@@ -2,7 +2,7 @@
   "name": "flash-wizard",
   "productName": "Flash Wizard",
   "description": "Hex files flasher for your 3D printer!",
-  "version": "0.1",
+  "version": "0.1.0",
   "private": true,
   "author": "Garage Makezone <garage.make.zone@gmail.com>",
   "copyright": "© 2020, Garage Makezone",
