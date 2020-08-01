@@ -6,8 +6,8 @@ const {is} = require('electron-util');
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 const contextMenu = require('electron-context-menu');
-const config = require('./config');
-const menu = require('./menu');
+const config = require('./js/config');
+const menu = require('./js/menu');
 
 unhandled();
 debug();
@@ -34,8 +34,8 @@ const createMainWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
 		show: false,
-		width: 600,
-		height: 400
+		width: 640,
+		height: 480
 	});
 
 	win.on('ready-to-show', () => {
@@ -48,7 +48,7 @@ const createMainWindow = async () => {
 		mainWindow = undefined;
 	});
 
-	await win.loadFile(path.join(__dirname, 'template', 'index.html'));
+	await win.loadFile(path.join(__dirname, 'index.html'));
 
 	return win;
 };
