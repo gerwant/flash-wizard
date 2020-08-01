@@ -67,7 +67,7 @@ app.on('second-instance', () => {
         mainWindow.show();
     }
 });
-    
+
 app.on('window-all-closed', () => {
     if (!is.macos) {
         app.quit();
@@ -80,11 +80,11 @@ app.on('activate', async () => {
     }
 });
 
-//(async () => {
-//	await app.whenReady();
-//	Menu.setApplicationMenu(menu);
-//	mainWindow = await createMainWindow();
-//
-//	const favoriteAnimal = config.get('favoriteAnimal');
-//	mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
-//})();
+(async () => {
+	await app.whenReady();
+	Menu.setApplicationMenu(menu);
+	mainWindow = await createMainWindow();
+
+	const favoriteAnimal = config.get('favoriteAnimal');
+	//mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
+})();
