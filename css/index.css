@@ -31,18 +31,22 @@ body {
 }
 
 .top-half {
-    height:50% !important;
+    height:50%;
     background-color: #F79D65 !important;
     border-radius: 0px !important;
     margin-right: 0 !important;
+    text-align: center;
 }
 
 .bottom-half {
-    height: 50% !important;
+    height: 50%;
+    position: fixed;
     background-color: #F27059 !important;
+    text-align: center;
     border-radius: 0px !important;
     width:100% !important;
     margin-right: 0 !important;
+    bottom: 0 !important;
 }
 
 .centered {
@@ -60,4 +64,8 @@ body {
         rgb(0, 0, 0) -1.96093px -2.27041px 0px, rgb(0, 0, 0) -1.11013px -2.78704px 0px, rgb(0, 0, 0) -0.137119px -2.99686px 0px,
          rgb(0, 0, 0) 0.850987px -2.87677px 0px, rgb(0, 0, 0) 1.74541px -2.43999px 0px, rgb(0, 0, 0) 2.44769px -1.73459px 0px,
           rgb(0, 0, 0) 2.88051px -0.838247px 0px;
+}
+
+#button1 {
+    transition: all .5s linear;
 }
