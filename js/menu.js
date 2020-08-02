@@ -176,4 +176,5 @@ if (is.development) {
 	});
 }
 
+
 module.exports = Menu.buildFromTemplate(template);
