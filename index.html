@@ -37,13 +37,16 @@
             </div>
             <div class="six wide column second-step-1" id="second-step-1">
                 <h3>Wybierz port</h3>
-                <button class="ui labeled icon button choose-port">
-                    <i class="sync circle right icon"></i>
-                    Odśwież listę portów
-                </button>
-                <div class="port-container">
-                    
+                <div class="ui floating scrolling labeled icon button dropdown">
+                    <input type="hidden" name="serial-port">
+                    <div class="text">Wybierz port</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu" id="ports">
+                    </div>
                 </div>
+                <button class="ui icon button choose-port">
+                    <i class="sync circle right icon"></i>
+                </button>
             </div>
             <div class="five wide column third-step-1">
                 <button class="ui labeled icon button flash-firmware-btn">
