@@ -95,41 +95,26 @@ app.on('activate', async () => {
 	//mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
 })();
 
-function listPorts() {
-    SerialPort.list().then(
-     ports => { console.log("Liczba portow:",ports.length)
-      ports.forEach(port => {
-       console.log(`${port.comName}\t${port.pnpId || ''}\t${port.manufacturer || ''}`)
-      })
-     },
-     err => {
-      console.error('Error listing ports', err)
-     }
-    )
-   }
-   
-listPorts()
+
 
   
 
 ipcMain.on('port-list-request', function (event, arg) {
     function listPorts() {
+        let list_ports = []
         SerialPort.list().then(
          ports => {
-          ports.forEach(port => {
-           console.log(`${port.comName}\t${port.pnpId || ''}\t${port.manufacturer || ''}`)
-          })
-         },
+             event.sender.send('port-list-reply', ports);
+            },
          err => {
           console.error('Error listing ports', err)
          }
         )
        }
        
-    listPorts()
-
-      
-    //   event.sender.send('port-list-reply', "sdadsdasdasdasd");
+    
+      listPorts()
+     
      
     })
      

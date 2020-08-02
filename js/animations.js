@@ -18,7 +18,7 @@ $('.choose-file').click(function(){
     $('.second-step-1').show("slide", {direction: "right"})
 })
 
-$('.choose-port').click(function(){
+$('.port').click(function(){
     $('.third-step-1').show("slide", {direction: "right"})
 })
 
