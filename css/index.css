@@ -1,0 +1,106 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    height: 100% !important;
+}
+
+/* Use OS default fonts */
+body {
+    font-family: -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        'Helvetica Neue',
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        'Segoe UI Symbol';
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga', 'clig', 'kern';
+    background-color: #acacac;
+}
+
+.box {
+    display: flex;
+    height: 100%;
+}
+/*
+.box.rw.top-half {
+    flex: 0 1 auto;
+}
+
+.box .rw.middle-segment {
+    flex: 1 1 auto;
+}
+*/
+
+#options {
+    height: 100% !important;
+    padding: 0;
+    margin-bottom: 0 !important;
+}
+
+.top-half {
+    height:50%;
+    background-color: #F79D65 !important;
+    border-radius: 0px !important;
+    margin-right: 0 !important;
+    text-align: center;
+}
+
+.bottom-half {
+    height: 50%;
+    position: fixed !important;
+    background-color: #F27059 !important;
+    text-align: center;
+    border-radius: 0px !important;
+    width:100% !important;
+    margin-right: 0px !important;
+    bottom: 0 !important;
+}
+
+.centered {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.opt {
+    color: #fff;
+    text-shadow: rgb(0, 0, 0) 3px 0px 0px, rgb(0, 0, 0) 2.83487px 0.981584px 0px, rgb(0, 0, 0) 2.35766px 1.85511px 0px,
+     rgb(0, 0, 0) 1.62091px 2.52441px 0px, rgb(0, 0, 0) 0.705713px 2.91581px 0px, rgb(0, 0, 0) -0.287171px 2.98622px 0px,
+      rgb(0, 0, 0) -1.24844px 2.72789px 0px, rgb(0, 0, 0) -2.07227px 2.16926px 0px, rgb(0, 0, 0) -2.66798px 1.37182px 0px,
+       rgb(0, 0, 0) -2.96998px 0.42336px 0px, rgb(0, 0, 0) -2.94502px -0.571704px 0px, rgb(0, 0, 0) -2.59586px -1.50383px 0px,
+        rgb(0, 0, 0) -1.96093px -2.27041px 0px, rgb(0, 0, 0) -1.11013px -2.78704px 0px, rgb(0, 0, 0) -0.137119px -2.99686px 0px,
+         rgb(0, 0, 0) 0.850987px -2.87677px 0px, rgb(0, 0, 0) 1.74541px -2.43999px 0px, rgb(0, 0, 0) 2.44769px -1.73459px 0px,
+          rgb(0, 0, 0) 2.88051px -0.838247px 0px;
+}
+
+.middle-segment-1, .middle-segment-2 {
+    /*display: none;*/
+    margin-top: 0 !important;
+}
+
+.first-step-1, .second-step-1, .third-step-1 {
+    padding-right: 0 !important;
+    display: none;
+    text-align: center;
+    border-right: 2px solid rgb(90, 90, 90);
+}
+
+.first-step-1 {
+    background-color: #808080;
+}
+
+.second-step-1 {
+    background-color: #8f8f8f;
+}
+
+.third-step-1 {
+    background-color: #a3a3a3;
+}
