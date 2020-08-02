@@ -36,7 +36,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     //container.appendChild(ul)
 
     let container = $('#ports');
-
+    container.html("")
     if(args.length===0){
         let alert = document.createElement('div')
         alert.innerHTML = "Brak dostępnych portów"
@@ -52,5 +52,6 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
 
     $('.port').click(function(){
         $('.third-step-1').show("slide", {direction: "right"})
+        electron.ipcRenderer.send('send-port-request', this.innerHTML);
     })
 });

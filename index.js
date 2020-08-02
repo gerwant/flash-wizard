@@ -11,6 +11,11 @@ const menu = require('./js/menu');
 const SerialPort = require('serialport');
 const { list } = require('serialport');
 
+var flash_config = {
+    file_path: null,
+    port: null,
+}
+
 unhandled();
 debug();
 contextMenu();
@@ -121,6 +126,18 @@ ipcMain.on('port-list-request', function (event, arg) {
      
     })
      
-	
+ipcMain.on('send-file-request', function (event, arg) {
+    flash_config.file_path = arg
+
+    console.log("flash config;\n", flash_config)
+
+})
+
+ipcMain.on('send-port-request', function (event, arg) {
+    flash_config.port = arg
+
+    console.log("flash config;\n", flash_config)
+
+})
 
 

@@ -1,4 +1,7 @@
+
+
 $('input[type="file"]').change((event)=>{
     const file = event.target.files[0];
-    console.log(file); // TODO: Pass new file to backend
+    // console.log(file); 
+    electron.ipcRenderer.send('send-file-request', file.path);
 })
