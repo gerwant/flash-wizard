@@ -10,16 +10,14 @@ $('.top-half').click(function(){
        });
     });
 
+    $('.bottom-half').css({"filter": "blur(10px)"});
+
     //$('.middle-segment-1').show(0).animate({height: ($(window).height()-200).toString()},0,function(){
     //});
 })
 
 $('.choose-file').click(function(){
     $('.second-step-1').show("slide", {direction: "right"})
-})
-
-$('.port').click(function(){
-    $('.third-step-1').show("slide", {direction: "right"})
 })
 
 $('.bottom-half').click(function(){

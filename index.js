@@ -54,6 +54,9 @@ const createMainWindow = async () => {
         mainWindow = undefined;
     });
 
+    // TODO: uncomment when ready to publish, only for development purposes needed
+    //win.setResizable(false);
+
     await win.loadFile(path.join(__dirname, 'index.html'));
 
     return win;

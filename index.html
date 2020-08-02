@@ -30,10 +30,18 @@
         </div>
         <div class="middle-segment-1 ui grid">
             <div class="five wide column first-step-1">
+                <!--
                 <button class="ui labeled icon button choose-file">
                     <i class="upload icon"></i>
                     Wybierz plik
                 </button>
+                -->
+                <label class="ui labeled icon button choose-file" for="selector">
+                    <i class="file icon"></i>
+                    Wybierz plik
+                </label>
+                <input type="file" id="selector" accept=".hex" style="display: none;">
+
             </div>
             <div class="six wide column second-step-1" id="second-step-1">
                 <h3>Wybierz port</h3>
@@ -78,6 +86,7 @@
         <script src="js/semantic.js"></script>
         <script src="js/animations.js"></script>
         <script src="js/hexfile.js"></script>
+        <script src="js/events.js"></script>
         
     </body>
 </html>
