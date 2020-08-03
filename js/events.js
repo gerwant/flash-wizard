@@ -9,5 +9,18 @@ $('input[type="file"]').change((event)=>{
 
 $('.flash-firmware-btn').click(()=>{
     console.log('Flash fired')
+    document.getElementsByClassName('avrdude_output')[0].innerHTML = '';
     electron.ipcRenderer.send('perform-flash', null)
+})
+
+$('.avrdude_output').keyup(function(event){
+    event.preventDefault();
+});
+
+$('.avrdude_output').keydown(function(event){
+    event.preventDefault();
+});
+electron.ipcRenderer.on('avrdude-response', (event, data)=>{
+    console.log('Data received');
+    document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
 })

@@ -117,10 +117,12 @@ ipcMain.on('perform-flash', (event, arg) => {
 
     child.stderr.on('data', (data) => {
         console.log(data.toString());
+        event.sender.send('avrdude-response', data.toString())
     })
 
     child.on('error', (err) => {
         console.log("ERROR DURING STARTUP");
+        event.sender.send('avrdude-response', data.toString())
     })
 })
 

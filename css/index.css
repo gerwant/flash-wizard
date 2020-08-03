@@ -120,3 +120,11 @@ body {
     margin-right: 0 !important;
     margin-top: 10%;
 }
+
+.avrdude_output {
+    position: relative;
+    width: 90%;
+    height:70%;
+    white-space: nowrap;
+    overflow: auto;
+}

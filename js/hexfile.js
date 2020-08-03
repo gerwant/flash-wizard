@@ -41,7 +41,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
         $('.port-dropdown-label').html("Brak dostepnych portow")
         electron.ipcRenderer.send('send-port-request', null);
     } else {
-        $('.port-dropdown-label').html("Wybierz port")
+        $('.port-dropdown-label').html("Port")
         args.forEach((element)=>{
             let li = document.createElement('div')
             li.className = "port item"
