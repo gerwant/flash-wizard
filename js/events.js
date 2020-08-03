@@ -23,4 +23,6 @@ $('.avrdude_output').keydown(function(event){
 electron.ipcRenderer.on('avrdude-response', (event, data)=>{
     console.log('Data received');
     document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
+    let textarea = $('.avrdude_output')
+    textarea.scrollTop(textarea[0].scrollHeight)
 })

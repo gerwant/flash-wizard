@@ -118,6 +118,10 @@ body {
     margin-top: 10%;
 }
 
+.port-dropdown-label {
+    text-align: left;
+}
+
 .avrdude_output {
     position: relative;
     width: 90%;
