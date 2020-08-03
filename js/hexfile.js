@@ -38,10 +38,10 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     let container = $('#ports');
     container.html("")
     if(args.length===0){
-        let alert = document.createElement('div')
-        alert.innerHTML = "Brak dostępnych portów"
-        $('.port-container').appendChild(alert)
+        $('.port-dropdown-label').html("Brak dostepnych portow")
+        electron.ipcRenderer.send('send-port-request', null);
     } else {
+        $('.port-dropdown-label').html("Wybierz port")
         args.forEach((element)=>{
             let li = document.createElement('div')
             li.className = "port item"
@@ -51,7 +51,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     }
 
     $('.port').click(function(){
-        $('.third-step-1').show("slide", {direction: "right"})
         electron.ipcRenderer.send('send-port-request', this.innerHTML);
+        $('.third-step-1').show("slide", {direction: "right"})
     })
 });
