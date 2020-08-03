@@ -10,7 +10,9 @@ $('input[type="file"]').change((event)=>{
 $('.flash-firmware-btn').click(()=>{
     console.log('Flash fired')
     document.getElementsByClassName('avrdude_output')[0].innerHTML = '';
-    electron.ipcRenderer.send('perform-flash', null)
+    $('.flash-progress').show("fade",()=>{
+        electron.ipcRenderer.send('perform-flash', null)
+    });
 })
 
 $('.avrdude_output').keyup(function(event){
@@ -22,6 +24,14 @@ $('.avrdude_output').keydown(function(event){
 });
 electron.ipcRenderer.on('avrdude-response', (event, data)=>{
     console.log('Data received');
+    document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
+    let textarea = $('.avrdude_output')
+    textarea.scrollTop(textarea[0].scrollHeight)
+})
+
+electron.ipcRenderer.on('avrdude-done', (event, data)=>{
+    console.log('Flashing done.')
+    $('.flash-progress').hide()
     document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
     let textarea = $('.avrdude_output')
     textarea.scrollTop(textarea[0].scrollHeight)

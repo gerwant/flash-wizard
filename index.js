@@ -102,11 +102,9 @@ app.on('activate', async () => {
 	Menu.setApplicationMenu(menu);
 	mainWindow = await createMainWindow();
 
-	const favoriteAnimal = config.get('favoriteAnimal');
+	//const favoriteAnimal = config.get('favoriteAnimal');
 	//mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
 })();
-
-
 
 ipcMain.on('perform-flash', (event, arg) => {
     const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
@@ -125,16 +123,25 @@ ipcMain.on('perform-flash', (event, arg) => {
 
     child.stdout.on('data', (data) => {
         console.log('stdout: ', data.toString());
+        if (data.toString().includes('avrdude done')){
+            event.sender.send('avrdude-done', data.toString())
+        } else {
+            event.sender.send('avrdude-response', data.toString())
+        }
     })
 
     child.stderr.on('data', (data) => {
-        console.log(data.toString());
-        event.sender.send('avrdude-response', data.toString())
+        console.log('stderr: ',data.toString());
+        if (data.toString().includes('avrdude done')){
+            event.sender.send('avrdude-done', data.toString())
+        } else {
+            event.sender.send('avrdude-response', data.toString())
+        }
     })
 
     child.on('error', (err) => {
-        console.log("ERROR DURING STARTUP");
-        event.sender.send('avrdude-response', data.toString())
+        console.log("ERROR DURING STARTUP", err);
+        event.sender.send('avrdude-done', null)
     })
 })
 
