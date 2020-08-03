@@ -30,13 +30,25 @@
         </div>
         <div class="middle-segment-1 ui grid">
             <div class="five wide column first-step-1 first-step">
+
+                <h4>Wybierz procesor</h4>
+                <div class="ui floating scrolling labeled icon button dropdown processor-dropdown">
+                    <input type="hidden" name="processors">
+                    <div class="text processor-dropdown-label">processors</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu" id="processors">
+                        <div class="item processor-item">atmega1284p</div>
+                        <div class="item processor-item">atmega2560</div>
+                    </div>
+                </div>
+
                 <!--
                 <button class="ui labeled icon button choose-file">
                     <i class="upload icon"></i>
                     Wybierz plik
                 </button>
                 -->
-                <h3>Wybierz plik</h3>
+                <h4>Wybierz plik</h4>
                 <label class="ui labeled icon button choose-file" for="selector">
                     <i class="file icon"></i>
                     Wybierz plik
@@ -53,6 +65,18 @@
                     <div class="menu" id="ports">
                     </div>
                 </div>
+
+                <h4>Wybierz baudrate</h4>
+                <div class="ui floating scrolling labeled icon button dropdown processor-dropdown">
+                    <input type="hidden" name="processors">
+                    <div class="text processor-dropdown-label">processors</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu" id="processors">
+                        <div class="item processor-item">atmega1284p</div>
+                        <div class="item processor-item">atmega2560</div>
+                    </div>
+                </div>
+
                 <button class="ui icon button refresh-ports">
                     <i class="sync circle right icon"></i>
                 </button>

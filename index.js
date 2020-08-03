@@ -157,18 +157,18 @@ ipcMain.on('port-list-request', function (event, arg) {
      
     })
      
-ipcMain.on('send-file-request', function (event, arg) {
-    flash_config.file_path = arg
+ipcMain.on('send-config-request', function (event, value, field) {
+    flash_config[field] = value
 
     console.log("flash config;\n", flash_config)
 
 })
 
-ipcMain.on('send-port-request', function (event, arg) {
-    flash_config.port = arg
-
-    console.log("flash config;\n", flash_config)
-
-})
+//ipcMain.on('send-port-request', function (event, arg) {
+//    flash_config.port = arg
+//
+//    console.log("flash config;\n", flash_config)
+//
+//})
 
 

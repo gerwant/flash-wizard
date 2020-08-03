@@ -39,7 +39,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     container.html("")
     if(args.length===0){
         $('.port-dropdown-label').html("Brak portow")
-        electron.ipcRenderer.send('send-port-request', null);
+        electron.ipcRenderer.send('send-config-request', null, "port");
     } else {
         $('.port-dropdown-label').html("Port")
         args.forEach((element)=>{
@@ -51,7 +51,11 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     }
 
     $('.port').click(function(){
-        electron.ipcRenderer.send('send-port-request', this.innerHTML);
+        electron.ipcRenderer.send('send-config-request', this.innerHTML, "port");
         $('.third-step-1').show("slide", {direction: "right"})
+    })
+
+    $('.processor-item').click(function(){
+        electron.ipcRenderer.send('send-config-request', this.innerHTML, "processor");
     })
 });

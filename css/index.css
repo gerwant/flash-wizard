@@ -106,7 +106,7 @@ body {
     background-color: #c4cfd4 ;
 }
 
-.choose-file {
+.choose-file, .processor-dropdown {
     margin-right: 0 !important;
     padding-right: 0 !important;
     margin-left: 1rem !important;
@@ -115,10 +115,13 @@ body {
 .dropdown {
     width: 70%;
     margin-right: 0 !important;
-    margin-top: 10%;
 }
 
 .port-dropdown-label {
+    text-align: left;
+}
+
+.processor-dropdown-label {
     text-align: left;
 }
 
