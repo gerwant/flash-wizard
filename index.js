@@ -13,8 +13,8 @@ const { list } = require('serialport');
 const spawn = require('child_process').spawn;
 
 var flash_config = {
-    file_path: null,
     port: null,
+    file_path: null,
     baudrate: null,
     processor: null
 }
@@ -65,6 +65,7 @@ const createMainWindow = async () => {
     // TODO: uncomment when ready to publish, only for development purposes needed
     //win.setResizable(false);
 
+
     await win.loadFile(path.join(__dirname, 'index.html'));
 
     return win;
@@ -100,8 +101,8 @@ app.on('activate', async () => {
 (async () => {
 	await app.whenReady();
 	Menu.setApplicationMenu(menu);
-	mainWindow = await createMainWindow();
-
+    mainWindow = await createMainWindow();
+    
 	//const favoriteAnimal = config.get('favoriteAnimal');
 	//mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
 })();

@@ -5,6 +5,11 @@ $('input[type="file"]').change((event)=>{
     // console.log(file); 
     electron.ipcRenderer.send('send-config-request', file.path, "file_path");
     $('.second-step-1').show("slide", {direction: "right"})
+
+    let name = (file.name.length>10) ? file.name.slice(0, 8)+"..." : file.name
+    $('.choose-file-label').text(name)
+    $('.choose-file').attr('data-tooltip', file.name)
+   
 })
 
 $('.flash-firmware-btn').click(()=>{

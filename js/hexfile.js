@@ -54,12 +54,13 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
         electron.ipcRenderer.send('send-config-request', this.innerHTML, "port");
         $('.third-step-1').show("slide", {direction: "right"})
     })
-
-    $('.processor-item').click(function(){
-        electron.ipcRenderer.send('send-config-request', this.innerHTML, "processor");
-    })
-
-    $('.baudrate-item').click(function(){
-        electron.ipcRenderer.send('send-config-request', this.innerHTML, "baudrate");
-    })
 });
+
+
+$('.processor-item').click(function(){
+    electron.ipcRenderer.send('send-config-request', this.innerHTML, "processor");
+})
+
+$('.baudrate-item').click(function(){
+    electron.ipcRenderer.send('send-config-request', this.innerHTML, "baudrate");
+})

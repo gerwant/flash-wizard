@@ -51,7 +51,7 @@
                 <h4>Wybierz plik</h4>
                 <label class="ui labeled icon button choose-file" for="selector">
                     <i class="file icon"></i>
-                    Wybierz plik
+                    <div class="choose-file-label">Wybierz plik</div>
                 </label>
                 <input type="file" id="selector" accept=".png,.hex" style="display: none;">
 
@@ -72,8 +72,10 @@
                     <div class="text baudrate-dropdown-label">baudrate</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="baudrate">
-                        <div class="item baudrate-item">atmega1284p</div>
-                        <div class="item baudrate-item">atmega2560</div>
+                        <div class="item baudrate-item">9600</div>
+                        <div class="item baudrate-item">57600</div>
+                        <div class="item baudrate-item">115200</div>
+                        <div class="item baudrate-item">250000</div>
                     </div>
                 </div>
 
