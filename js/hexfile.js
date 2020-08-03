@@ -58,4 +58,8 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     $('.processor-item').click(function(){
         electron.ipcRenderer.send('send-config-request', this.innerHTML, "processor");
     })
+
+    $('.baudrate-item').click(function(){
+        electron.ipcRenderer.send('send-config-request', this.innerHTML, "baudrate");
+    })
 });
