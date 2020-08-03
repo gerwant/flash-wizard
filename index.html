@@ -25,11 +25,11 @@
         -->
 
         <!-- Tu działa już -->
-        <div class="top-half">
-            <h1 class="centered opt">Mam plik .hex</h1>
+        <div class="top-half" isselected="">
+            <h1 class="centered opt top-half-label noselect">Mam plik .hex</h1>
         </div>
         <div class="middle-segment-1 ui grid">
-            <div class="five wide column first-step-1">
+            <div class="five wide column first-step-1 first-step">
                 <!--
                 <button class="ui labeled icon button choose-file">
                     <i class="upload icon"></i>
@@ -43,7 +43,7 @@
                 <input type="file" id="selector" accept=".hex" style="display: none;">
 
             </div>
-            <div class="six wide column second-step-1" id="second-step-1">
+            <div class="six wide column second-step-1 second-step" id="second-step-1">
                 <h3>Wybierz port</h3>
                 <div class="ui floating scrolling labeled icon button dropdown">
                     <input type="hidden" name="serial-port">
@@ -52,11 +52,11 @@
                     <div class="menu" id="ports">
                     </div>
                 </div>
-                <button class="ui icon button choose-port">
+                <button class="ui icon button refresh-ports">
                     <i class="sync circle right icon"></i>
                 </button>
             </div>
-            <div class="five wide column third-step-1">
+            <div class="five wide column third-step-1 third-step">
                 <button class="ui labeled icon button flash-firmware-btn">
                     <i class="bolt icon"></i>
                     Flash!
@@ -64,21 +64,32 @@
             </div>
         </div>
         <div class="middle-segment-2 ui grid">
-            <div class="five wide column first-step-1">
-                <button class="ui labeled icon button">
+            <div class="five wide column first-step-2 first-step" >
+                //TODO Opcje
+                <button class="ui labeled icon button confirm-config-btn">
                     <i class="save icon"></i>
-                    idk 
+                    Zatwierdź 
                 </button>
             </div>
-            <div class="six wide column second-step-1">
-                <h4 class="centered">content needed</h4>
+            <div class="six wide column second-step-2 second-step">
+                 <h3>Wybierz port</h3>
+                <div class="ui floating scrolling labeled icon button dropdown">
+                    <input type="hidden" name="serial-port">
+                    <div class="text port-dropdown-label">Wybierz port</div>
+                        <i class="dropdown icon"></i>
+                    <div class="menu" id="ports2">
+                    </div>
+                </div>
             </div>
-            <div class="five wide column third-step-1">
-                <h3>and animations</h3>
+            <div class="five wide column third-step-2 third-step">
+                <button class="ui labeled icon button flash-firmware-btn">
+                    <i class="bolt icon"></i>
+                    Flash!
+                </button>
             </div>
         </div>
-        <div class="bottom-half">
-            <h1 class="centered opt">Nie mam pliku .hex</h1>
+        <div class="bottom-half" isselected="">
+            <h1 class="centered opt bottom-half-label noselect">Nie mam pliku .hex</h1>
         </div>
 
         <script>window.$ = window.jQuery = require('jquery');</script>
@@ -86,6 +97,7 @@
         <script src="js/semantic.js"></script>
         <script src="js/animations.js"></script>
         <script src="js/hexfile.js"></script>
+        <script src="js/nohexfile.js"></script>
         <script src="js/events.js"></script>
         
     </body>

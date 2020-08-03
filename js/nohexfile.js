@@ -1,14 +1,13 @@
-const electron = require('electron')
 
 $('.ui.dropdown').dropdown();
 
 
 
-$('.refresh-ports').click(function(){
-   
+$('.confirm-config-btn').click(function(){
+    $('.second-step-2').show("slide", {direction: "right"})
     electron.ipcRenderer.send('port-list-request');
 })
-$('.choose-file').click(function(){
+$('.refresh-ports').click(function(){
    
     electron.ipcRenderer.send('port-list-request');
 })
@@ -35,7 +34,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     //});
     //container.appendChild(ul)
 
-    let container = $('#ports');
+    let container = $('#ports2');
     container.html("")
     if(args.length===0){
         $('.port-dropdown-label').html("Brak portow")
@@ -52,6 +51,6 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
 
     $('.port').click(function(){
         electron.ipcRenderer.send('send-port-request', this.innerHTML);
-        $('.third-step-1').show("slide", {direction: "right"})
+        $('.third-step-2').show("slide", {direction: "right"})
     })
 });
