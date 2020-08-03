@@ -22,7 +22,7 @@ body {
         'Segoe UI Symbol';
     text-rendering: optimizeLegibility;
     font-feature-settings: 'liga', 'clig', 'kern';
-    background-color: #acacac;
+    background-color: #f2f2f2  ;
 }
 
 .box {
@@ -47,8 +47,7 @@ body {
 
 .top-half {
     height:50%;
-    /*background-color: #F79D65 !important;*/
-    background-image: radial-gradient(#F79D65, #FFC599) !important;
+    background-color: #6b8794   !important;
     border-radius: 0px !important;
     margin-right: 0 !important;
     text-align: center;
@@ -57,8 +56,7 @@ body {
 .bottom-half {
     height: 50%;
     position: fixed !important;
-    /*background-color: #F27059 !important;*/
-    background-image: radial-gradient(#F27059, #FFA08F) !important;
+    background-color: #566c76     !important;
     text-align: center;
     border-radius: 0px !important;
     width:100% !important;
@@ -88,8 +86,7 @@ body {
     margin-top: 0 !important;
 }
 
-.first-step-1, .second-step-1, .third-step-1,
-.first-step-2, .second-step-2, .third-step-2 {
+.first-step, .second-step, .third-step {
     padding-right: 0 !important;
     padding-left: 0 !important;
     display: none;
@@ -97,16 +94,16 @@ body {
     border-right: 2px solid rgb(90, 90, 90);
 }
 
-.first-step-1, .first-step-2 {
-    background-color: #808080;
+.first-step {
+    background-color:  #e1e7ea ;
 }
 
-.second-step-1, .second-step-2 {
-    background-color: #8f8f8f;
+.second-step {
+    background-color:  #d3dbdf;
 }
 
-.third-step-1, .third-step-2 {
-    background-color: #a3a3a3;
+.third-step {
+    background-color: #c4cfd4 ;
 }
 
 .choose-file {
@@ -128,3 +125,12 @@ body {
     white-space: nowrap;
     overflow: auto;
 }
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
