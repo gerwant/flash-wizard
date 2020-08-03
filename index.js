@@ -10,10 +10,13 @@ const config = require('./js/config');
 const menu = require('./js/menu');
 const SerialPort = require('serialport');
 const { list } = require('serialport');
+const spawn = require('child_process').spawn;
 
 var flash_config = {
     file_path: null,
     port: null,
+    baudrate: null,
+    processor: null
 }
 
 unhandled();
@@ -106,10 +109,19 @@ app.on('activate', async () => {
 
 
 ipcMain.on('perform-flash', (event, arg) => {
-    let spawn = require('child_process').spawn;
-    let avrdude_path = path.join(__dirname, 'bin')+'/avrdude';
+    const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
+    let avrdude_path = path.join(__dirname, 'bin/')+avrdude_exec;
     console.log(avrdude_path)
-    let child = spawn(avrdude_path);
+    const avrdude_args = [
+        '-Cbin/avrdude.conf',
+        '-patmega1284p',
+        '-carduino',
+        '-P'+flash_config.port,
+        '-b57600',
+        '-D',
+        '-Uflash:w:'+flash_config.file_path+':i'
+    ]
+    let child = spawn(avrdude_path, avrdude_args);
 
     child.stdout.on('data', (data) => {
         console.log('stdout: ', data.toString());
