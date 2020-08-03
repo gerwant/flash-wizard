@@ -105,7 +105,24 @@ app.on('activate', async () => {
 
 
 
-  
+ipcMain.on('perform-flash', (event, arg) => {
+    let spawn = require('child_process').spawn;
+    let avrdude_path = path.join(__dirname, 'bin')+'/avrdude';
+    console.log(avrdude_path)
+    let child = spawn(avrdude_path);
+
+    child.stdout.on('data', (data) => {
+        console.log('stdout: ', data.toString());
+    })
+
+    child.stderr.on('data', (data) => {
+        console.log(data.toString());
+    })
+
+    child.on('error', (err) => {
+        console.log("ERROR DURING STARTUP");
+    })
+})
 
 ipcMain.on('port-list-request', function (event, arg) {
     function listPorts() {

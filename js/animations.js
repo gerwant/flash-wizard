@@ -23,7 +23,10 @@ $('.top-half').click(function(){
 $('.bottom-half').click(function(){
     $(this).animate({height:'100px'});
     $('.top-half').animate({height: '100px'});
-    $('.middle-segment-1').hide();
+    $('.first-step-1').hide("slide",{direction: "left"}, function(){
+
+        $('.middle-segment-1').hide();
+    })
     $('.middle-segment-2').show(0).animate({height: ($(window).height()-200).toString()},0)
     $(this).css({"filter": "none"});
     $('.top-half').css({"filter": "blur(10px)"});
