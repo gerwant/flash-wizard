@@ -40,6 +40,7 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 // Prevent window from being garbage collected
 let mainWindow;
 
+
 const createMainWindow = async () => {
     const win = new BrowserWindow({
         title: app.name,
@@ -61,6 +62,8 @@ const createMainWindow = async () => {
         // For multiple windows store them in an array
         mainWindow = undefined;
     });
+
+    console.log(process.env.NODE_ENV)
 
     // TODO: uncomment when ready to publish, only for development purposes needed
     //win.setResizable(false);
@@ -113,11 +116,11 @@ ipcMain.on('perform-flash', (event, arg) => {
     let avrdude_path = ''
     let avrdude_config_path = ''
     if(process.env.NODE_ENV == "development"){
-        avrdude_path = path.join(__dirname, 'bin/')+avrdude_exec;
+        avrdude_path = path.join(__dirname, 'bin\\')+avrdude_exec;
         avrdude_config_path = path.join(__dirname, 'bin/')+'avrdude.conf'
     } else {
-        avrdude_path = path.join(process.resourcesPath, "bin/")+avrdude_exec;
-        avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf'
+        avrdude_path = path.join(__dirname, "bin/")+avrdude_exec;
+        avrdude_config_path = path.join(__dirname, 'bin/')+'avrdude.conf' //process.resourcesPath
     }
     console.log(avrdude_path)
     const avrdude_args = [
@@ -129,7 +132,12 @@ ipcMain.on('perform-flash', (event, arg) => {
         '-D',
         '-Uflash:w:'+flash_config.file_path+':i'
     ]
-    let child = spawn(avrdude_path, avrdude_args);
+    let child = null;
+    if (process.platform === "win32"){
+        child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
+    } else {
+        child = spawn(avrdude_path, avrdude_args);
+    }
 
     child.stdout.on('data', (data) => {
         console.log('stdout: ', data.toString());

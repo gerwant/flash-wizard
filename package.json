@@ -5,6 +5,7 @@
 	"description": "The best app ever",
 	"license": "MIT",
 	"repository": "sindresorhus/electron-boilerplate",
+	"main": "index.js",
 	"author": {
 		"name": "Your Name",
 		"email": "user@gmail.com",
