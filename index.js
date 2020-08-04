@@ -131,7 +131,7 @@ ipcMain.on('perform-flash', (event, arg) => {
     ]
     let child = null;
     if (process.platform === "win32"){
-        child = spawn('cmd', ['/c'].concat(avrdude_args))
+        child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
     } else {
         child = spawn(avrdude_path, avrdude_args);
     }
