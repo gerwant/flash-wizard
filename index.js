@@ -129,7 +129,12 @@ ipcMain.on('perform-flash', (event, arg) => {
         '-D',
         '-Uflash:w:'+flash_config.file_path+':i'
     ]
-    let child = spawn(avrdude_path, avrdude_args);
+    let child = null;
+    if (process.platform === "win32"){
+        child = spawn('cmd', ['/c'].concat(avrdude_args))
+    } else {
+        child = spawn(avrdude_path, avrdude_args);
+    }
 
     child.stdout.on('data', (data) => {
         console.log('stdout: ', data.toString());
