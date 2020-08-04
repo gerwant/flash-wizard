@@ -109,14 +109,23 @@ app.on('activate', async () => {
 
 ipcMain.on('perform-flash', (event, arg) => {
     const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
-    let avrdude_path = path.join(__dirname, 'bin/')+avrdude_exec;
+
+    let avrdude_path = ''
+    let avrdude_config_path = ''
+    if(process.env.NODE_ENV == "development"){
+        avrdude_path = path.join(__dirname, 'bin/')+avrdude_exec;
+        avrdude_config_path = path.join(__dirname, 'bin/')+'avrdude.conf'
+    } else {
+        avrdude_path = path.join(process.resourcesPath, "bin/")+avrdude_exec;
+        avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf'
+    }
     console.log(avrdude_path)
     const avrdude_args = [
-        '-Cbin/avrdude.conf',
-        '-patmega1284p',
+        '-C'+avrdude_config_path,
+        '-p'+flash_config.processor,
         '-carduino',
         '-P'+flash_config.port,
-        '-b57600',
+        '-b'+flash_config.baudrate,
         '-D',
         '-Uflash:w:'+flash_config.file_path+':i'
     ]

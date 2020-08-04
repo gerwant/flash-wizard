@@ -16,7 +16,7 @@
 		"test": "npm run lint",
 		"start": "electron .",
 		"pack": "electron-builder --dir",
-		"dist": "electron-builder --macos --linux --windows",
+		"dist": "electron-builder --windows",
 		"release": "np"
 	},
 	"dependencies": {
@@ -47,7 +47,10 @@
 		"releaseDraft": false
 	},
 	"build": {
-		"appId": "com.company.AppName",
+		"appId": "com.garage-makezone.flash-wizard",
+		"productName": "Flash Wizard",
+		"extraResources": "bin",
+		"npmRebuild": false,
 		"mac": {
 			"category": "public.app-category.social-networking",
 			"darkModeSupport": true
@@ -72,7 +75,14 @@
 				"AppImage",
 				"deb"
 			],
-			"category": "Network;Chat"
+			"category": "Network;Chat",
+			"executableName": "Flash Wizard",
+			"vendor": "Garage Makezone"
+		},
+		"deb": {
+			"maintainer": "Garage Makezone",
+			"vendor": "Garage Makezone",
+			"description": "Flash .hex file to your 3D printer!"
 		}
 	}
 }
