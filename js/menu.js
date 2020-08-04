@@ -1,6 +1,7 @@
 'use strict';
 const path = require('path');
 const {app, Menu, shell} = require('electron');
+var i18n = require('../localization/i18n')
 const {
 	is,
 	appMenu,
@@ -101,7 +102,7 @@ const macosTemplate = [
 		}
 	]),
 	{
-		role: 'fileMenu',
+		role: 'fileMenu', 
 		submenu: [
 			{
 				label: 'Custom'
@@ -132,7 +133,7 @@ const macosTemplate = [
 // Linux and Windows
 const otherTemplate = [
 	{
-		role: 'fileMenu',
+		role: 'fileMenu', label: i18n.__("File"),
 		submenu: [
 			{
 				label: 'Custom'
@@ -164,6 +165,19 @@ const otherTemplate = [
 	{
 		role: 'help',
 		submenu: helpSubmenu
+	},
+	{
+		label: 'Language',
+		submenu: [
+			{
+				label: 'English',
+				click: () => {i18n.changeLanguage("en")}
+			},
+			{
+				label: 'Polski',
+				click: () => {i18n.changeLanguage("pl")}
+			}
+		]
 	}
 ];
 

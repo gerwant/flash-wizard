@@ -1,3 +1,5 @@
+$('.middle-segment-1').hide();
+
 $('.top-half').click(function(){
     //blur stuff
     $(this).attr("isselected", "true")

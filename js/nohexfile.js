@@ -37,7 +37,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     let container = $('#ports2');
     container.html("")
     if(args.length===0){
-        $('.port-dropdown-label').html("Brak portow")
+        $('.port-dropdown-label').html(i18n.__("No ports"))
         electron.ipcRenderer.send('send-port-request', null);
     } else {
         $('.port-dropdown-label').html("Port")

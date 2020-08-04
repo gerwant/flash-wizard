@@ -1,4 +1,5 @@
-const electron = require('electron')
+const electron = require('electron');
+
 
 $('.ui.dropdown').dropdown();
 
@@ -38,7 +39,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     let container = $('#ports');
     container.html("")
     if(args.length===0){
-        $('.port-dropdown-label').html("Brak portow")
+        $('.port-dropdown-label').html(i18n.__("No ports"))
         electron.ipcRenderer.send('send-config-request', null, "port");
     } else {
         $('.port-dropdown-label').html("Port")
