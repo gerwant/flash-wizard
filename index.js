@@ -46,7 +46,7 @@ let env = process.env.NODE_ENV || 'development'
 
 const createMainWindow = async () => {
     const win = new BrowserWindow({
-        title: app.name,
+        title: "Flash Wizard",
         show: false,
         width: 640,
         height: 480,

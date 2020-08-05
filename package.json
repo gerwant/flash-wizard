@@ -1,10 +1,10 @@
 {
-	"name": "app-name",
-	"productName": "App Name",
+	"name": "flash-wizard",
+	"productName": "Flash Wizard",
 	"version": "0.1.0",
-	"description": "The best app ever",
+	"description": "Flash .hex file to your 3D printer!",
 	"license": "MIT",
-	"repository": "sindresorhus/electron-boilerplate",
+	"repository": "https://gitlab.com/gerwant/flash-wizard",
 	"main": "index.js",
 	"author": {
 		"name": "Your Name",
@@ -17,7 +17,7 @@
 		"test": "npm run lint",
 		"start": "electron .",
 		"pack": "electron-builder --dir",
-		"dist": "electron-builder --windows",
+		"dist": "electron-builder --linux",
 		"release": "np"
 	},
 	"dependencies": {
@@ -53,7 +53,10 @@
 	"build": {
 		"appId": "com.garage-makezone.flash-wizard",
 		"productName": "Flash Wizard",
-		"extraResources": ["bin", "localization"],
+		"extraResources": [
+			"bin",
+			"localization"
+		],
 		"npmRebuild": false,
 		"mac": {
 			"category": "public.app-category.social-networking",
