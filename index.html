@@ -25,6 +25,16 @@
         -->
 
         <!-- Tu działa już -->
+        <div class="ui floating scrolling labeled icon button dropdown language-dropdown">
+            <input type="hidden" name="language">
+            <div class="text language-dropdown-label translate">Language</div>
+            <i class="dropdown icon"></i>
+            <div class="menu" id="baudrate">
+                <div class="item language-item" val="en">English</div>
+                <div class="item language-item" val="pl">Polski</div>
+            </div>
+        </div>
+
         <div class="top-half" isselected="">
             <h1 class="centered opt top-half-label noselect translate">I have the .hex file</h1>
         </div>
@@ -123,11 +133,14 @@
         <div class="bottom-half" isselected="">
             <h1 class="centered opt bottom-half-label noselect translate">I don't have the .hex file</h1>
         </div>
+ 
 
         <script>window.$ = window.jQuery = require('jquery');</script>
         <script src="js/jquery-ui.js"></script>
         <script>
+            const electron = require('electron');
             let i18n = require('./localization/i18n.js') 
+
             let toTranslate = document.getElementsByClassName("translate")
             for (var i = 0; i < toTranslate.length; i++) {
                 toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)

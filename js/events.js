@@ -1,5 +1,6 @@
 
 
+
 $('input[type="file"]').change((event)=>{
     const file = event.target.files[0];
     // console.log(file); 
@@ -40,4 +41,9 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
     let textarea = $('.avrdude_output')
     textarea.scrollTop(textarea[0].scrollHeight)
+})
+
+$('.language-item').click(function(){
+    
+    electron.ipcRenderer.send('change-language-request', $(this).attr("val"));
 })

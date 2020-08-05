@@ -117,6 +117,13 @@ body {
     margin-right: 0 !important;
 }
 
+.language-dropdown{
+    position: absolute !important;
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+    width: 150px;
+}
+
 .port-dropdown-label, .processor-dropdown-label,  .baudrate-dropdown-label {
     text-align: left;
 }

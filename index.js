@@ -10,6 +10,7 @@ const config = require('./js/config');
 const menu = require('./js/menu');
 const SerialPort = require('serialport');
 const { list } = require('serialport');
+const i18n = require('./localization/i18n');
 const spawn = require('child_process').spawn;
 
 var flash_config = {
@@ -185,8 +186,11 @@ ipcMain.on('port-list-request', function (event, arg) {
 ipcMain.on('send-config-request', function (event, value, field) {
     flash_config[field] = value
 
-    console.log("flash config;\n", flash_config)
+})
 
+ipcMain.on('change-language-request', function (event, atr) {
+    i18n.changeLanguage(atr)
+    mainWindow.reload()
 })
 
 //ipcMain.on('send-port-request', function (event, arg) {

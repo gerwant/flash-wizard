@@ -1,4 +1,4 @@
-const electron = require('electron');
+
 
 
 $('.ui.dropdown').dropdown();

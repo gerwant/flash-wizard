@@ -171,11 +171,15 @@ const otherTemplate = [
 		submenu: [
 			{
 				label: 'English',
-				click: () => {i18n.changeLanguage("en")}
+				click: () => {
+				i18n.changeLanguage("en")
+			}
 			},
 			{
 				label: 'Polski',
-				click: () => {i18n.changeLanguage("pl")}
+				click: () => {
+				i18n.changeLanguage("pl")
+			}
 			}
 		]
 	}

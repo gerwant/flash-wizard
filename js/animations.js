@@ -7,6 +7,7 @@ $('.top-half').click(function(){
     $('.top-half-label').css({"filter": "none"});
     $('.bottom-half-label').css({"filter": "blur(10px)"});
 
+    $('.language-dropdown').hide()
     $('.first-step-1').hide()
     $('.second-step-1').hide()
     $('.third-step-1').hide()
@@ -51,7 +52,7 @@ $('.bottom-half').click(function(){
     $('.bottom-half-label').css({"filter": "none"});
     $('.top-half-label').css({"filter": "blur(10px)"});
 
-
+    $('.language-dropdown').hide()
     $('.first-step').hide()
     $('.second-step').hide()
     $('.third-step').hide()
