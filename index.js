@@ -10,7 +10,7 @@ const config = require('./js/config');
 const menu = require('./js/menu');
 const SerialPort = require('serialport');
 const { list } = require('serialport');
-const i18n = require('./localization/i18n');
+const i18n = require('./js/i18n');
 const spawn = require('child_process').spawn;
 
 var flash_config = {

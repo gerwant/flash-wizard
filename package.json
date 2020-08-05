@@ -24,6 +24,7 @@
 		"edit-json-file": "^1.4.0",
 		"electron-context-menu": "^0.15.0",
 		"electron-debug": "^3.0.0",
+		"electron-is-dev": "^1.2.0",
 		"electron-store": "^5.1.0",
 		"electron-unhandled": "^3.0.0",
 		"electron-updater": "^4.0.6",
@@ -51,7 +52,7 @@
 	"build": {
 		"appId": "com.garage-makezone.flash-wizard",
 		"productName": "Flash Wizard",
-		"extraResources": "bin",
+		"extraResources": ["bin", "localization"],
 		"npmRebuild": false,
 		"mac": {
 			"category": "public.app-category.social-networking",

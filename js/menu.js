@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 const {app, Menu, shell} = require('electron');
-var i18n = require('../localization/i18n')
+var i18n = require('./i18n')
 const {
 	is,
 	appMenu,
