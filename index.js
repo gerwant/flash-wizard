@@ -12,6 +12,7 @@ const SerialPort = require('serialport');
 const { list } = require('serialport');
 const i18n = require('./localization/i18n');
 const spawn = require('child_process').spawn;
+const isDev = require('electron-is-dev');
 
 var flash_config = {
     port: null,
@@ -41,6 +42,7 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 // Prevent window from being garbage collected
 let mainWindow;
 
+let env = process.env.NODE_ENV || 'development'
 
 const createMainWindow = async () => {
     const win = new BrowserWindow({
@@ -116,12 +118,12 @@ ipcMain.on('perform-flash', (event, arg) => {
 
     let avrdude_path = ''
     let avrdude_config_path = ''
-    if(process.env.NODE_ENV == "development"){
-        avrdude_path = path.join(__dirname, 'bin\\')+avrdude_exec;
+    if(isDev){
+        avrdude_path = path.join(__dirname, 'bin/')+avrdude_exec;
         avrdude_config_path = path.join(__dirname, 'bin/')+'avrdude.conf'
     } else {
-        avrdude_path = path.join(__dirname, "bin/")+avrdude_exec;
-        avrdude_config_path = path.join(__dirname, 'bin/')+'avrdude.conf' //process.resourcesPath
+        avrdude_path = path.join(process.resourcesPath, "bin/")+avrdude_exec;
+        avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf' //process.resourcesPath
     }
     console.log(avrdude_path)
     const avrdude_args = [
