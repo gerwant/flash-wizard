@@ -13,7 +13,7 @@ const { list } = require('serialport');
 const i18n = require('./js/i18n');
 const spawn = require('child_process').spawn;
 const isDev = require('electron-is-dev');
-const { configureBuildCommand } = require('electron-builder/out/builder');
+
 
 var flash_config = {
     port: null,
