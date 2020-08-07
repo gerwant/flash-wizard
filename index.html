@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="css/index.css">
     </head>
-    <body>
+    <body style="background-color:  #272A31;">
         
         <!--
             <div id="options" class="ui equal width center aligned padded grid">
@@ -25,7 +25,7 @@
         -->
 
         <!-- Tu działa już -->
-        <div class="ui floating scrolling labeled icon button dropdown language-dropdown">
+        <!-- <div class="ui floating scrolling labeled icon button dropdown language-dropdown">
             <input type="hidden" name="language">
             <div class="text language-dropdown-label translate">Language</div>
             <i class="dropdown icon"></i>
@@ -33,12 +33,9 @@
                 <div class="item language-item" val="en">English</div>
                 <div class="item language-item" val="pl">Polski</div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="top-half" isselected="">
-            <h1 class="centered opt top-half-label noselect translate">I have the .hex file</h1>
-        </div>
-        <div class="middle-segment-1 ui grid">
+        <!-- <div class="middle-segment-1 ui grid">
             <div class="five wide column first-step-1 first-step">
 
                 <h4 class=translate>Choose processor</h4>
@@ -52,12 +49,12 @@
                     </div>
                 </div>
 
-                <!--
+                
                 <button class="ui labeled icon button choose-file">
                     <i class="upload icon"></i>
                     Wybierz plik
                 </button>
-                -->
+               
                 <h4 class="translate">Choose file</h4>
                 <label class="ui labeled icon button choose-file" for="selector">
                     <i class="file icon"></i>
@@ -130,11 +127,57 @@
                 </button>
             </div>
         </div>
-        <div class="bottom-half" isselected="">
-            <h1 class="centered opt bottom-half-label noselect translate">I don't have the .hex file</h1>
-        </div>
- 
+  --> 
+    <div class="list-wrapper">
+        <div class="ui step-list horizontal list">
+            <div class="item step step1">
+                <i class="microchip step-icon icon active-icon big"></i>
+                <h4 class="active-step-title translate center">Choose processor</h4>
+                    <div class="active-btn step-btn ui floating scrolling labeled icon button dropdown processor-dropdown">
+                        <input type="hidden" name="processors">
+                        <div class="text processor-dropdown-label translate active-step">Processors</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu" id="processors">
+                            <div class="item processor-item">atmega1284p</div>
+                            <div class="item processor-item">atmega2560</div>
+                        </div>
+                    </div>
+                    
+            </div>
+            <div class="item step step2">
+                <i class="usb icon big step-icon inactive-icon"></i>
+                <h4 class="inactive-step-title translate center">Choose port</h4>
+                <div class="inactive-btn step-btn ui disabled floating scrolling labeled icon button dropdown">
+                    <input type="hidden" name="serial-port">
+                    <div class="text port-dropdown-label translate">Port</div>
+                        <i class="dropdown icon"></i>
+                    <div class="menu" id="ports">
+                    </div>
+                </div>
+            </div>
+            <div class=" item step step3">
+                <i class="file icon big step-icon inactive-icon"style="margin-left: 10%"></i>
+                <h4 class="inactive-step-title translate">Choose file</h4>
+                <label class="inactive-btn step-btn ui disabled labeled icon button choose-file" for="selector">
+                    <i class="file icon"></i>
+                    <div class="choose-file-label translate">File</div>
+                </label>
+                <input type="file" id="selector" accept=".png,.hex" style="display: none;">
+            </div>
+            <div class="item step step4">
+                <i class="bolt icon big step-icon inactive-icon" style="margin-left: 5%;"></i>
+                <h4 class="inactive-step-title translate">Flash</h4>
+                <button class="inactive-btn step-btn disabled ui labeled icon button flash-firmware-btn">
+                    <i class="bolt icon"></i>
+                    <div class="translate">Flash!</div>
+                </button>
+            </div>
+    </div>
+    </div>
 
+    <footer>
+        
+    </footer>
         <script>window.$ = window.jQuery = require('jquery');</script>
         <script src="js/jquery-ui.js"></script>
         <script>

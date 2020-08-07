@@ -42,7 +42,20 @@ body {
 .header{
     color: white !important;
 }
-
+.active-icon{
+    color: rgb(224, 223, 223);
+}
+.inactive-icon{
+    color: rgb(77, 77, 77);
+}
+.active-step-title{
+    color: rgb(224, 223, 223);
+    margin-top: 10px !important;
+}
+.inactive-step-title{
+    color: rgb(77, 77, 77);
+    margin-top: 10px !important;
+}
 .flag{
     width: 100px;
     height: 70px;
@@ -50,10 +63,6 @@ body {
     margin-right: auto !important;
     padding: 0% !important;
 
-}
-.flag-list{
-    margin-left: auto !important;
-    margin-right: auto !important;
 }
 .chosen-flag{ 
     border: grey solid thin;
@@ -77,6 +86,19 @@ body {
     margin-right: auto !important;
 
 }
+.step{
+    text-align: center;
+    width: 140px;
+    
+}
+.list-wrapper{
+    display: flex;
+    margin-top: 20% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center;
+    
+}
 .segment{
     color: white;
     position: relative;
@@ -88,24 +110,6 @@ body {
     margin-right: auto !important;
 }
 
-.top-half {
-    height:50%;
-    background-color: #6b8794   !important;
-    border-radius: 0px !important;
-    margin-right: 0 !important;
-    text-align: center;
-}
-
-.bottom-half {
-    height: 50%;
-    position: fixed !important;
-    background-color: #566c76     !important;
-    text-align: center;
-    border-radius: 0px !important;
-    width:100% !important;
-    margin-right: 0px !important;
-    bottom: 0 !important;
-}
 
 .centered {
     position: relative;
@@ -152,7 +156,7 @@ body {
 .choose-file, .processor-dropdown, .baudrate-dropdown {
     margin-right: 0 !important;
     padding-right: 0 !important;
-    margin-left: 1rem !important;
+   
 }
 
 .dropdown {
@@ -167,8 +171,26 @@ body {
     width: 150px;
 }
 
-.port-dropdown-label, .processor-dropdown-label,  .baudrate-dropdown-label {
+.port-dropdown-label, .processor-dropdown-label, .processor-dropdown {
+    text-align: left !important;
+}
+
+.step-btn{
     text-align: left;
+    width: 130px !important;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.inactive-btn{
+    color: white !important;
+    background-color: grey !important;
+}
+
+.active-btn{
+    color: white !important;
+    background-color: #1E8449 !important;
 }
 
 .avrdude_output {

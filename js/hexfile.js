@@ -9,7 +9,7 @@ $('.refresh-ports').click(function(){
    
     electron.ipcRenderer.send('port-list-request');
 })
-$('.choose-file').click(function(){
+$('.processor-item').click(function(){
    
     electron.ipcRenderer.send('port-list-request');
 })
@@ -53,13 +53,45 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
 
     $('.port').click(function(){
         electron.ipcRenderer.send('send-config-request', this.innerHTML, "port");
-        $('.third-step-1').show("slide", {direction: "right"})
+        $('.step2').find('h4').removeClass("active-step-title")
+        $('.step2').find('h4').addClass("inactive-step-title")
+        $('.step2').find('.step-icon').removeClass("active-icon")
+        $('.step2').find('.step-icon').addClass("inactive-icon")
+        $('.step2').find('.step-btn').removeClass("active-btn")
+        $('.step2').find('.step-btn').addClass("inactive-btn")
+    
+        
+    
+        $('.step3').find('h4').removeClass("inactive-step-title")
+        $('.step3').find('h4').addClass("active-step-title")
+        $('.step3').find('.step-icon').removeClass("inactive-icon")
+        $('.step3').find('.step-icon').addClass("active-icon")
+        $('.step3').find('.step-btn').removeClass("inactive-btn")
+        $('.step3').find('.step-btn').addClass("active-btn")
+        $('.step3').find('.step-btn').removeClass("disabled")
     })
 });
 
 
 $('.processor-item').click(function(){
     electron.ipcRenderer.send('send-config-request', this.innerHTML, "processor");
+    $('.step1').find('h4').removeClass("active-step-title")
+    $('.step1').find('h4').addClass("inactive-step-title")
+    $('.step1').find('.step-icon').removeClass("active-icon")
+    $('.step1').find('.step-icon').addClass("inactive-icon")
+    $('.step1').find('.step-btn').removeClass("active-btn")
+    $('.step1').find('.step-btn').addClass("inactive-btn")
+
+    
+
+    $('.step2').find('h4').removeClass("inactive-step-title")
+    $('.step2').find('h4').addClass("active-step-title")
+    $('.step2').find('.step-icon').removeClass("inactive-icon")
+    $('.step2').find('.step-icon').addClass("active-icon")
+    $('.step2').find('.step-btn').removeClass("inactive-btn")
+    $('.step2').find('.step-btn').addClass("active-btn")
+    $('.step2').find('.step-btn').removeClass("disabled")
+
 })
 
 $('.baudrate-item').click(function(){
