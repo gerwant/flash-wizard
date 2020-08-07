@@ -1,5 +1,11 @@
 
 
+$(document).ready(function(){
+    let lanugage = i18n.getLanguage()
+    console.log("langugag", lanugage)
+    $(`.${lanugage}`).addClass("chosen-flag")
+})
+
 
 $('input[type="file"]').change((event)=>{
     const file = event.target.files[0];
@@ -45,5 +51,8 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
 
 $('.language-item').click(function(){
     
+    electron.ipcRenderer.send('change-language-request', $(this).attr("val"));
+})
+$('.flag').click(function(){
     electron.ipcRenderer.send('change-language-request', $(this).attr("val"));
 })

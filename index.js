@@ -77,6 +77,42 @@ const createMainWindow = async () => {
     return win;
 };
 
+
+
+const createWelcomeWindow = async () => {
+    const win = new BrowserWindow({
+        title: "Flash Wizard",
+        show: false,
+        width: 640,
+        height: 480,
+        webPreferences: {
+            devTools: true,
+            nodeIntegration: true
+        }
+    });
+
+    win.on('ready-to-show', () => {
+        win.show();
+    });
+
+    win.on('closed', () => {
+        // Dereference the window
+        // For multiple windows store them in an array
+        mainWindow = undefined;
+    });
+
+    console.log(process.env.NODE_ENV)
+
+    // TODO: uncomment when ready to publish, only for development purposes needed
+    //win.setResizable(false);
+
+
+    await win.loadFile(path.join(__dirname, 'welcome.html'));
+
+    return win;
+};
+
+
 // Prevent multiple instances of the app
 if (!app.requestSingleInstanceLock()) {
     app.quit();
@@ -107,10 +143,8 @@ app.on('activate', async () => {
 (async () => {
 	await app.whenReady();
 	Menu.setApplicationMenu(menu);
-    mainWindow = await createMainWindow();
-    
-	//const favoriteAnimal = config.get('favoriteAnimal');
-	//mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
+    mainWindow = await createWelcomeWindow();
+ 
 })();
 
 ipcMain.on('perform-flash', (event, arg) => {
@@ -193,6 +227,15 @@ ipcMain.on('send-config-request', function (event, value, field) {
 ipcMain.on('change-language-request', function (event, atr) {
     i18n.changeLanguage(atr)
     mainWindow.reload()
+})
+
+ipcMain.on('openMainWindow', function (event, atr) {
+    (async () => {
+        let welcome_window = mainWindow
+        mainWindow = await createMainWindow();
+        welcome_window.close()
+     
+    })();
 })
 
 //ipcMain.on('send-port-request', function (event, arg) {

@@ -38,7 +38,7 @@ function i18n() {
      try{
           loadedLanguage = JSON.parse(fs.readFileSync(path.join(dirname, language + '.json'), 'utf8'))
      }
-     catch{
+     catch(error){
           loadedLanguage = JSON.parse(fs.readFileSync(path.join(dirname, 'en.json'), 'utf8'))
      }
    
@@ -54,7 +54,16 @@ i18n.prototype.__ = function(phrase) {
 }
 
 i18n.prototype.changeLanguage = function(l) {
-    loadedLanguage = JSON.parse(fs.readFileSync(path.join(dirname, l + '.json'), 'utf8'))
+     try{
+          loadedLanguage = JSON.parse(fs.readFileSync(path.join(dirname, l + '.json'), 'utf8'))
+     }
+     catch(error){
+          console.error(error)
+     }
     config.set("Language", l)
  }
+
+i18n.prototype.getLanguage = function(){
+     return JSON.parse(fs.readFileSync(configPath, 'utf8'))["Language"]
+}
 module.exports = new i18n;

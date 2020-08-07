@@ -66,3 +66,8 @@ $('.bottom-half').click(function(){
      });
 
 })
+
+$('.flag').click(function(){
+    $('.chosen-flag').removeClass("chosen-flag")
+    $(this).addClass("chosen-flag")
+})

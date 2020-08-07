@@ -2,6 +2,7 @@
     "File": "Plik",
     "I have the .hex file": "Mam plik .hex",
     "I don't have the .hex file": "Nie mam pliku .hex",
+    "Do you have the .hex file?": "Czy masz plik .hex?",
     "Choose processor": "Wybierz procesor",
     "Processors": "Procesory",
     "Choose file": "Wybierz plik",
