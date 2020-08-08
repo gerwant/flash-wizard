@@ -115,6 +115,8 @@ body {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .opt {
@@ -191,14 +193,19 @@ body {
 .active-btn{
     color: white !important;
     background-color: #1E8449 !important;
+    
 }
 
 .avrdude_output {
+    display: block;
     position: relative;
-    width: 90%;
-    height:70%;
+    width: 80% !important;
+    height: 20% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
     white-space: nowrap;
     overflow: auto;
+    background-color: grey !important;
 }
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */

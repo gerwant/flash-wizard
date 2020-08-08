@@ -71,3 +71,8 @@ $('.flag').click(function(){
     $('.chosen-flag').removeClass("chosen-flag")
     $(this).addClass("chosen-flag")
 })
+
+$('.flash-firmware-btn').click(function(){
+    $('.avrdude_output_wrapper').show("fade")
+})
+
