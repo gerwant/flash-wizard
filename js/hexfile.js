@@ -74,7 +74,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
 
 
 $('.processor-item').click(function(){
-    electron.ipcRenderer.send('send-config-request', this.innerHTML, "processor");
+    electron.ipcRenderer.send('send-config-request', $(this).data("value"), "processor");
     $('.step1').find('h4').removeClass("active-step-title")
     $('.step1').find('h4').addClass("inactive-step-title")
     $('.step1').find('.step-icon').removeClass("active-icon")

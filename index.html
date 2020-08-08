@@ -139,12 +139,14 @@
                     <div class="text processor-dropdown-label translate active-step">Printers</div>
                     <div class="menu" id="processors">
                         <div class="item processor-item" data-value="atmega1284p">Anet A8/A6</div> <!-- atmega1284p -->
-                        <div class="item processor-item" data-value="atmega2560">Ender 3</div> <!-- atmega2560 -->
+                        <div class="item processor-item" data-value="atmega1284p">Ender 3</div> <!-- atmega2560 -->
                         <div class="item processor-item" data-value="atmega328p">GRBL</div>
+                        <div class="item processor-item" data-value="atmega2560">Other</div>
                     </div>
                 </div>
                     
             </div>
+            <div class="item horizontal-line"></div>
             <div class="item step step2">
                 <i class="usb icon big step-icon inactive-icon"></i>
                 <h4 class="inactive-step-title translate center">Choose port</h4>
@@ -155,6 +157,7 @@
                     </div>
                 </div>
             </div>
+            <div class="item horizontal-line"></div>
             <div class=" item step step3">
                 <i class="file icon big step-icon inactive-icon"style="margin-left: 10%"></i>
                 <h4 class="inactive-step-title translate">Choose file</h4>
@@ -163,6 +166,7 @@
                 </label>
                 <input type="file" id="selector" accept=".png,.hex" style="display: none;">
             </div>
+            <div class="item horizontal-line"></div>
             <div class="item step step4">
                 <i class="bolt icon big step-icon inactive-icon" style="margin-left: 5%;"></i>
                 <div class="ui active inline loader tiny flash-progress" style="display: none"></div>
@@ -171,7 +175,7 @@
                     <div class="translate">Flash!</div>
                 </button>
             </div>
-    </div>
+        </div>
     </div>
     <div class="avrdude_output_wrapper" style="display: none; width: 100%;">
         <div class="ui form">

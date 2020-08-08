@@ -49,7 +49,7 @@ const createMainWindow = async () => {
         title: "Flash Wizard",
         icon: iconPath,
         show: false,
-        width: 640,
+        width: 740,
         height: 480,
         webPreferences: {
             devTools: true,
@@ -85,7 +85,7 @@ const createWelcomeWindow = async () => {
         title: "Flash Wizard",
         icon: iconPath,
         show: false,
-        width: 640,
+        width: 740,
         height: 480,
         webPreferences: {
             devTools: true,

@@ -222,3 +222,15 @@ body {
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
   }
+
+.horizontal-line {
+    position: relative;
+    top: -83px;
+    background-color: #5f5f5f;
+    width: 100px;
+    height: 1px !important;
+    padding: 0px 0 0 0 !important;
+    left: -50px;
+    margin-right: -100px;
+
+}
