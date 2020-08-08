@@ -55,7 +55,8 @@
 		"productName": "Flash Wizard",
 		"extraResources": [
 			"bin",
-			"localization"
+			"localization",
+			"static/icon"
 		],
 		"npmRebuild": false,
 		"mac": {

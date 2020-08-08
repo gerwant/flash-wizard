@@ -41,12 +41,13 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 
 // Prevent window from being garbage collected
 let mainWindow;
-
+let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
 let env = process.env.NODE_ENV || 'development'
 
 const createMainWindow = async () => {
     const win = new BrowserWindow({
         title: "Flash Wizard",
+        icon: iconPath,
         show: false,
         width: 640,
         height: 480,
@@ -82,6 +83,7 @@ const createMainWindow = async () => {
 const createWelcomeWindow = async () => {
     const win = new BrowserWindow({
         title: "Flash Wizard",
+        icon: iconPath,
         show: false,
         width: 640,
         height: 480,
@@ -238,11 +240,5 @@ ipcMain.on('openMainWindow', function (event, atr) {
     })();
 })
 
-//ipcMain.on('send-port-request', function (event, arg) {
-//    flash_config.port = arg
-//
-//    console.log("flash config;\n", flash_config)
-//
-//})
 
 
