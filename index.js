@@ -5,7 +5,7 @@ const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const {is} = require('electron-util');
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
-const contextMenu = require('electron-context-menu');
+//const contextMenu = require('electron-context-menu');
 const config = require('./js/config');
 const SerialPort = require('serialport');
 const { list } = require('serialport');
@@ -23,7 +23,7 @@ var flash_config = {
 
 unhandled();
 debug();
-contextMenu();
+//contextMenu();
 
 // Note: Must match `build.appId` in package.json
 app.setAppUserModelId('com.garage-makezone.flash-wizard');

@@ -3,14 +3,15 @@
     "I have the .hex file": "Mam plik .hex",
     "I don't have the .hex file": "Nie mam pliku .hex",
     "Do you have the .hex file?": "Czy masz plik .hex?",
-    "Choose processor": "Wybierz procesor",
-    "Processors": "Procesory",
+    "Choose printer": "Wybierz drukarkę",
+    "Printers": "Drukarki",
     "Choose file": "Wybierz plik",
     "Choose boundrate": "Wybierz baudrate",
     "Choose port": "Wybierz port",
     "Flashing": "Wgrywanie",
     "Flash!": "Wgraj!",
     "Confirm": "Zatwierdź",
-    "No ports": "Brak portów"
-    
+    "No ports": "Brak portów",
+    "Other": "Inna",
+    "RAMPS-based": "RAMPS i pochodne"
 }
