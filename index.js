@@ -178,20 +178,22 @@ ipcMain.on('perform-flash', (event, arg) => {
     }
 
     child.stdout.on('data', (data) => {
-        console.log('stdout: ', data.toString());
-        if (data.toString().includes('avrdude done')){
-            event.sender.send('avrdude-done', data.toString())
+        let datastring = data.toString()
+        console.log('stdout: ', datastring);
+        if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')){
+            event.sender.send('avrdude-done', datastring)
         } else {
-            event.sender.send('avrdude-response', data.toString())
+            event.sender.send('avrdude-response', datastring)
         }
     })
 
     child.stderr.on('data', (data) => {
-        console.log('stderr: ',data.toString());
-        if (data.toString().includes('avrdude done')){
-            event.sender.send('avrdude-done', data.toString())
+        let datastring = data.toString()
+        console.log('stderr: ',datastring);
+        if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')){
+            event.sender.send('avrdude-done', datastring)
         } else {
-            event.sender.send('avrdude-response', data.toString())
+            event.sender.send('avrdude-response', datastring)
         }
     })
 
