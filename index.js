@@ -7,7 +7,6 @@ const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 const contextMenu = require('electron-context-menu');
 const config = require('./js/config');
-const menu = require('./js/menu');
 const SerialPort = require('serialport');
 const { list } = require('serialport');
 const i18n = require('./js/i18n');
@@ -56,7 +55,7 @@ const createMainWindow = async () => {
             nodeIntegration: true
         }
     });
-
+    win.setMenu(null)
     win.on('ready-to-show', () => {
         win.show();
     });
@@ -91,7 +90,7 @@ const createWelcomeWindow = async () => {
             nodeIntegration: true
         }
     });
-
+    win.setMenu(null)
     win.on('ready-to-show', () => {
         win.show();
     });
@@ -143,7 +142,6 @@ app.on('activate', async () => {
 
 (async () => {
 	await app.whenReady();
-	Menu.setApplicationMenu(menu);
     mainWindow = await createWelcomeWindow();
  
 })();
