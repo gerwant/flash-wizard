@@ -133,15 +133,16 @@
         <div class="ui step-list horizontal list">
             <div class="item step step1">
                 <i class="microchip step-icon icon active-icon big"></i>
-                <h4 class="active-step-title translate center">Choose processor</h4>
-                    <div class="active-btn step-btn ui floating scrolling labeled icon button dropdown processor-dropdown">
-                        <input type="hidden" name="processors">
-                        <div class="text processor-dropdown-label translate active-step">Processors</div>
-                        <div class="menu" id="processors">
-                            <div class="item processor-item">atmega1284p</div>
-                            <div class="item processor-item">atmega2560</div>
-                        </div>
+                <h4 class="active-step-title translate center">Choose printer</h4>
+                <div class="active-btn step-btn ui floating dropdown labeled scrolling icon button processor-dropdown">
+                    <input type="hidden" name="processors">
+                    <div class="text processor-dropdown-label translate active-step">Printers</div>
+                    <div class="menu" id="processors">
+                        <div class="item processor-item" data-value="atmega1284p">Anet A8/A6</div> <!-- atmega1284p -->
+                        <div class="item processor-item" data-value="atmega2560">Ender 3</div> <!-- atmega2560 -->
+                        <div class="item processor-item" data-value="atmega328p">GRBL</div>
                     </div>
+                </div>
                     
             </div>
             <div class="item step step2">

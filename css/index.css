@@ -119,6 +119,11 @@ body {
     margin-right: auto;
 }
 
+.ui.labeled.icon.button {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
 .opt {
     color: #fff;
     text-shadow: rgb(0, 0, 0) 3px 0px 0px, rgb(0, 0, 0) 2.83487px 0.981584px 0px, rgb(0, 0, 0) 2.35766px 1.85511px 0px,
@@ -162,7 +167,7 @@ body {
 }
 
 .dropdown {
-    width: 70%;
+    /*width: 70%;*/
     margin-right: 0 !important;
 }
 
@@ -178,10 +183,11 @@ body {
 }
 
 .step-btn{
-    text-align: left;
+    text-align: center !important;
     width: 130px !important;
     margin-right: auto;
-    margin-left: auto;
+    padding-left: 0px !important;
+    /*margin-left: auto;*/
 
 }
 

@@ -17,7 +17,7 @@ const isDev = require('electron-is-dev');
 var flash_config = {
     port: null,
     file_path: null,
-    baudrate: 9600,
+    baudrate: 57600,
     processor: null
 }
 
