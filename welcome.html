@@ -37,9 +37,11 @@
 
             <div class="ui raised padded text segment">
                 <h2 class="ui header translate">Do you have the .hex file?</h2>
-                <div class="ui button hex-trigger translate">I have the .hex file</div>
+                <div class="ui button hex-trigger translate" >I have the .hex file</div>
                 <br>
-                <div class="ui button no-hex-trigger translate">I don't have the .hex file</div>
+                <div class="tooltip-wrapper tooltip-translate" data-tooltip="We are working on it">
+                    <div class="ui button no-hex-trigger translate inactive-btn disabled">I don't have the .hex file</div>
+                </div>
             </div>
     </div>
 
@@ -48,10 +50,15 @@
         <script>
             const electron = require('electron');
             let i18n = require('./js/i18n.js') 
-
+            //translating divs
             let toTranslate = document.getElementsByClassName("translate")
             for (var i = 0; i < toTranslate.length; i++) {
                 toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
+            }
+            //translating tooltips
+            let tooltips = document.getElementsByClassName("tooltip-translate")
+            for (var i = 0; i < tooltips.length; i++) {
+                tooltips.item(i).setAttribute("data-tooltip", i18n.__(tooltips.item(i).getAttribute("data-tooltip")))
             }
             // sorry Damian, jquery didn't work
             // $('.translate').text(i18n.__($(this).text()))      

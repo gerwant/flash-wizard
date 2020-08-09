@@ -13,8 +13,8 @@ $('input[type="file"]').change((event)=>{
 
     let name = (file.name.length>10) ? file.name.slice(0, 8)+"..." : file.name
     $('.choose-file-label').text(name)
-    $('.choose-file').attr('data-tooltip', file.name
-    )
+    $('.choose-file').attr('data-tooltip', file.name)
+    
     $('.step3').find('h4').removeClass("active-step-title")
     $('.step3').find('h4').addClass("inactive-step-title")
     $('.step3').find('.step-icon').removeClass("active-icon")
