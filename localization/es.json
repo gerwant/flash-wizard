@@ -1,0 +1,18 @@
+{
+    "File": "Archivo",
+    "I have the .hex file": "Tengo el archivo .hex",
+    "I don't have the .hex file": "No tengo el archivo .hex",
+    "Do you have the .hex file?": "Tienes el archivo .hex?",
+    "Choose printer": "Elige la impresora",
+    "Printers": "Las impresoras",
+    "Choose file": "Elige un archivo",
+    "Choose baudrate": "Elige baudrate",
+    "Choose port": "Elige el puerto",
+    "Flashing": "Instalando",
+    "Flash!": "Instala!",
+    "Confirm": "Confirma",
+    "No ports": "No hay puertos",
+    "Other": "Otro",
+    "RAMPS-based": "Basado en RAMPS",
+    "We are working on it": "Estamos trabajando en ello"
+}
