@@ -9,125 +9,6 @@
     </head>
     <body style="background-color:  #272A31;">
         
-        <!--
-            <div id="options" class="ui equal width center aligned padded grid">
-                <div class="row top-half ui button">
-                    <div class="column">
-                        <h1 class="centered opt">Mam plik .hex</h1>
-                    </div>
-                </div>
-                <div class="row bottom-half ui button">
-                    <div class="column">
-                        <h1 class="centered opt">Nie mam pliku .hex</h1>
-                    </div>
-                </div>
-            </div>
-        -->
-
-        <!-- Tu działa już -->
-        <!-- <div class="ui floating scrolling labeled icon button dropdown language-dropdown">
-            <input type="hidden" name="language">
-            <div class="text language-dropdown-label translate">Language</div>
-            <i class="dropdown icon"></i>
-            <div class="menu" id="baudrate">
-                <div class="item language-item" val="en">English</div>
-                <div class="item language-item" val="pl">Polski</div>
-            </div>
-        </div> -->
-
-        <!-- <div class="middle-segment-1 ui grid">
-            <div class="five wide column first-step-1 first-step">
-
-                <h4 class=translate>Choose processor</h4>
-                <div class="ui floating scrolling labeled icon button dropdown processor-dropdown">
-                    <input type="hidden" name="processors">
-                    <div class="text processor-dropdown-label translate">Processors</div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu" id="processors">
-                        <div class="item processor-item">atmega1284p</div>
-                        <div class="item processor-item">atmega2560</div>
-                    </div>
-                </div>
-
-                
-                <button class="ui labeled icon button choose-file">
-                    <i class="upload icon"></i>
-                    Wybierz plik
-                </button>
-               
-                <h4 class="translate">Choose file</h4>
-                <label class="ui labeled icon button choose-file" for="selector">
-                    <i class="file icon"></i>
-                    <div class="choose-file-label translate">Choose file</div>
-                </label>
-                <input type="file" id="selector" accept=".png,.hex" style="display: none;">
-
-            </div>
-            <div class="five wide column second-step-1 second-step" id="second-step-1">
-                
-                <h4 class="translate">Choose boundrate</h4>
-                <div class="ui floating scrolling labeled icon button dropdown baudrate-dropdown">
-                    <input type="hidden" name="baudrate">
-                    <div class="text baudrate-dropdown-label translate">Baudrate</div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu" id="baudrate">
-                        <div class="item baudrate-item">9600</div>
-                        <div class="item baudrate-item">57600</div>
-                        <div class="item baudrate-item">115200</div>
-                        <div class="item baudrate-item">250000</div>
-                    </div>
-                </div>
-                
-                <h4 class="translate">Choose port</h4>
-                <div class="ui floating scrolling labeled icon button dropdown">
-                    <input type="hidden" name="serial-port">
-                    <div class="text port-dropdown-label translate">Port</div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu" id="ports">
-                    </div>
-                </div>
-
-
-                <button class="ui icon button refresh-ports">
-                    <i class="sync circle right icon"></i>
-                </button>
-            </div>
-            <div class="six wide column third-step-1 third-step">
-                <h4 class="translate">Flashing</h4>
-                <button class="ui labeled icon button flash-firmware-btn">
-                    <i class="bolt icon"></i>
-                    <div class="translate">Flash!</div>
-                </button>
-                <div class="ui active inline loader tiny flash-progress" style="display: none;"></div>
-                <textarea class="avrdude_output" wrap="soft"></textarea>
-            </div>
-        </div>
-        <div class="middle-segment-2 ui grid">
-            <div class="five wide column first-step-2 first-step" >
-                //TODO Opcje
-                <button class="ui labeled icon button confirm-config-btn">
-                    <i class="save icon"></i>
-                    <div class="translate">Confirm</div>
-                </button>
-            </div>
-            <div class="six wide column second-step-2 second-step">
-                 <h3 class="translate">Choose port</h3>
-                <div class="ui floating scrolling labeled icon button dropdown">
-                    <input type="hidden" name="serial-port">
-                    <div class="text port-dropdown-label translate">Port</div>
-                        <i class="dropdown icon"></i>
-                    <div class="menu" id="ports2">
-                    </div>
-                </div>
-            </div>
-            <div class="five wide column third-step-2 third-step">
-                <button class="ui labeled icon button flash-firmware-btn">
-                    <i class="bolt icon"></i>
-                    <div class="translate">Flash!</div>
-                </button>
-            </div>
-        </div>
-  --> 
     <div class="logo-wrapper">
         <img class="main-website-redir" src="static/wizard.png">
     </div>
@@ -142,7 +23,7 @@
                     <div class="text processor-dropdown-label translate active-step">Printers</div>
                     <div class="menu" id="processors">
                         <div class="item processor-item" data-value="atmega1284p">Anet A8/A6</div> <!-- atmega1284p -->
-                        <div class="item processor-item" data-value="atmega1284p">Ender 3</div> <!-- atmega2560 -->
+                        <div class="item processor-item" data-value="atmega1284p">Ender 3/3 Pro/5</div> <!-- atmega2560 -->
                         <div class="item processor-item" data-value="atmega328p">GRBL</div>
                         <div class="item processor-item translate" data-value="atmega2560">RAMPS-based</div>
                         <div class="item processor-item translate" data-value="atmega2560">Other</div>
@@ -168,7 +49,7 @@
                 <label class="inactive-btn step-btn ui disabled labeled icon button choose-file" for="selector">
                     <div class="choose-file-label translate">File</div>
                 </label>
-                <input type="file" id="selector" accept=".png,.hex" style="display: none;">
+                <input type="file" id="selector" accept=".bin,.hex" style="display: none;">
             </div>
             <div class="item horizontal-line"></div>
             <div class="item step step4">
