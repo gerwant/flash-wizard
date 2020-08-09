@@ -1,0 +1,18 @@
+{
+    "File": "Файл",
+    "I have the .hex file": "У меня есть файл .hex",
+    "I don't have the .hex file": "У меня нет файла .hex",
+    "Do you have the .hex file?": "У вас есть файл .hex?",
+    "Choose printer": "Выберите принтер",
+    "Printers": "Принтеры",
+    "Choose file": "Выберите файл",
+    "Choose boundrate": "Выберите скорость передачи",
+    "Choose port": "Выберите порт",
+    "Flashing": "мигающий",
+    "Flash!": "Вспышка!",
+    "Confirm": "Подтверждение",
+    "No ports": "Нет портов",
+    "Other": "Другой",
+    "RAMPS-based": "RAMPS на основе",
+    "We are working on it": "Мы работаем над этим"
+}
