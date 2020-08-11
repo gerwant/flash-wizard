@@ -8,11 +8,13 @@ const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 //const contextMenu = require('electron-context-menu');
 const config = require('./js/config');
+require('dotenv').config();
 const SerialPort = require('serialport');
 const { list } = require('serialport');
 const i18n = require('./js/i18n');
 const spawn = require('child_process').spawn;
 const isDev = require('electron-is-dev');
+const ftp = require('basic-ftp');
 
 
 var flash_config = {
@@ -44,6 +46,7 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 
 // Prevent window from being garbage collected
 let mainWindow;
+let helpWindow;
 let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
 let env = process.env.NODE_ENV || 'development'
 
@@ -70,18 +73,52 @@ const createMainWindow = async () => {
         mainWindow = undefined;
     });
 
-    console.log(process.env.NODE_ENV)
-
-    // TODO: uncomment when ready to publish, only for development purposes needed
-    //win.setResizable(false);
-
-
     await win.loadFile(path.join(__dirname, 'index.html'));
 
     return win;
 };
 
+const createNohexWindow = async () => {
+    const win = new BrowserWindow({
+        title: "Flash Wizard",
+        icon: iconPath,
+        show: false,
+        width: 740,
+        height: 480,
+        webPreferences: {
+            devTools: true,
+            nodeIntegration: true
+        }
+    });
+    win.setMenu(null)
+    win.on('ready-to-show', () => {
+        win.show();
+    });
 
+    win.on('closed', () => {
+        // Dereference the window
+        // For multiple windows store them in an array
+        mainWindow = undefined;
+    });
+
+    const client = new ftp.Client();
+    client.ftp.verbose = true;
+    try {
+        await client.access({
+            host: process.env.FTP_HOST,
+            user: process.env.FTP_USER,
+            password: process.env.FTP_PASSWORD,
+            secure: false
+        })
+        console.log(await client.list())
+    } catch(err) {
+        console.log(err)
+    }
+
+    await win.loadFile(path.join(__dirname, 'nohex.html'));
+
+    return win;
+};
 
 const createWelcomeWindow = async () => {
     const win = new BrowserWindow({
@@ -106,11 +143,6 @@ const createWelcomeWindow = async () => {
         // For multiple windows store them in an array
         mainWindow = undefined;
     });
-
-    console.log(process.env.NODE_ENV)
-
-    // TODO: uncomment when ready to publish, only for development purposes needed
-    //win.setResizable(false);
 
 
     await win.loadFile(path.join(__dirname, 'welcome.html'));
@@ -141,14 +173,8 @@ const createHelpWindow = async () => {
         // Dereference the window
         // For multiple windows store them in an array
         isHelpOpen = false;
-        win = null;
+        helpWindow = null;
     });
-
-    console.log(process.env.NODE_ENV)
-
-    // TODO: uncomment when ready to publish, only for development purposes needed
-    //win.setResizable(false);
-
 
     await win.loadFile(path.join(__dirname, 'help.html'));
 
@@ -283,12 +309,20 @@ ipcMain.on('openMainWindow', function (event, atr) {
     })();
 })
 
+ipcMain.on('openNohexWindow', function(e, atr) {
+    (async () => {
+        let nohex_window = mainWindow
+        mainWindow = await createNohexWindow();
+        nohex_window.close();
+    })();
+})
+
 ipcMain.on('openHelpWindow', function (event, atr) {
     (async () => {
         if (isHelpOpen){
             return;
         } else {
-            await createHelpWindow();     
+            helpWindow = await createHelpWindow();     
         }
     })();
 })
