@@ -89,7 +89,7 @@ const createWelcomeWindow = async () => {
         icon: iconPath,
         show: false,
         width: 740,
-        height: 620,
+        height: 480,
         resizable: isDev ? true : false,
         webPreferences: {
             devTools: true,
