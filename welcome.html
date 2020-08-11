@@ -10,6 +10,9 @@
     <body>
         <div style="margin-top: 20px;">
             <div class="ui segment language-row">
+                <div>
+                    <i class="help-trigger big question circle icon"></i>
+                </div>
                 <img class="wizzard-icon main-website-redir" src="static/icon/wizzard.png" width="100px" height="100px" alt="" srcset="">
                 <div class="flag-list">
                     <div class="ui horizontal list">
@@ -76,7 +79,9 @@
             $('.no-hex-trigger').click(function(){
                 electron.ipcRenderer.send('openMainWindow');
             })
-             
+            $('.help-trigger').click(function(){
+                electron.ipcRenderer.send('openHelpWindow');
+            })
         </script>
        
     </body>

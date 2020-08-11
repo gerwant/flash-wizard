@@ -115,6 +115,40 @@ const createWelcomeWindow = async () => {
     return win;
 };
 
+const createHelpWindow = async () => {
+    const win = new BrowserWindow({
+        title: "Flash Wizard",
+        icon: iconPath,
+        show: false,
+        width: 500,
+        height: 240,
+        webPreferences: {
+            devTools: true,
+            nodeIntegration: true
+        }
+    });
+    win.setMenu(null)
+    win.on('ready-to-show', () => {
+        win.show();
+    });
+
+    win.on('closed', () => {
+        // Dereference the window
+        // For multiple windows store them in an array
+        win = null;
+    });
+
+    console.log(process.env.NODE_ENV)
+
+    // TODO: uncomment when ready to publish, only for development purposes needed
+    //win.setResizable(false);
+
+
+    await win.loadFile(path.join(__dirname, 'help.html'));
+
+    return win;
+};
+
 
 // Prevent multiple instances of the app
 if (!app.requestSingleInstanceLock()) {
@@ -243,36 +277,43 @@ ipcMain.on('openMainWindow', function (event, atr) {
     })();
 })
 
-autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
-autoUpdater.autoDownload = true;
+ipcMain.on('openHelpWindow', function (event, atr) {
+    (async () => {
+        await createHelpWindow();     
+    })();
+})
 
-autoUpdater.setFeedURL({
-    provider: "generic",
-    url: "https://gitlab.com/gerwant/flash-wizard"
-});
-
-autoUpdater.on('checking-for-update', function () {
-    sendStatusToWindow('Checking for update...');
-});
-
-autoUpdater.on('update-available', function (info) {
-    sendStatusToWindow('Update available.');
-});
-
-autoUpdater.on('update-not-available', function (info) {
-    sendStatusToWindow('Update not available.');
-});
-
-autoUpdater.on('error', function (err) {
-    sendStatusToWindow('Error in auto-updater.');
-});
-
-autoUpdater.on('download-progress', function (progressObj) {
-    let log_message = "Download speed: " + progressObj.bytesPerSecond;
-    log_message = log_message + ' - Downloaded ' + parseInt(progressObj.percent) + '%';
-    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-    sendStatusToWindow(log_message);
-});
+// autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
+// autoUpdater.autoDownload = true;
+// 
+// autoUpdater.setFeedURL({
+//     provider: "generic",
+//     url: "https://gitlab.com/gerwant/flash-wizard"
+// });
+// 
+// autoUpdater.on('checking-for-update', function () {
+//     sendStatusToWindow('Checking for update...');
+// });
+// 
+// autoUpdater.on('update-available', function (info) {
+//     sendStatusToWindow('Update available.');
+// });
+// 
+// autoUpdater.on('update-not-available', function (info) {
+//     sendStatusToWindow('Update not available.');
+// });
+// 
+// autoUpdater.on('error', function (err) {
+//     sendStatusToWindow('Error in auto-updater.');
+// });
+// 
+// autoUpdater.on('download-progress', function (progressObj) {
+//     sendStatusToWindow('Update downloaded; will install in 1 seconds');
+//     let log_message = "Download speed: " + progressObj.bytesPerSecond;
+//     log_message = log_message + ' - Downloaded ' + parseInt(progressObj.percent) + '%';
+//     log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+//     sendStatusToWindow(log_message);
+// });
 
 autoUpdater.on('update-downloaded', function (info) {
     sendStatusToWindow('Update downloaded; will install in 1 seconds');
