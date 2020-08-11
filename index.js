@@ -22,6 +22,8 @@ var flash_config = {
     processor: null
 }
 
+let isHelpOpen = false;
+
 unhandled();
 debug();
 //contextMenu();
@@ -132,11 +134,13 @@ const createHelpWindow = async () => {
     win.setMenu(null)
     win.on('ready-to-show', () => {
         win.show();
+        isHelpOpen = true;
     });
 
     win.on('closed', () => {
         // Dereference the window
         // For multiple windows store them in an array
+        isHelpOpen = false;
         win = null;
     });
 
@@ -281,7 +285,11 @@ ipcMain.on('openMainWindow', function (event, atr) {
 
 ipcMain.on('openHelpWindow', function (event, atr) {
     (async () => {
-        await createHelpWindow();     
+        if (isHelpOpen){
+            return;
+        } else {
+            await createHelpWindow();     
+        }
     })();
 })
 
