@@ -110,6 +110,12 @@ body {
     margin-right: auto !important;
 }
 
+.help-trigger{
+    position: fixed;
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+    color: rgb(224, 223, 223);
+}
 
 .centered {
     position: relative;

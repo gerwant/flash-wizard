@@ -8,10 +8,9 @@
         <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
+
         <div style="margin-top: 20px;">
-            <div>
-                <i class="help-trigger big question circle icon"></i>
-            </div>
+
             <div class="ui segment">
                 <div class="ui horizontal list logo-list">
                     <div class="item logo-item">
@@ -87,9 +86,7 @@
             $('.no-hex-trigger').click(function(){
                 electron.ipcRenderer.send('openMainWindow');
             })
-            $('.help-trigger').click(function(){
-                electron.ipcRenderer.send('openHelpWindow');
-            })
+
         </script>
        
     </body>

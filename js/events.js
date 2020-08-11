@@ -83,3 +83,6 @@ $('.flag').click(function(){
 $('.main-website-redir').click(()=>{
     electron.shell.openExternal('https://garage-makezone.eu')
 })
+$('.help-trigger').click(function(){
+    electron.ipcRenderer.send('openHelpWindow');
+})

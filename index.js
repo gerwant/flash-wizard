@@ -88,6 +88,7 @@ const createWelcomeWindow = async () => {
         show: false,
         width: 740,
         height: 620,
+        resizable: isDev ? true : false,
         webPreferences: {
             devTools: true,
             nodeIntegration: true
@@ -122,6 +123,7 @@ const createHelpWindow = async () => {
         show: false,
         width: 500,
         height: 240,
+        resizable: isDev ? true : false,
         webPreferences: {
             devTools: true,
             nodeIntegration: true
