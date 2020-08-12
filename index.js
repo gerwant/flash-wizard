@@ -109,6 +109,7 @@ const createNohexWindow = async () => {
         mainWindow = undefined;
     });
 
+    // FTP connection
     const client = new ftp.Client();
     client.ftp.verbose = true;
     try {
@@ -120,9 +121,11 @@ const createNohexWindow = async () => {
         })
         let listing = await client.list()
         listing = _.filter(listing, (element)=>{
-            return element.type ==2;
+            return element.type ==2; // 2 because type 2 means it's a directory
         })
     } catch(err) {
+        // Should terminate window and return to welcome window
+        // with appropriate error message
         console.log(err)
     }
 
@@ -198,6 +201,14 @@ End of creating windows.
 
 */
 
+/*
+
+Handling app signals,
+closing and opening windows,
+handling external events.
+
+*/
+
 // Prevent multiple instances of the app
 if (!app.requestSingleInstanceLock()) {
     app.quit();
@@ -226,14 +237,14 @@ app.on('window-all-closed', () => {
 // or application's gonna be relaunched when it's running
 app.on('activate', async () => {
     if (!mainWindow) {
-        helpWindow = await createWelcomeWindow();
+        mainWindow = await createWelcomeWindow();
     }
 });
 
 // Create first welcome screen when app is ready.
 (async () => {
 	await app.whenReady();
-    helpWindow = await createWelcomeWindow();
+    mainWindow = await createWelcomeWindow();
  
 })();
 
