@@ -9,11 +9,70 @@
         <link rel="stylesheet" href="css/index.css">
     </head>
 </head>
-<body>
-    <div style="margin-top: 20px;">
-        <div class="ui segment">
-            <h1>Pomocy</h1>
+<body style="overflow-y: scroll;">
+    <h1 class="faqheader">FAQ</h1>
+
+    <div class="ui segment" style="width: 600px !important;">
+        <div class="question">
+            <h3 class="translate">sample question</h3>
+            <p class="translate">sample answer</p>
         </div>
+        
+        <div class="question">
+            <h3 class="translate">sample question</h3>
+            <p class="translate">sample answer</p>
+        </div>
+        
+
+      
+        <div class="question">
+            <h3 class="translate">sample question</h3>
+            <p class="translate">sample answer</p>
+        </div>
+        
+
+      
+        <div class="question">
+            <h3 class="translate">sample question</h3>
+            <p class="translate">sample answer</p>
+        </div>
+        
+
+      
+        <div class="question">
+            <h3 class="translate">sample question</h3>
+            <p class="translate">sample answer</p>
+        </div>
+        
+
+      
+        
+        
+        
     </div>
+
+    <script>
+            const electron = require('electron');
+            let i18n = require('./js/i18n.js') 
+
+            //translating divs
+            let toTranslate = document.getElementsByClassName("translate")
+            for (var i = 0; i < toTranslate.length; i++) {
+                toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
+            }
+    </script>
 </body>
+<style>
+    .question{
+        padding-bottom: 30px;
+
+        text-align: left;
+    }
+    .faqheader{
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+        font-size: 40px;
+    }
+</style>
 </html>

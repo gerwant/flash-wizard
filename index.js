@@ -169,8 +169,8 @@ const createHelpWindow = async () => {
         title: "Flash Wizard",
         icon: iconPath,
         show: false,
-        width: 500,
-        height: 240,
+        width: 740,
+        height: 480,
         resizable: isDev ? true : false,
         webPreferences: {
             devTools: true,
@@ -409,19 +409,19 @@ Autoupdater module.
 //     log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
 //     sendStatusToWindow(log_message);
 // });
+// 
+// autoUpdater.on('update-downloaded', function (info) {
+//     sendStatusToWindow('Update downloaded; will install in 1 seconds');
+// });
 
-autoUpdater.on('update-downloaded', function (info) {
-    sendStatusToWindow('Update downloaded; will install in 1 seconds');
-});
+// autoUpdater.on('update-downloaded', function (info) {
+//     setTimeout(function () {
+//         autoUpdater.quitAndInstall();
+//     }, 1000);
+// });
 
-autoUpdater.on('update-downloaded', function (info) {
-    setTimeout(function () {
-        autoUpdater.quitAndInstall();
-    }, 1000);
-});
+// autoUpdater.checkForUpdates();
 
-autoUpdater.checkForUpdates();
-
-function sendStatusToWindow(message) {
-    console.log(message);
-}
+// function sendStatusToWindow(message) {
+//     console.log(message);
+// }
