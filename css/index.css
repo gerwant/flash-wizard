@@ -111,6 +111,28 @@ body {
     margin-left: auto !important;
     margin-right: auto !important;
 }
+body::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+    background-color: #3C404B;
+    outline: none;
+
+  }
+   
+body::-webkit-scrollbar-track {
+    box-shadow: none;
+
+  }
+   
+body::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 7px;
+    background-color:  #272A31;
+    
+    
+}
 
 .help-trigger{
     position: fixed;
