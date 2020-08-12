@@ -141,6 +141,13 @@ body::-webkit-scrollbar-thumb {
     color: rgb(224, 223, 223);
 }
 
+.go-back{
+    position: fixed;
+    top: 15px !important;
+    left: 10px !important;
+    color: rgb(224, 223, 223);
+}
+
 .centered {
     position: relative;
     top: 50%;

@@ -376,6 +376,13 @@ ipcMain.on('openHelpWindow', function (event, atr) {
     })();
 })
 
+ipcMain.on('goToWelcome', function (event, atr) {
+    (async () => {
+        let backWindow = mainWindow
+        mainWindow = await createWelcomeWindow();
+        backWindow.close();
+    })();
+})
 /* 
 
 End of communication with frontend.

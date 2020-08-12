@@ -91,3 +91,6 @@ $('.main-website-redir').click(()=>{
 $('.help-trigger').click(function(){
     electron.ipcRenderer.send('openHelpWindow');
 })
+$('.go-back').click(()=> {
+    electron.ipcRenderer.send('goToWelcome');
+})
