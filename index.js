@@ -52,6 +52,10 @@ let isHelpOpen = false;
 
 let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
 
+// FTP connection
+const client = new ftp.Client();
+client.ftp.verbose = true;
+
 /*
 
  Creating new windows.
@@ -109,9 +113,6 @@ const createNohexWindow = async () => {
         mainWindow = undefined;
     });
 
-    // FTP connection
-    const client = new ftp.Client();
-    client.ftp.verbose = true;
     try {
         await client.access({
             host: process.env.FTP_HOST,
@@ -119,10 +120,7 @@ const createNohexWindow = async () => {
             password: process.env.FTP_PASSWORD,
             secure: false
         })
-        let listing = await client.list()
-        listing = _.filter(listing, (element)=>{
-            return element.type ==2; // 2 because type 2 means it's a directory
-        })
+        
     } catch(err) {
         // Should terminate window and return to welcome window
         // with appropriate error message
@@ -255,6 +253,18 @@ Events defined to perform actions
 basing on frontend signals.
 
 */
+
+ipcMain.on('devices-list-request', async (event, arg) => {
+    let listing = await client.list()
+    listing = _.filter(listing, (element)=>{
+        return element.type == 2; // 2 because type 2 means it's a directory
+    })
+    listing = _.map(listing, (element) => {
+        return element.name;
+    })
+    console.log(listing)
+    event.sender.send('dropdown-content', {dropdown: "processors", content: listing})
+})
 
 ipcMain.on('perform-flash', (event, arg) => {
     const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'

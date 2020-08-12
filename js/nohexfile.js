@@ -12,27 +12,18 @@ $('.refresh-ports').click(function(){
     electron.ipcRenderer.send('port-list-request');
 })
 
+electron.ipcRenderer.on('dropdown-content', (event, args) => {
+    let dropdown = $("#"+args.dropdown);
+    _.each(args.content, (element) => {
+        let div = document.createElement('div')
+        div.className = "item processor-item"
+        div.innerHTML = element
+        dropdown.append(div)
+    })
+})
 
 
 electron.ipcRenderer.on('port-list-reply', function (event, args) {
-    //let container = document.getElementsByClassName('port-container').item(0)
-    
-    //container.innerHTML = ""
-    //if(args.length === 0){
-    //    
-    //    let alert = document.createElement('div')
-    //    alert.innerHTML = "Brak dostępnych portów"
-    //    container.appendChild(alert)
-    //}
-    //let ul = document.createElement('div')
-    //ul.className = "ui middle aligned selection list portlist"
-    //args.forEach(element => {
-    //    let li = document.createElement('div')
-    //    li.className = "item port"
-    //    li.innerHTML = element.path
-    //    ul.appendChild(li)
-    //});
-    //container.appendChild(ul)
 
     let container = $('#ports2');
     container.html("")

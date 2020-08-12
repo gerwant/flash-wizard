@@ -13,9 +13,48 @@
         </div>
         <div class="list-wrapper">
             <div class="ui step-list horizontal list">
-                Test
+                <div class="item step step1">
+                <i class="microchip step-icon icon active-icon big"></i>
+                <h4 class="active-step-title noselect translate center">Choose device</h4>
+                <div class="active-btn step-btn ui floating dropdown labeled scrolling icon button processor-dropdown">
+                    <input type="hidden" name="processors">
+                    <div class="text processor-dropdown-label translate active-step">Devices</div>
+                    <div class="menu" id="processors">
+                        <!--<div class="item processor-item" data-value="atmega1284p">Anet A8/A6</div> atmega1284p 
+                        <div class="item processor-item" data-value="atmega1284p">Ender 3/3 Pro/5</div> atmega2560 
+                        <div class="item processor-item" data-value="atmega328p">GRBL</div>
+                        <div class="item processor-item translate" data-value="atmega2560">RAMPS-based</div>
+                        <div class="item processor-item translate" data-value="atmega2560">Other</div> -->
+                    </div>
+                </div>
+                    
             </div>
-            
+            </div>
         </div>
+
+    <div class="subtext-wrapper">
+        <img class="main-website-redir" src="static/bygmz.png">
+    </div>
+    
+        <script>window.$ = window.jQuery = require('jquery');</script>
+        <script src="js/jquery-ui.js"></script>
+        <script>
+            const electron = require('electron');
+            let i18n = require('./js/i18n.js');
+            const _ = require('underscore');
+
+            let toTranslate = document.getElementsByClassName("translate")
+            for (var i = 0; i < toTranslate.length; i++) {
+                toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
+            }
+
+            document.addEventListener("DOMContentLoaded", ()=>{
+                electron.ipcRenderer.send('devices-list-request');
+            })
+        </script>
+        <script src="js/semantic.js"></script>
+        <script src="js/animations.js"></script>
+        <script src="js/nohexfile.js"></script>
+        <script src="js/events.js"></script>
     </body>
 </html>
