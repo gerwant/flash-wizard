@@ -15,6 +15,7 @@ const i18n = require('./js/i18n');
 const spawn = require('child_process').spawn;
 const isDev = require('electron-is-dev');
 const ftp = require('basic-ftp');
+const _ = require('underscore');
 
 
 var flash_config = {
@@ -24,7 +25,6 @@ var flash_config = {
     processor: null
 }
 
-let isHelpOpen = false;
 
 unhandled();
 debug();
@@ -47,8 +47,16 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 // Prevent window from being garbage collected
 let mainWindow;
 let helpWindow;
+
+let isHelpOpen = false;
+
 let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
-let env = process.env.NODE_ENV || 'development'
+
+/*
+
+ Creating new windows.
+
+*/
 
 const createMainWindow = async () => {
     const win = new BrowserWindow({
@@ -110,7 +118,10 @@ const createNohexWindow = async () => {
             password: process.env.FTP_PASSWORD,
             secure: false
         })
-        console.log(await client.list())
+        let listing = await client.list()
+        listing = _.filter(listing, (element)=>{
+            return element.type ==2;
+        })
     } catch(err) {
         console.log(err)
     }
@@ -181,12 +192,18 @@ const createHelpWindow = async () => {
     return win;
 };
 
+/*
+
+End of creating windows.
+
+*/
 
 // Prevent multiple instances of the app
 if (!app.requestSingleInstanceLock()) {
     app.quit();
 }
 
+// Restore already opened window when somebody tries to open second app instance
 app.on('second-instance', () => {
     if (mainWindow) {
         if (mainWindow.isMinimized()) {
@@ -197,23 +214,36 @@ app.on('second-instance', () => {
     }
 });
 
+// No windows opened? Close app.
 app.on('window-all-closed', () => {
     if (!is.macos) {
         app.quit();
     }
 });
 
+// Create window on attempt of activation the app.
+// For ex. when taskbar or dock icon clicked
+// or application's gonna be relaunched when it's running
 app.on('activate', async () => {
     if (!mainWindow) {
-        mainWindow = await createMainWindow();
+        helpWindow = await createWelcomeWindow();
     }
 });
 
+// Create first welcome screen when app is ready.
 (async () => {
 	await app.whenReady();
-    mainWindow = await createWelcomeWindow();
+    helpWindow = await createWelcomeWindow();
  
 })();
+
+/*
+
+Communication with frontend.
+Events defined to perform actions 
+basing on frontend signals.
+
+*/
 
 ipcMain.on('perform-flash', (event, arg) => {
     const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
@@ -284,9 +314,7 @@ ipcMain.on('port-list-request', function (event, arg) {
         )
        }
        
-    
       listPorts()
-     
      
     })
      
@@ -326,6 +354,18 @@ ipcMain.on('openHelpWindow', function (event, atr) {
         }
     })();
 })
+
+/* 
+
+End of communication with frontend.
+
+*/
+
+/*
+
+Autoupdater module.
+
+*/
 
 // autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
 // autoUpdater.autoDownload = true;
