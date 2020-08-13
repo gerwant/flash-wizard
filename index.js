@@ -225,7 +225,7 @@ app.on('second-instance', () => {
 
 // No windows opened? Close app.
 app.on('window-all-closed', () => {
-    if (process.platform === "darwin") {
+    if (process.platform !== "darwin") {
         app.quit();
     }
 });
