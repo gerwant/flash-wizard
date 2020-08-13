@@ -49,7 +49,6 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 // Prevent window from being garbage collected
 let mainWindow;
 let helpWindow;
-
 let isHelpOpen = false;
 
 let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
@@ -331,9 +330,6 @@ ipcMain.on('openNohexWindow', function(e, atr) {
     (async () => {
         await connectFTP();
         mainWindow.loadFile('nohex.html')
-        //let nohex_window = mainWindow
-        //mainWindow = await createNohexWindow();
-        //nohex_window.close();
     })();
 })
 
@@ -349,25 +345,16 @@ ipcMain.on('openHelpWindow', function (event, atr) {
 
 ipcMain.on('goToWelcome', function (event, atr) {
     (async () => {
-        //let backWindow = mainWindow
-        //console.log(mainWindow)
-        //mainWindow = await createWelcomeWindow();
         mainWindow.loadFile('welcome.html')
     })();
 })
 
 ipcMain.on('close-help-window', function (event, atr) {
     (async () => {
- 
         helpWindow.close()
         isHelpOpen = false
     })();
 })
-/* 
-
-End of communication with frontend.
-
-*/
 
 /*
 
