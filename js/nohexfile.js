@@ -1,10 +1,7 @@
 
 $('.ui.dropdown').dropdown();
 
-
-
 $('.confirm-config-btn').click(function(){
-    $('.second-step-2').show("slide", {direction: "right"})
     electron.ipcRenderer.send('port-list-request');
 })
 $('.refresh-ports').click(function(){
@@ -12,16 +9,21 @@ $('.refresh-ports').click(function(){
     electron.ipcRenderer.send('port-list-request');
 })
 
+
+
 electron.ipcRenderer.on('dropdown-content', (event, args) => {
     let dropdown = $("#"+args.dropdown);
     _.each(args.content, (element) => {
         let div = document.createElement('div')
-        div.className = "item processor-item"
+        div.className = "item "
+        div.className += (args.dropdown=="processors") ? "processor-item" : "";
         div.innerHTML = element
         dropdown.append(div)
     })
+    $('.processor-item').click(function(){
+        electron.ipcRenderer.send('sensors-list-request', $(this).innerHTML);
+    })
 })
-
 
 electron.ipcRenderer.on('port-list-reply', function (event, args) {
 
@@ -42,6 +44,6 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
 
     $('.port').click(function(){
         electron.ipcRenderer.send('send-port-request', this.innerHTML);
-        $('.third-step-2').show("slide", {direction: "right"})
     })
 });
+

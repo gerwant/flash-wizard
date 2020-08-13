@@ -18,21 +18,47 @@
         <div class="list-wrapper">
             <div class="ui step-list horizontal list">
                 <div class="item step step1">
-                <i class="microchip step-icon icon active-icon big"></i>
-                <h4 class="active-step-title noselect translate center">Choose device</h4>
-                <div class="active-btn step-btn ui floating dropdown labeled scrolling icon button processor-dropdown">
-                    <input type="hidden" name="processors">
-                    <div class="text processor-dropdown-label translate active-step">Devices</div>
-                    <div class="menu" id="processors">
-                        <!--<div class="item processor-item" data-value="atmega1284p">Anet A8/A6</div> atmega1284p 
-                        <div class="item processor-item" data-value="atmega1284p">Ender 3/3 Pro/5</div> atmega2560 
-                        <div class="item processor-item" data-value="atmega328p">GRBL</div>
-                        <div class="item processor-item translate" data-value="atmega2560">RAMPS-based</div>
-                        <div class="item processor-item translate" data-value="atmega2560">Other</div> -->
+                    <i class="microchip step-icon icon active-icon big"></i>
+                    <h4 class="active-step-title noselect translate center">Choose device</h4>
+                    <div class="active-btn step-btn ui floating dropdown labeled scrolling icon button processor-dropdown">
+                        <input type="hidden" name="processors">
+                        <div class="text processor-dropdown-label translate active-step">Devices</div>
+                        <div class="menu" id="processors">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="item horizontal-line"></div>
+
+                <div class=" item step step3">
+                    <i class="file icon big step-icon inactive-icon"style="margin-left: 6%"></i>
+                    <h4 class="inactive-step-title noselect translate">Choose sensor</h4>
+                    <label class="inactive-btn step-btn ui disabled labeled icon button choose-file" for="selector">
+                        <div class="choose-file-label translate">Sensor</div>
+                    </label>
+                </div>
+
+                <div class="item horizontal-line"></div>
+
+                <div class="item step step2">
+                    <i class="usb icon big step-icon inactive-icon"></i>
+                    <h4 class="inactive-step-title noselect translate center">Choose port</h4>
+                    <div class="inactive-btn step-btn ui disabled floating scrolling labeled icon button dropdown">
+                        <input type="hidden" name="serial-port">
+                        <div class="text port-dropdown-label translate">Port</div>
+                        <div class="menu" id="ports">
+                        </div>
                     </div>
                 </div>
-                    
-            </div>
+                <div class="item horizontal-line"></div>
+                <div class="item step step4">
+                    <i class="bolt icon big step-icon inactive-icon" style="margin-left: 5%;"></i>
+                    <div class="ui active inline loader small flash-progress" style="display: none;"></div>
+                    <h4 class="inactive-step-title noselect translate">Flash!</h4> 
+                    <button class="inactive-btn step-btn disabled ui labeled icon button flash-firmware-btn">
+                        <div class="translate">Flash!</div>
+                    </button>
+                </div>
             </div>
         </div>
 

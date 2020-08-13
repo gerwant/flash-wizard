@@ -55,62 +55,7 @@ let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPat
 const client = new ftp.Client();
 client.ftp.verbose = true;
 
-/*
-
- Creating new windows.
-
-*/
-
-const createMainWindow = async () => {
-    const win = new BrowserWindow({
-        title: "Flash Wizard",
-        icon: iconPath,
-        show: false,
-        width: 740,
-        height: 480,
-        webPreferences: {
-            devTools: true,
-            nodeIntegration: true
-        }
-    });
-    win.setMenu(null)
-    win.on('ready-to-show', () => {
-        win.show();
-    });
-
-    win.on('closed', () => {
-        // Dereference the window
-        // For multiple windows store them in an array
-        mainWindow = undefined;
-    });
-
-    await win.loadFile(path.join(__dirname, 'index.html'));
-
-    return win;
-};
-
-const createNohexWindow = async () => {
-    const win = new BrowserWindow({
-        title: "Flash Wizard",
-        icon: iconPath,
-        show: false,
-        width: 740,
-        height: 480,
-        webPreferences: {
-            devTools: true,
-            nodeIntegration: true
-        }
-    });
-    win.setMenu(null)
-    win.on('ready-to-show', () => {
-        win.show();
-    });
-
-    win.on('closed', () => {
-        // Dereference the window
-        // For multiple windows store them in an array
-        mainWindow = undefined;
-    });
+async function connectFTP(){
 
     try {
         await client.access({
@@ -119,18 +64,22 @@ const createNohexWindow = async () => {
             password: process.env.FTP_PASSWORD,
             secure: false
         })
+
+        return true
         
     } catch(err) {
         // Should terminate window and return to welcome window
         // with appropriate error message
-        console.log(err)
+        console.log("FTP ERROR: ", err)
+        return false
     }
+}
 
-    await win.loadFile(path.join(__dirname, 'nohex.html'));
+/*
 
-    return win;
-};
+ Creating new windows.
 
+*/
 const createWelcomeWindow = async () => {
     const win = new BrowserWindow({
         title: "Flash Wizard",
@@ -195,12 +144,6 @@ const createHelpWindow = async () => {
 
 /*
 
-End of creating windows.
-
-*/
-
-/*
-
 Handling app signals,
 closing and opening windows,
 handling external events.
@@ -255,6 +198,10 @@ basing on frontend signals.
 */
 
 ipcMain.on('devices-list-request', async (event, arg) => {
+    if (!client){
+        console.error('No ftp connection')
+        return;
+    }
     let listing = await client.list()
     listing = _.filter(listing, (element)=>{
         return element.type == 2; // 2 because type 2 means it's a directory
@@ -363,6 +310,7 @@ ipcMain.on('openMainWindow', function (event, atr) {
 ipcMain.on('openNohexWindow', function(e, atr) {
     (async () => {
         mainWindow.loadFile('nohex.html')
+        await connectFTP();
         //let nohex_window = mainWindow
         //mainWindow = await createNohexWindow();
         //nohex_window.close();

@@ -2,10 +2,8 @@ $(document).ready(function(){
     let lanugage = i18n.getLanguage()
     console.log("langugag", lanugage)
     $(`.${lanugage}`).addClass("chosen-flag")
-    if(isDev){
         $('.no-hex-trigger').removeClass("inactive-btn disabled")
         $('.tooltip-wrapper').removeAttr("data-tooltip")
-    }
     
 })
 
