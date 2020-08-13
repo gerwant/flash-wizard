@@ -10,6 +10,10 @@
     </head>
 </head>
 <body style="overflow-y: scroll;">
+
+    <i class="go-back big question arrow circle left icon"></i>
+
+
     <h1 class="faqheader">FAQ</h1>
 
     <div class="ui segment question-segment" style="width: 600px !important;">
@@ -83,6 +87,9 @@
             })
             $('.paypal-redir').click(()=>{
                 electron.shell.openExternal('https://sketchtoy.com/69292690')
+            })
+            $('.go-back').click(() => {
+                electron.ipcRenderer.send('close-help-window');
             })
     </script>
 </body>

@@ -387,6 +387,14 @@ ipcMain.on('goToWelcome', function (event, atr) {
         mainWindow.loadFile('welcome.html')
     })();
 })
+
+ipcMain.on('close-help-window', function (event, atr) {
+    (async () => {
+ 
+        helpWindow.close()
+        isHelpOpen = false
+    })();
+})
 /* 
 
 End of communication with frontend.

@@ -1,71 +1,22 @@
-$('.middle-segment-1').hide();
+//step = id of step you are leaving
+function stepTransition(step){
+    $(`.step${step}`).find('h4').removeClass("active-step-title")
+    $(`.step${step}`).find('h4').addClass("inactive-step-title")
+    $(`.step${step}`).find('.step-icon').removeClass("active-icon")
+    $(`.step${step}`).find('.step-icon').addClass("inactive-icon")
+    $(`.step${step}`).find('.step-btn').removeClass("active-btn")
+    $(`.step${step}`).find('.step-btn').addClass("inactive-btn")
 
-$('.top-half').click(function(){
-    //blur stuff
-    $(this).attr("isselected", "true")
-    $('.bottom-half').attr("isselected","false")
-    $('.top-half-label').css({"filter": "none"});
-    $('.bottom-half-label').css({"filter": "blur(10px)"});
+    
 
-    $('.language-dropdown').hide()
-    $('.first-step-1').hide()
-    $('.second-step-1').hide()
-    $('.third-step-1').hide()
-    $('.middle-segment-2').hide();
-    $(this).animate({height:'100px'});
-    $('.bottom-half').animate({height: '100px'}, 500, function(){
-       $('.middle-segment-1').show(0).animate({height: ($(window).height()-200).toString()},0, function(){
-            $('.first-step-1').show("slide")
-       });
-    });
-   
-
-    //$('.middle-segment-1').show(0).animate({height: ($(window).height()-200).toString()},0,function(){
-    //});
-})
-
-
-$('.top-half').mouseover(function(){
-    $('.top-half-label').css({"filter": "none"});
-})
-$('.bottom-half').mouseover(function(){
-    $('.bottom-half-label').css({"filter": "none"});
-})
-$('.top-half').mouseout(function(){
-    if($(this).attr("isselected")==="false")
-        $('.top-half-label').css({"filter": "blur(10px)"})   
-})
-$('.bottom-half').mouseout(function(){
-    if($(this).attr("isselected")==="false")
-        $('.bottom-half-label').css({"filter": "blur(10px)"}) 
-})
-
-
-// $('.choose-file').click(function(){
-//     $('.second-step-1').show("slide", {direction: "right"})
-// })
-
-$('.bottom-half').click(function(){
-    //blur stuff
-    $(this).attr("isselected", "true")
-    $('.top-half').attr("isselected","false")
-    $('.bottom-half-label').css({"filter": "none"});
-    $('.top-half-label').css({"filter": "blur(10px)"});
-
-    $('.language-dropdown').hide()
-    $('.first-step').hide()
-    $('.second-step').hide()
-    $('.third-step').hide()
-    $(this).animate({height:'100px'});
-    $('.middle-segment-1').hide();
-
-    $('.top-half').animate({height: '100px'}, 500, function(){
-        $('.middle-segment-2').show(0).animate({height: ($(window).height()-200).toString()},0, function(){
-             $('.first-step-2').show("slide")
-        });
-     });
-
-})
+    $(`.step${step + 1}`).find('h4').removeClass("inactive-step-title")
+    $(`.step${step + 1}`).find('h4').addClass("active-step-title")
+    $(`.step${step + 1}`).find('.step-icon').removeClass("inactive-icon")
+    $(`.step${step + 1}`).find('.step-icon').addClass("active-icon")
+    $(`.step${step + 1}`).find('.step-btn').removeClass("inactive-btn")
+    $(`.step${step + 1}`).find('.step-btn').addClass("active-btn")
+    $(`.step${step + 1}`).find('.step-btn').removeClass("disabled")
+}
 
 $('.flag').click(function(){
     $('.chosen-flag').removeClass("chosen-flag")

@@ -20,22 +20,7 @@ $('input[type="file"]').change((event)=>{
     $('.choose-file-label').text(name)
     $('.choose-file').attr('data-tooltip', file.name)
     
-    $('.step3').find('h4').removeClass("active-step-title")
-    $('.step3').find('h4').addClass("inactive-step-title")
-    $('.step3').find('.step-icon').removeClass("active-icon")
-    $('.step3').find('.step-icon').addClass("inactive-icon")
-    $('.step3').find('.step-btn').removeClass("active-btn")
-    $('.step3').find('.step-btn').addClass("inactive-btn")
-
-    
-
-    $('.step4').find('h4').removeClass("inactive-step-title")
-    $('.step4').find('h4').addClass("active-step-title")
-    $('.step4').find('.step-icon').removeClass("inactive-icon")
-    $('.step4').find('.step-icon').addClass("active-icon")
-    $('.step4').find('.step-btn').removeClass("inactive-btn")
-    $('.step4').find('.step-btn').addClass("active-btn")
-    $('.step4').find('.step-btn').removeClass("disabled")
+    stepTransition(3)
    
 })
 
