@@ -12,7 +12,7 @@
 <body style="overflow-y: scroll;">
     <h1 class="faqheader">FAQ</h1>
 
-    <div class="ui segment" style="width: 600px !important;">
+    <div class="ui segment question-segment" style="width: 600px !important;">
         <div class="question">
             <h3 class="translate">sample question</h3>
             <p class="translate">sample answer</p>
@@ -43,14 +43,32 @@
             <h3 class="translate">sample question</h3>
             <p class="translate">sample answer</p>
         </div>
-        
-
-      
-        
-        
+    
         
     </div>
 
+    <div class="sticky-footer">
+        <div class="ui horizontal list">
+            <div class="item">
+                <div class="ui button active-btn main-website-redir">
+                    About Wizzard
+                </div>
+            </div>
+            <div class="item">
+                <div class="ui button active-btn main-website-redir">
+                    About us
+                </div>
+            </div>
+            <div class="item">
+                <div class="ui button active-btn paypal-redir">
+                    Donate
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="js/jquery-ui.js"></script>
     <script>
             const electron = require('electron');
             let i18n = require('./js/i18n.js') 
@@ -60,6 +78,12 @@
             for (var i = 0; i < toTranslate.length; i++) {
                 toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
             }
+            $('.main-website-redir').click(()=>{
+                electron.shell.openExternal('https://garage-makezone.eu')
+            })
+            $('.paypal-redir').click(()=>{
+                electron.shell.openExternal('https://sketchtoy.com/69292690')
+            })
     </script>
 </body>
 <style>
@@ -73,6 +97,31 @@
         color: white;
         padding-top: 20px;
         font-size: 40px;
+    }
+    .sticky-footer{
+        position: fixed;
+        background-color: #3C404B;
+        bottom: 0;
+        width: 100%;
+        height: 12%;
+       
+    }
+    .horizontal{
+        width: 100% !important;
+    }
+    .item{
+        color: white;
+        width: 32%;
+        text-align: center;
+
+        
+    }
+    .active-btn{
+        width: 200px !important;
+        margin-top: 5px !important;
+    }
+    .question-segment{
+        margin-bottom: 100px !important;
     }
 </style>
 </html>

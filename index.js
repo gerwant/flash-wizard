@@ -3,7 +3,6 @@ const path = require('path');
 const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const updater = require("electron-updater");
 const autoUpdater = updater.autoUpdater;
-const {is} = require('electron-util');
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 //const contextMenu = require('electron-context-menu');
@@ -158,7 +157,7 @@ const createWelcomeWindow = async () => {
 
 
     await win.loadFile(path.join(__dirname, 'welcome.html'));
-
+    win.webContents.closeDevTools()
     return win;
 };
 
@@ -176,6 +175,7 @@ const createHelpWindow = async () => {
         }
     });
     win.setMenu(null)
+
     win.on('ready-to-show', () => {
         win.show();
         isHelpOpen = true;
@@ -189,7 +189,7 @@ const createHelpWindow = async () => {
     });
 
     await win.loadFile(path.join(__dirname, 'help.html'));
-
+    win.webContents.closeDevTools()
     return win;
 };
 
@@ -225,7 +225,7 @@ app.on('second-instance', () => {
 
 // No windows opened? Close app.
 app.on('window-all-closed', () => {
-    if (!is.macos) {
+    if (process.platform === "darwin") {
         app.quit();
     }
 });
