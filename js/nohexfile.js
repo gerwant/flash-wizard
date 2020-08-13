@@ -9,10 +9,9 @@ $('.refresh-ports').click(function(){
     electron.ipcRenderer.send('port-list-request');
 })
 
-
-
 electron.ipcRenderer.on('dropdown-content', (event, args) => {
     let dropdown = $("#"+args.dropdown);
+    dropdown.html("")
     _.each(args.content, (element) => {
         let div = document.createElement('div')
         div.className = "item "
@@ -21,7 +20,8 @@ electron.ipcRenderer.on('dropdown-content', (event, args) => {
         dropdown.append(div)
     })
     $('.processor-item').click(function(){
-        electron.ipcRenderer.send('sensors-list-request', $(this).innerHTML);
+        console.log($(this).text())
+        electron.ipcRenderer.send('sensors-list-request', {device: $(this).text()});
     })
 })
 

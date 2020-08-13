@@ -30,17 +30,19 @@
                 </div>
                 <div class="item horizontal-line"></div>
 
-                <div class=" item step step3">
+                <div class=" item step step2">
                     <i class="file icon big step-icon inactive-icon"style="margin-left: 6%"></i>
-                    <h4 class="inactive-step-title noselect translate">Choose sensor</h4>
-                    <label class="inactive-btn step-btn ui disabled labeled icon button choose-file" for="selector">
-                        <div class="choose-file-label translate">Sensor</div>
-                    </label>
+                    <h4 class="inactive-step-title noselect translate center">Choose sensor</h4>
+                    <div class="inactive-btn step-btn ui floating dropdown labeled scrolling icon button processor-dropdown">
+                        <input type="hidden" name="sensor">
+                        <div class="text processor-dropdown-label translate"></div>
+                        <div class="menu" id="sensors"></div>
+                    </div>
                 </div>
 
                 <div class="item horizontal-line"></div>
 
-                <div class="item step step2">
+                <div class="item step step3">
                     <i class="usb icon big step-icon inactive-icon"></i>
                     <h4 class="inactive-step-title noselect translate center">Choose port</h4>
                     <div class="inactive-btn step-btn ui disabled floating scrolling labeled icon button dropdown">

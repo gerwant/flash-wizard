@@ -21,7 +21,6 @@
 		"release": "np"
 	},
 	"dependencies": {
-		"basic-ftp": "^4.6.2",
 		"edit-json-file": "^1.4.0",
 		"electron-context-menu": "^0.15.0",
 		"electron-debug": "^3.0.0",
@@ -30,6 +29,7 @@
 		"electron-unhandled": "^3.0.0",
 		"electron-updater": "^4.3.4",
 		"electron-util": "^0.13.0",
+		"ftp": "^0.3.10",
 		"jquery": "^3.5.1",
 		"serialport": "^9.0.0",
 		"underscore": "^1.10.2"

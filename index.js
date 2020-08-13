@@ -6,14 +6,12 @@ const autoUpdater = updater.autoUpdater;
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 //const contextMenu = require('electron-context-menu');
-const config = require('./js/config');
 require('dotenv').config();
 const SerialPort = require('serialport');
-const { list } = require('serialport');
 const i18n = require('./js/i18n');
 const spawn = require('child_process').spawn;
 const isDev = require('electron-is-dev');
-const ftp = require('basic-ftp');
+const FTPClient = require('ftp');
 const _ = require('underscore');
 
 
@@ -22,6 +20,11 @@ var flash_config = {
     file_path: null,
     baudrate: 57600,
     processor: null
+}
+
+var hexpath_config = {
+    device: null,
+    sensor: null
 }
 
 
@@ -52,13 +55,13 @@ let isHelpOpen = false;
 let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
 
 // FTP connection
-const client = new ftp.Client();
-client.ftp.verbose = true;
+const client = new FTPClient();
+const excluded_dirs = ['.', '..']
 
 async function connectFTP(){
 
     try {
-        await client.access({
+        client.connect({
             host: process.env.FTP_HOST,
             user: process.env.FTP_USER,
             password: process.env.FTP_PASSWORD,
@@ -202,15 +205,32 @@ ipcMain.on('devices-list-request', async (event, arg) => {
         console.error('No ftp connection')
         return;
     }
-    let listing = await client.list()
-    listing = _.filter(listing, (element)=>{
-        return element.type == 2; // 2 because type 2 means it's a directory
+    client.list('/', (err, listing) => {
+        console.log(listing)
+        listing = _.filter(listing, (element)=>{
+            return element.type == 'd' && !excluded_dirs.includes(element.name); // 2 because type 2 means it's a directory
+        })
+        listing = _.map(listing, (element) => {
+            return element.name;
+        })
+        console.log(listing)
+        event.sender.send('dropdown-content', {dropdown: "processors", content: listing})
     })
-    listing = _.map(listing, (element) => {
-        return element.name;
+    
+})
+
+ipcMain.on('sensors-list-request', async (event, arg) => {
+    hexpath_config.device = arg.device;
+    client.listSafe(`/${hexpath_config.device}`, (err, listing) =>{
+        let lst = _.filter(listing, (el) => {
+            return el.type == 'd' && !excluded_dirs.includes(el.name);
+        })
+        lst = _.map(lst, (el) => {
+            return el.name;
+        })
+        event.sender.send('dropdown-content', {dropdown: "sensors", content: lst})
     })
-    console.log(listing)
-    event.sender.send('dropdown-content', {dropdown: "processors", content: listing})
+    
 })
 
 ipcMain.on('perform-flash', (event, arg) => {
@@ -309,8 +329,8 @@ ipcMain.on('openMainWindow', function (event, atr) {
 
 ipcMain.on('openNohexWindow', function(e, atr) {
     (async () => {
-        mainWindow.loadFile('nohex.html')
         await connectFTP();
+        mainWindow.loadFile('nohex.html')
         //let nohex_window = mainWindow
         //mainWindow = await createNohexWindow();
         //nohex_window.close();
