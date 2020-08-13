@@ -351,18 +351,21 @@ ipcMain.on('change-language-request', function (event, atr) {
 
 ipcMain.on('openMainWindow', function (event, atr) {
     (async () => {
-        let welcome_window = mainWindow
-        mainWindow = await createMainWindow();
-        welcome_window.close()
+        mainWindow.loadFile('index.html')
+        //let welcome_window = mainWindow
+        //console.log(mainWindow)
+        //mainWindow = await createMainWindow();
+        //console.log(mainWindow)
      
     })();
 })
 
 ipcMain.on('openNohexWindow', function(e, atr) {
     (async () => {
-        let nohex_window = mainWindow
-        mainWindow = await createNohexWindow();
-        nohex_window.close();
+        mainWindow.loadFile('nohex.html')
+        //let nohex_window = mainWindow
+        //mainWindow = await createNohexWindow();
+        //nohex_window.close();
     })();
 })
 
@@ -378,9 +381,10 @@ ipcMain.on('openHelpWindow', function (event, atr) {
 
 ipcMain.on('goToWelcome', function (event, atr) {
     (async () => {
-        let backWindow = mainWindow
-        mainWindow = await createWelcomeWindow();
-        backWindow.close();
+        //let backWindow = mainWindow
+        //console.log(mainWindow)
+        //mainWindow = await createWelcomeWindow();
+        mainWindow.loadFile('welcome.html')
     })();
 })
 /* 
