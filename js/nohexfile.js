@@ -26,6 +26,7 @@ electron.ipcRenderer.on('dropdown-content', (event, args) => {
         stepTransition(1)
     })
     $('.sensor').click(function(){
+        electron.ipcRenderer.send('update-sensor', {sensor: $(this).text()})
         electron.ipcRenderer.send('port-list-request');
         stepTransition(2)
     })

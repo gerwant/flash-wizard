@@ -221,13 +221,23 @@ ipcMain.on('devices-list-request', async (event, arg) => {
 ipcMain.on('sensors-list-request', async (event, arg) => {
     hexpath_config.device = arg.device;
     client.listSafe(`/${hexpath_config.device}`, (err, listing) =>{
-        let lst = _.filter(listing, (el) => {
-            return el.type == 'd' && !excluded_dirs.includes(el.name);
-        })
-        lst = _.map(lst, (el) => {
-            return el.name;
-        })
-        event.sender.send('dropdown-content', {dropdown: "sensors", content: lst})
+
+        let procfile = _.find(listing, (el) => { return el.name.includes('.processor')}) // Look for .processor file
+
+        if (procfile){
+            flash_config.processor = procfile.name.split('.')[0]
+            console.log(flash_config)
+            let lst = _.filter(listing, (el) => { //Look for all directories meaning sensors
+                return el.type == 'd' && !excluded_dirs.includes(el.name);
+            })
+            lst = _.map(lst, (el) => { // Select only names of them
+                return el.name;
+            })
+            event.sender.send('dropdown-content', {dropdown: "sensors", content: lst})
+        } else { // No .processor file means something went wrong and flash can't be performed
+            event.sender.send('dropdown-content', {dropdown: "sensors", content: ''})
+        }
+        
     })
     
 })
@@ -307,7 +317,11 @@ ipcMain.on('port-list-request', function (event, arg) {
      
 ipcMain.on('send-config-request', function (event, value, field) {
     flash_config[field] = value
+})
 
+ipcMain.on('update-sensor', (event, data)=> {
+    hexpath_config.sensor = data.sensor;
+    console.log(hexpath_config)
 })
 
 ipcMain.on('change-language-request', function (event, atr) {
