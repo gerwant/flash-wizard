@@ -198,7 +198,8 @@ body::-webkit-scrollbar-thumb {
     background-color: #c4cfd4 ;
 }
 
-.choose-file, .processor-dropdown, .baudrate-dropdown {
+.choose-file, .processor-dropdown, .baudrate-dropdown,
+.sensor-dropdown {
     margin-right: 0 !important;
     padding-right: 0 !important;
    
@@ -237,7 +238,8 @@ body::-webkit-scrollbar-thumb {
 .logo-list{
     width: 100%;
 }
-.port-dropdown-label, .processor-dropdown-label, .processor-dropdown {
+.port-dropdown-label, .processor-dropdown-label, .processor-dropdown,
+.sensor-dropdown-label {
     text-align: left !important;
 }
 

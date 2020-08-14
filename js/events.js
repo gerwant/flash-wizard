@@ -34,6 +34,7 @@ $('.flash-firmware-btn').click(()=>{
     });
 })
 
+// Prevent editing in avrdude output console.
 $('.avrdude_output').keyup(function(event){
     event.preventDefault();
 });
@@ -41,6 +42,7 @@ $('.avrdude_output').keyup(function(event){
 $('.avrdude_output').keydown(function(event){
     event.preventDefault();
 });
+
 electron.ipcRenderer.on('avrdude-response', (event, data)=>{
     console.log('Data received');
     document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
@@ -59,6 +61,28 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     let textarea = $('.avrdude_output')
     textarea.scrollTop(textarea[0].scrollHeight)
 })
+
+electron.ipcRenderer.on('port-list-reply', function (event, args) {
+
+    let container = $('#ports');
+    container.html("")
+    if(args.length===0){
+        $('.port-dropdown-label').html(i18n.__("No ports"))
+        electron.ipcRenderer.send('send-config-request', null, "port");
+    } else {
+        $('.port-dropdown-label').html("Port")
+        args.forEach((element)=>{
+            let li = document.createElement('div')
+            li.className = "port item"
+            li.innerHTML = element.path
+            container.append(li)
+        })
+    }
+    $('.port').click(function(){
+        electron.ipcRenderer.send('send-config-request', this.innerHTML, "port");
+        stepTransition(3)
+    })
+});
 
 $('.language-item').click(function(){
     
