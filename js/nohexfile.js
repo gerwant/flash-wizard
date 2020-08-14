@@ -50,6 +50,7 @@ electron.ipcRenderer.on('dropdown-content', (event, args) => {
     $('.sensor').click(function(){
         electron.ipcRenderer.send('update-sensor', {sensor: $(this).text()})
         electron.ipcRenderer.send('port-list-request');
-        stepTransition(2)
+        $('.file.icon').hide()
+        $('.flash-progress-download').show()
     })
 })

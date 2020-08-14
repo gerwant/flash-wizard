@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const {app, BrowserWindow, Menu, ipcMain} = require('electron');
+const {app, BrowserWindow} = require('electron');
 const updater = require("electron-updater");
 const autoUpdater = updater.autoUpdater;
 const unhandled = require('electron-unhandled');
@@ -163,7 +163,7 @@ app.on('activate', async () => {
 
 
 
-require('./js/backend-events')(ipcMain, windowManager, createHelpWindow)
+require('./js/backend-events')(windowManager, createHelpWindow)
 
 
 

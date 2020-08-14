@@ -5,6 +5,9 @@ const FTPClient = require('ftp');
 const _ = require('underscore');
 const path = require('path');
 const spawn = require('child_process').spawn;
+const fs = require('fs');
+const config = require('./config');
+const {ipcMain} = require('electron')
 
 var flash_config = {
     port: null,
@@ -42,7 +45,7 @@ async function connectFTP(){
 }
 
 
-module.exports = function(ipcMain, windowManager, createHelpWindow){
+module.exports = function(windowManager, createHelpWindow){
     /*
 
     Communication with frontend.
@@ -138,6 +141,27 @@ module.exports = function(ipcMain, windowManager, createHelpWindow){
     ipcMain.on('update-sensor', (event, data)=> {
         hexpath_config.sensor = data.sensor;
         console.log(hexpath_config)
+        if(hexpath_config.sensor && hexpath_config.device){
+
+            fs.unlink('firmware.hex', function(err) {
+                if(err && err.code == 'ENOENT') {
+                    // file doens't exist
+                    console.info("File doesn't exist, won't remove it.");
+                } else if (err) {
+                    // other errors, e.g. maybe we don't have enough permission
+                    console.error("Error occurred while trying to remove file");
+                } else {
+                    console.info(`removed`);
+                }
+            });
+
+            client.get(`/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex` , function(err, stream) {
+                if (err) throw err;
+                stream.pipe(fs.createWriteStream('firmware.hex'));
+                event.sender.send("hex-downloaded")
+            });
+        }
+
     })
 
     ipcMain.on('openMainWindow', function (event, atr) {

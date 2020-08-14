@@ -1,6 +1,5 @@
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
-    console.log("langugag", lanugage)
     $(`.${lanugage}`).addClass("chosen-flag")
         $('.no-hex-trigger').removeClass("inactive-btn disabled")
         $('.tooltip-wrapper').removeAttr("data-tooltip")
@@ -42,6 +41,14 @@ $('.avrdude_output').keyup(function(event){
 $('.avrdude_output').keydown(function(event){
     event.preventDefault();
 });
+
+electron.ipcRenderer.on('hex-downloaded', (event) =>{
+    
+    stepTransition(2)
+    $('.flash-progress-download').hide()
+    $('.file.icon').show()
+   
+})
 
 electron.ipcRenderer.on('avrdude-response', (event, data)=>{
     console.log('Data received');
