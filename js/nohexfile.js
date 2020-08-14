@@ -48,6 +48,8 @@ electron.ipcRenderer.on('dropdown-content', (event, args) => {
         stepTransition(1)
     })
     $('.sensor').click(function(){
+        
+        electron.ipcRenderer.send('send-config-request', path.join(__dirname, '../firmware.hex'), "file_path")
         electron.ipcRenderer.send('update-sensor', {sensor: $(this).text()})
         electron.ipcRenderer.send('port-list-request');
         $('.file.icon').hide()

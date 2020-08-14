@@ -23,6 +23,7 @@ $('input[type="file"]').change((event)=>{
 
 $('.flash-firmware-btn').click(()=>{
     console.log('Flash fired')
+    
     document.getElementsByClassName('avrdude_output')[0].innerHTML = '';
     $('.bolt.icon').hide()
     $('.flash-progress').show("fade",()=>{
@@ -58,6 +59,17 @@ electron.ipcRenderer.on('avrdude-response', (event, data)=>{
 })
 
 electron.ipcRenderer.on('avrdude-done', (event, data)=>{
+    fs.unlink('firmware.hex', function(err) {
+        if(err && err.code == 'ENOENT') {
+            // file doens't exist
+            console.info("File doesn't exist, won't remove it.");
+        } else if (err) {
+            // other errors, e.g. maybe we don't have enough permission
+            console.error("Error occurred while trying to remove file");
+        } else {
+            console.info(`removed`);
+        }
+    });
     console.log('Flashing done.')
     $('.flash-progress').hide()
     $('.bolt.icon').show()

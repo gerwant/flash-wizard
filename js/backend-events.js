@@ -101,6 +101,7 @@ module.exports = function(windowManager, createHelpWindow){
             '-D',
             '-Uflash:w:'+flash_config.file_path+':i'
         ]
+        console.log(avrdude_args)
         let child = null;
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))

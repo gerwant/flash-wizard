@@ -66,12 +66,19 @@
             </div>
         </div>
 
+        <div class="avrdude_output_wrapper" style="display: none; width: 100%; text-align: right;">
+            <div class="ui form">
+                <textarea class="avrdude_output" wrap="soft" spellcheck="false"></textarea>
+            </div>
+        </div>
+
     <div class="subtext-wrapper">
         <img class="main-website-redir" src="static/bygmz.png">
     </div>
     
         <script>window.$ = window.jQuery = require('jquery');</script>
         <script>
+            const path = require('path')
             const electron = require('electron');
             let i18n = require('./js/i18n.js');
             const _ = require('underscore');
