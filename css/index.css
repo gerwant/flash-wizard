@@ -1,8 +1,5 @@
 html,
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 0;
     margin: 0;
     background: transparent;
@@ -28,7 +25,11 @@ body {
     background-color: #3C404B ;
     overflow: hidden;
 }
-
+.welcome-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .box {
     display: flex;
     height: 100%;
