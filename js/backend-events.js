@@ -82,8 +82,8 @@ module.exports = function(ipcMain, windowManager, createHelpWindow){
         let avrdude_path = ''
         let avrdude_config_path = ''
         if(isDev){
-            avrdude_path = path.join(__dirname, 'bin/')+avrdude_exec;
-            avrdude_config_path = path.join(__dirname, 'bin/')+'avrdude.conf'
+            avrdude_path = path.join(__dirname, '../bin/')+avrdude_exec;
+            avrdude_config_path = path.join(__dirname, '../bin/')+'avrdude.conf'
         } else {
             avrdude_path = path.join(process.resourcesPath, "bin/")+avrdude_exec;
             avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf' //process.resourcesPath
