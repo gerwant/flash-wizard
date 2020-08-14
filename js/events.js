@@ -62,27 +62,6 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     textarea.scrollTop(textarea[0].scrollHeight)
 })
 
-electron.ipcRenderer.on('port-list-reply', function (event, args) {
-
-    let container = $('#ports');
-    container.html("")
-    if(args.length===0){
-        $('.port-dropdown-label').html(i18n.__("No ports"))
-        electron.ipcRenderer.send('send-config-request', null, "port");
-    } else {
-        $('.port-dropdown-label').html("Port")
-        args.forEach((element)=>{
-            let li = document.createElement('div')
-            li.className = "port item"
-            li.innerHTML = element.path
-            container.append(li)
-        })
-    }
-    $('.port').click(function(){
-        electron.ipcRenderer.send('send-config-request', this.innerHTML, "port");
-        stepTransition(3)
-    })
-});
 
 $('.language-item').click(function(){
     
