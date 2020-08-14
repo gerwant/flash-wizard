@@ -1,5 +1,8 @@
 html,
 body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0;
     margin: 0;
     background: transparent;
@@ -101,13 +104,19 @@ body {
     justify-content: center;
     
 }
+.welcome-wrapper{
+    display: block;
+    position: relative;
+    margin-bottom: auto;
+    margin-top: auto;
+}
 .segment{
     color: white;
     position: relative;
     background-color: #272A31 !important;
     text-align: center;
     width: 400px!important;
-    margin-top: 30px;
+    margin-top: 0px !important;
     margin-left: auto !important;
     margin-right: auto !important;
 }
