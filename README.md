@@ -6,21 +6,23 @@
 
 ## Install
 
-*macOS 10.10+, Linux, and Windows 7+ are supported (64-bit only).*
+*Linux and Windows 7+ are supported (64-bit only).*
+*On our way to provide 32-bit binaries also.*
+
 
 **macOS**
 
-[**Download**](https://github.com/user/repo/releases/latest) the `.dmg` file.
+*We didn't build it yet (mainly because of lack of macOS machines), but if community will alert such a need, we will provide solution.*
 
 **Linux**
 
-[**Download**](https://github.com/user/repo/releases/latest) the `.AppImage` or `.deb` file.
+[**Download**](https://github.com/gerwant/flash-wizard/releases/latest) the `.AppImage` or `.deb` file.
 
 *The AppImage needs to be [made executable](http://discourse.appimage.org/t/how-to-make-an-appimage-executable/80) after download.*
 
 **Windows**
 
-[**Download**](https://github.com/user/repo/releases/latest) the `.exe` file.
+[**Download**](https://github.com/gerwant/flash-wizard/releases/latest) the `.exe` file.
 
 
 ---
@@ -28,7 +30,8 @@
 
 ## Dev
 
-Built with [Electron](https://electronjs.org).
+Built with [Node.js](https://nodejs.org/en/) + [Electron](https://electronjs.org).<br/>
+[Underscore.js](https://underscorejs.org/) was also very helpful.
 
 ### Run
 
@@ -36,11 +39,4 @@ Built with [Electron](https://electronjs.org).
 $ npm install
 $ npm start
 ```
-
-### Publish
-
-```
-$ npm run release
-```
-
-After Travis finishes building your app, open the release draft it created and click "Publish".
+*Keep in mind that your compilation won't have "I don't have .hex file option" because ftp credentials aren't stored in the repository.*
