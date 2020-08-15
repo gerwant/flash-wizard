@@ -12,9 +12,6 @@ var download = require('download-file');
 const { dir } = require('console');
 const fs = require('fs')
 
-
-
-
 var flash_config = {
     port: null,
     file_path: null,
@@ -28,7 +25,6 @@ var hexpath_config = {
 }
 
 var wizzardAssistant = "http://161.97.90.147:3000"
-
 
 
 module.exports = function(windowManager, createHelpWindow){
@@ -126,7 +122,7 @@ module.exports = function(windowManager, createHelpWindow){
     
     ipcMain.on('update-sensor', (event, data)=> {
         let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex`
-        let hex_path = isDev? path.join(__dirname, '../../') : process.resourcesPath
+        let hex_path = isDev? path.join(__dirname, '../') : process.resourcesPath
 
         fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
             if(err && err.code == 'ENOENT') {
