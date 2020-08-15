@@ -1,7 +1,6 @@
 const SerialPort = require('serialport');
 const isDev = require('electron-is-dev')
 const i18n = require('./i18n')
-const FTPClient = require('ftp');
 const axios = require('axios');
 const path = require('path');
 const spawn = require('child_process').spawn;
@@ -9,6 +8,12 @@ const config = require('./config');
 const {ipcMain} = require('electron')
 const electron = require('electron')
 const _ = require('underscore')
+var download = require('download-file');
+const { dir } = require('console');
+const fs = require('fs')
+
+
+
 
 var flash_config = {
     port: null,
@@ -22,30 +27,8 @@ var hexpath_config = {
     sensor: null
 }
 
-var wizzardAssistant = "http://localhost:3000"
-// FTP connection
-const client = new FTPClient();
-const excluded_dirs = ['.', '..']
+var wizzardAssistant = "http://161.97.90.147:3000"
 
-async function connectFTP(){
-    
-    try {
-        client.connect({
-            host: process.env.FTP_HOST,
-            user: process.env.FTP_USER,
-            password: process.env.FTP_PASSWORD,
-            secure: false
-        })
-
-        return true
-        
-    } catch(err) {
-        // Should terminate window and return to welcome window
-        // with appropriate error message
-        console.log("FTP ERROR: ", err)
-        return false
-    }
-}
 
 
 module.exports = function(windowManager, createHelpWindow){
@@ -142,9 +125,37 @@ module.exports = function(windowManager, createHelpWindow){
     })
     
     ipcMain.on('update-sensor', (event, data)=> {
-        hexpath_config.sensor = data.sensor;
         let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex`
-        electron.shell.openExternal(link)
+        let hex_path = isDev? path.join(__dirname, '../../') : process.resourcesPath
+
+        fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
+            if(err && err.code == 'ENOENT') {
+                // file doens't exist
+                console.info("File doesn't exist, won't remove it.");
+            } else if (err) {
+                // other errors, e.g. maybe we don't have enough permission
+                console.error("Error occurred while trying to remove file");
+            } else {
+                console.info(`removed`);
+            }
+        });
+
+        hexpath_config.sensor = data.sensor;
+
+        var options = {
+            directory: hex_path,
+            filename: "firmware.hex"
+        }
+         
+        download(link, options, function(err){
+            if (err){
+                event.sender.send("hex-download-fail")
+            }
+            else{
+            event.sender.send("hex-downloaded")
+            }
+        }) 
+        
 
     })
 
@@ -156,7 +167,6 @@ module.exports = function(windowManager, createHelpWindow){
 
     ipcMain.on('openNohexWindow', function(e, atr) {
         (async () => {
-            await connectFTP();
             windowManager.mainWindow.loadFile('nohex.html')
         })();
     })

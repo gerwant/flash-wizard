@@ -61,7 +61,9 @@ electron.ipcRenderer.on('avrdude-response', (event, data)=>{
 })
 
 electron.ipcRenderer.on('avrdude-done', (event, data)=>{
-    fs.unlink('firmware.hex', function(err) {
+    let hex_path = isDev? path.join(__dirname, '../../') : process.resourcesPath
+
+    fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
         if(err && err.code == 'ENOENT') {
             // file doens't exist
             console.info("File doesn't exist, won't remove it.");
