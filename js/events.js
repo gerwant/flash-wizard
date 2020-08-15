@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
     $(`.${lanugage}`).addClass("chosen-flag")

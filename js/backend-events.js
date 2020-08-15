@@ -5,7 +5,6 @@ const FTPClient = require('ftp');
 const axios = require('axios');
 const path = require('path');
 const spawn = require('child_process').spawn;
-const fs = require('fs');
 const config = require('./config');
 const {ipcMain} = require('electron')
 const electron = require('electron')
