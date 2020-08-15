@@ -35,6 +35,7 @@ $('.processor-item').click(function(){
 
 $('.processor-item').click(function(){
     electron.ipcRenderer.send('send-config-request', $(this).data("value"), "processor");
+    electron.ipcRenderer.send('send-config-request', $(this).data("baudrate"), "baudrate")
     stepTransition(1)
 })
 

@@ -14,7 +14,7 @@ const _ = require('underscore')
 var flash_config = {
     port: null,
     file_path: null,
-    baudrate: 57600,
+    baudrate: null,
     processor: null
 }
 
