@@ -1,5 +1,9 @@
 const fs = require('fs')
-
+const path = require('path')
+try{
+const isDev = require('electron-is-dev')
+}
+catch(err){ throw err}
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
     $(`.${lanugage}`).addClass("chosen-flag")
