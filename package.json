@@ -21,6 +21,7 @@
 		"release": "np"
 	},
 	"dependencies": {
+		"axios": "^0.19.2",
 		"dotenv": "^8.2.0",
 		"edit-json-file": "^1.4.0",
 		"electron-context-menu": "^0.15.0",

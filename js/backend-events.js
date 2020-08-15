@@ -2,12 +2,14 @@ const SerialPort = require('serialport');
 const isDev = require('electron-is-dev')
 const i18n = require('./i18n')
 const FTPClient = require('ftp');
-const _ = require('underscore');
+const axios = require('axios');
 const path = require('path');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
 const config = require('./config');
 const {ipcMain} = require('electron')
+const electron = require('electron')
+const _ = require('underscore')
 
 var flash_config = {
     port: null,
@@ -20,6 +22,8 @@ var hexpath_config = {
     device: null,
     sensor: null
 }
+
+var wizzardAssistant = "http://localhost:3000"
 // FTP connection
 const client = new FTPClient();
 const excluded_dirs = ['.', '..']
@@ -70,13 +74,12 @@ module.exports = function(windowManager, createHelpWindow){
                 },
              err => {
               console.error('Error listing ports', err)
-             }
-            )
-           }
+             });
+           };
            
           listPorts()
          
-        })
+        });
     
         
     ipcMain.on('perform-flash', (event, arg) => {
@@ -141,38 +144,14 @@ module.exports = function(windowManager, createHelpWindow){
     
     ipcMain.on('update-sensor', (event, data)=> {
         hexpath_config.sensor = data.sensor;
-        console.log(hexpath_config)
-        if(hexpath_config.sensor && hexpath_config.device){
-
-            fs.unlink('firmware.hex', function(err) {
-                if(err && err.code == 'ENOENT') {
-                    // file doens't exist
-                    console.info("File doesn't exist, won't remove it.");
-                } else if (err) {
-                    // other errors, e.g. maybe we don't have enough permission
-                    console.error("Error occurred while trying to remove file");
-                } else {
-                    console.info(`removed`);
-                }
-            });
-
-            client.get(`/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex` , function(err, stream) {
-                if (err) throw err;
-                stream.pipe(fs.createWriteStream('firmware.hex'));
-                event.sender.send("hex-downloaded")
-            });
-        }
+        let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex`
+        electron.shell.openExternal(link)
 
     })
 
     ipcMain.on('openMainWindow', function (event, atr) {
         (async () => {
             windowManager.mainWindow.loadFile('index.html')
-            //let welcome_window = mainWindow
-            //console.log(mainWindow)
-            //mainWindow = await createMainWindow();
-            //console.log(mainWindow)
-            
         })();
     })
 
@@ -207,45 +186,26 @@ module.exports = function(windowManager, createHelpWindow){
     })
 
     ipcMain.on('devices-list-request', async (event, arg) => {
-        if (!client){
-            console.error('No ftp connection')
-            return;
-        }
-        client.list('/', (err, listing) => {
-            console.log(listing)
-            listing = _.filter(listing, (element)=>{
-                return element.type == 'd' && !excluded_dirs.includes(element.name); // 2 because type 2 means it's a directory
-            })
-            listing = _.map(listing, (element) => {
-                return element.name;
-            })
-            console.log(listing)
-            event.sender.send('dropdown-content', {dropdown: "processors", content: listing})
+        axios.get(wizzardAssistant + "/devices")
+        .then(response => {
+          event.sender.send('dropdown-content', {dropdown: "processors", content: response.data["devices"]})
         })
-        
+        .catch(error => {
+          console.log(error);
+        });
     })
 
     ipcMain.on('sensors-list-request', async (event, arg) => {
         hexpath_config.device = arg.device;
-        client.listSafe(`/${hexpath_config.device}`, (err, listing) =>{
-            let procfile = _.find(listing, (el) => { return el.name.includes('.processor')}) // Look for .processor file
-    
-        
-            if (procfile){
-                flash_config.processor = procfile.name.split('.')[0]
-                console.log(flash_config)
-                let lst = _.filter(listing, (el) => { //Look for all directories meaning sensors
-                    return el.type == 'd' && !excluded_dirs.includes(el.name);
-                })
-                lst = _.map(lst, (el) => { // Select only names of them
-                    return el.name;
-                })
-                event.sender.send('dropdown-content', {dropdown: "sensors", content: lst})
-            } else { // No .processor file means something went wrong and flash can't be performed
-                event.sender.send('dropdown-content', {dropdown: "sensors", content: ''})
-            }
-            
+        axios.get(wizzardAssistant + `/${hexpath_config.device}`)
+        .then(response => {
+            flash_config.baudrate = response.data["baudrate"]
+            flash_config.processor = response.data["processor"]
+            event.sender.send('dropdown-content', {dropdown: "sensors", content: response.data["sensors"]})
         })
+        .catch(error => {
+          console.log(error);
+        });
         
     })
         
