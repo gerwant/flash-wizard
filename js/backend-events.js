@@ -121,6 +121,8 @@ module.exports = function(windowManager, createHelpWindow){
     })
     
     ipcMain.on('update-sensor', (event, data)=> {
+        hexpath_config.sensor = data.sensor
+        console.log(hexpath_config)
         let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex`
         let hex_path = isDev? path.join(__dirname, '../') : process.resourcesPath
 

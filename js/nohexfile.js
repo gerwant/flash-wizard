@@ -49,9 +49,10 @@ electron.ipcRenderer.on('dropdown-content', (event, args) => {
     })
     $('.sensor').click(function(){
         
-        electron.ipcRenderer.send('send-config-request', path.join(__dirname, '../firmware.hex'), "file_path")
-        electron.ipcRenderer.send('update-sensor', {sensor: $(this).text()})
+        //electron.ipcRenderer.send('send-config-request', path.join(__dirname, '../firmware.hex'), "file_path")
         electron.ipcRenderer.send('port-list-request');
+        console.log('firing update sensor with ', $(this).text())
+        electron.ipcRenderer.send('update-sensor', {sensor: $(this).text()})
         $('.file.icon').hide()
         $('.flash-progress-download').show()
     })
