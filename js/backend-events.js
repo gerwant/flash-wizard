@@ -12,6 +12,7 @@ var download = require('download-file');
 const { dir } = require('console');
 const fs = require('fs')
 
+let child = null;
 var flash_config = {
     port: null,
     file_path: null,
@@ -83,7 +84,6 @@ module.exports = function(windowManager, createHelpWindow){
             '-Uflash:w:'+flash_config.file_path+':i'
         ]
         console.log(avrdude_args)
-        let child = null;
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
         } else {
@@ -200,6 +200,13 @@ module.exports = function(windowManager, createHelpWindow){
         .catch(error => {
           console.log(error);
         });
+    })
+    ipcMain.on('kill_avrdude', async (event) => {
+        
+        //TODO kill avrdude
+        //if(child) child.kill()
+        console.log("avrdude killed")
+        event.sender.send("avrdude-done", "Flashing aborted")
     })
 
     ipcMain.on('sensors-list-request', async (event, arg) => {

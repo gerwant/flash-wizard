@@ -40,9 +40,8 @@ $('.flash-firmware-btn').click(()=>{
     document.getElementsByClassName('avrdude_output')[0].innerHTML = '';
     $('.bolt.icon').hide()
     $('.flash-progress').show("fade",()=>{
-        $('.flash-firmware-btn').removeClass('active-btn')
-        $('.flash-firmware-btn').addClass("inactive-btn")
-        $('.flash-firmware-btn').addClass("disabled")
+        $('.flash-firmware-btn').hide()
+        $('.kill-avr-btn').show()
         electron.ipcRenderer.send('perform-flash', null)
     });
 })
@@ -73,7 +72,9 @@ electron.ipcRenderer.on('avrdude-response', (event, data)=>{
 
 electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     let hex_path = isDev? path.join(__dirname, '../../') : process.resourcesPath
-
+    $('.kill-avr-btn').hide()
+    $('.flash-firmware-btn').show()
+    
     fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
         if(err && err.code == 'ENOENT') {
             // file doens't exist
@@ -113,10 +114,15 @@ $('.help-trigger').click(function(){
 })
 $('.go-back').click(()=> {
     electron.ipcRenderer.send('goToWelcome');
+    electron.ipcRenderer.send('kill_avrdude');
+
 })
 $('.processor-dropdown').change(function(){
     cutlabel( $('.processor-dropdown-label').text(), "processor-dropdown")
 })
 $('.sensor-dropdown').change(function(){
     cutlabel( $('.sensor-dropdown-label').text(), "sensor-dropdown")
+})
+$('.kill-avr-btn').click(function(){
+    electron.ipcRenderer.send('kill_avrdude');
 })
