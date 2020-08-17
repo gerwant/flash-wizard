@@ -18,6 +18,7 @@
 		"start": "electron .",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder --windows",
+		"dist32": "electron-builder --windows --ia32",
 		"release": "np"
 	},
 	"dependencies": {
@@ -55,6 +56,7 @@
 		"releaseDraft": false
 	},
 	"build": {
+		
 		"appId": "com.garage-makezone.flash-wizard",
 		"productName": "Flash Wizard",
 		"extraResources": [
