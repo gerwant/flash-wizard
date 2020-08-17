@@ -82,7 +82,6 @@ module.exports = function(windowManager, createHelpWindow){
             '-D',
             '-Uflash:w:'+flash_config.file_path+':i'
         ]
-        console.log(avrdude_args)
         let child = null;
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
@@ -125,7 +124,7 @@ module.exports = function(windowManager, createHelpWindow){
         console.log(hexpath_config)
         let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex`
         let hex_path = isDev? path.join(__dirname, '../') : process.resourcesPath
-
+        flash_config.file_path = hex_path
         fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
             if(err && err.code == 'ENOENT') {
                 // file doens't exist
