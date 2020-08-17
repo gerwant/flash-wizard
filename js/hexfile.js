@@ -34,11 +34,14 @@ $('.processor-item').click(function(){
 })
 
 $('.processor-item').click(function(){
-    electron.ipcRenderer.send('send-config-request', $(this).data("value"), "processor");
+    electron.ipcRenderer.send('send-config-request', $(this).data("processor"), "processor");
     electron.ipcRenderer.send('send-config-request', $(this).data("baudrate"), "baudrate")
     stepTransition(1)
 })
 
+
+
 $('.baudrate-item').click(function(){
     electron.ipcRenderer.send('send-config-request', this.innerHTML, "baudrate");
 })
+

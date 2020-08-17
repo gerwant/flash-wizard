@@ -9,16 +9,26 @@ $(document).ready(function(){
     
 })
 
+function cutlabel(label, btn){
+    
+    if(label.length>16){
+        $(`.${btn}-label`).text(label.slice(0, 15)+'...')
+        $(`.${btn}`).attr('data-tooltip', label)
+    }
+    else{
+        
+        $(`.${btn}-label`).text(label)
+        $(`.${btn}`).removeAttr('data-tooltip')
+    }
+}
 
 $('input[type="file"]').change((event)=>{
     const file = event.target.files[0];
     // console.log(file); 
     electron.ipcRenderer.send('send-config-request', file.path, "file_path");
 
+    cutlabel(file.name, 'choose-file')
 
-    let name = (file.name.length>10) ? file.name.slice(0, 8)+"..." : file.name
-    $('.choose-file-label').text(name)
-    $('.choose-file').attr('data-tooltip', file.name)
     
     stepTransition(3)
    
@@ -103,4 +113,10 @@ $('.help-trigger').click(function(){
 })
 $('.go-back').click(()=> {
     electron.ipcRenderer.send('goToWelcome');
+})
+$('.processor-dropdown').change(function(){
+    cutlabel( $('.processor-dropdown-label').text(), "processor-dropdown")
+})
+$('.sensor-dropdown').change(function(){
+    cutlabel( $('.sensor-dropdown-label').text(), "sensor-dropdown")
 })
