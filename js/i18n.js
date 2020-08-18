@@ -19,7 +19,9 @@ let configPath = path.join(app.getPath('userData'), "config.json")
 
 fs.access(configPath, fs.F_OK, (err) => {
      if (err) {
-          fs.writeFile(configPath, JSON.stringify(configJSON));
+          fs.writeFile(configPath, JSON.stringify(configJSON) ,()=>{
+               console.log("crated config.json")
+          });
      }
      })
 
@@ -34,8 +36,13 @@ let config = editJsonFile(configPath, {autosave: true});
 
 
 function i18n() {
-     let language = JSON.parse(fs.readFileSync(configPath, 'utf8'))["Language"]
+     let language
      try{
+          language = JSON.parse(fs.readFileSync(configPath, 'utf8'))["Language"]
+     }catch(err){
+          language = 'en'
+     }
+          try{
           loadedLanguage = JSON.parse(fs.readFileSync(path.join(dirname, language + '.json'), 'utf8'))
      }
      catch(error){

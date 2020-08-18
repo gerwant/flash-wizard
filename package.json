@@ -56,7 +56,6 @@
 		"releaseDraft": false
 	},
 	"build": {
-		
 		"appId": "com.garage-makezone.flash-wizard",
 		"productName": "Flash Wizard",
 		"extraResources": [
