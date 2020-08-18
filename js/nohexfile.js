@@ -1,3 +1,4 @@
+const { ipcRenderer } = require("electron");
 
 $('.ui.dropdown').dropdown();
 
@@ -31,6 +32,23 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     })
 });
 
+electron,ipcRenderer.on("language-popup", (event, args) =>{
+    
+    let files = {}
+    $('.modal-flag').css({"filter": "filter: grayscale(100%);"})
+    args.files.forEach((element)=>{
+        let lang = element.slice(-6, -4).toLowerCase()
+        files[lang] = element
+        $(`.modal-flag.${lang}`).css({"filter": "none"})
+        $(`.modal-flag.${lang}`).click(function(){
+            electron.ipcRenderer.send('download-hex', lang)
+            $('.modal').modal('hide')
+        })
+    })
+    
+    $('.modal').modal('show')
+})
+
 electron.ipcRenderer.on('dropdown-content', (event, args) => {
     let dropdown = $("#"+args.dropdown);
     dropdown.html("")
@@ -48,7 +66,6 @@ electron.ipcRenderer.on('dropdown-content', (event, args) => {
         stepTransition(1)
     })
     $('.sensor').click(function(){
-        
         //electron.ipcRenderer.send('send-config-request', path.join(__dirname, '../firmware.hex'), "file_path")
         electron.ipcRenderer.send('port-list-request');
         console.log('firing update sensor with ', $(this).text())

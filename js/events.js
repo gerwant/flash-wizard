@@ -3,7 +3,7 @@ const path = require('path')
 
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
-    $(`.${lanugage}`).addClass("chosen-flag")
+    $(`.${lanugage}.flag`).addClass("chosen-flag")
         $('.no-hex-trigger').removeClass("inactive-btn disabled")
         $('.tooltip-wrapper').removeAttr("data-tooltip")
     
@@ -126,6 +126,6 @@ $('.sensor-dropdown').change(function(){
 $('.kill-avr-btn').click(function(){
     electron.ipcRenderer.send('kill_avrdude');
 })
-$('.modal-trigger').click(function(){
+$('.mini-flag').click(function(){
     $('.modal').modal('show')
 })

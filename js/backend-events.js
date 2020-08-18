@@ -120,12 +120,12 @@ module.exports = function(windowManager, createHelpWindow){
         flash_config[field] = value
     })
     
-    ipcMain.on('update-sensor', (event, data)=> {
-        hexpath_config.sensor = data.sensor
-        console.log(hexpath_config)
-        let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware.hex`
+    ipcMain.on('download-hex', (event, lang)=>{
         let hex_path = isDev? path.join(__dirname, '../') : process.resourcesPath
         flash_config.file_path = path.join(hex_path, "firmware.hex")
+        
+        let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware_${lang.toUpperCase()}.hex`
+        console.log(link)
         fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
             if(err && err.code == 'ENOENT') {
                 // file doens't exist
@@ -138,7 +138,6 @@ module.exports = function(windowManager, createHelpWindow){
             }
         });
 
-        hexpath_config.sensor = data.sensor;
 
         var options = {
             directory: hex_path,
@@ -153,6 +152,21 @@ module.exports = function(windowManager, createHelpWindow){
             event.sender.send("hex-downloaded")
             }
         }) 
+    })
+
+    ipcMain.on('update-sensor', (event, data)=> {
+        hexpath_config.sensor = data.sensor
+        
+        console.log(hexpath_config)
+        
+        
+        axios.get(wizzardAssistant + `/dev/${hexpath_config.device}/${hexpath_config.sensor}`)
+        .then(response => {
+            event.sender.send('language-popup', {files: response.data["devices"]})
+        })
+        .catch(error => {
+          console.log(error);
+        });
         
 
     })
