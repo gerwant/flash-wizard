@@ -39,4 +39,7 @@ Built with [Node.js](https://nodejs.org/en/) + [Electron](https://electronjs.org
 $ npm install
 $ npm start
 ```
-*Keep in mind that your compilation won't have "I don't have .hex file option" because ftp credentials aren't stored in the repository.*
+
+### Wizard Assistant
+
+Option #2 called "I don't have .hex file" couldn't be done without creating a special server which helps us with filtering traffic between file server and client through FTP and providing appropriate API endpoints. It's called [Wizard Assistant](https://github.com/rafalelo/wizard-assistant) and it's developed simultaneously with Flash Wizard, as an integral part. Future plans include making it more reliable, bulletproof and stable. Our goal is to provide continuous distribution of firmwares for your printers and rapidly develop new software to make manipulating with firmwares easier for everyone.
