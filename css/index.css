@@ -34,7 +34,18 @@ body {
     display: flex;
     height: 100%;
 }
+.modal-header{
+    background-color:  #3C404B !important;
+    text-align: center;
+    color: white;
+    margin-top: 20px    
 
+}
+.modal{
+    background-color:  #3C404B !important;
+    width: 80% !important;
+    height: 80% !important;
+}
 
 /*
 .box.rw.top-half {
