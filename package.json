@@ -35,6 +35,7 @@
 		"electron-util": "^0.13.0",
 		"jquery": "^3.5.1",
 		"serialport": "^9.0.0",
+		"tree-kill": "^1.2.2",
 		"underscore": "^1.10.2"
 	},
 	"devDependencies": {

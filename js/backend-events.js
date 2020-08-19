@@ -9,8 +9,8 @@ const {ipcMain} = require('electron')
 const electron = require('electron')
 const _ = require('underscore')
 var download = require('download-file');
-const { dir } = require('console');
 const fs = require('fs')
+const kill = require('tree-kill')
 
 let child = null;
 var flash_config = {
@@ -26,6 +26,8 @@ var hexpath_config = {
 }
 
 var wizzardAssistant = "http://161.97.90.147:3000"
+
+let avrdude_ids = [];
 
 
 module.exports = function(windowManager, createHelpWindow){
@@ -93,7 +95,9 @@ module.exports = function(windowManager, createHelpWindow){
         } else {
             child = spawn(avrdude_path, avrdude_args);
         }
-    
+
+        avrdude_ids.push(child.pid)
+
         child.stdout.on('data', (data) => {
             let datastring = data.toString()
             console.log('stdout: ', datastring);
@@ -222,11 +226,21 @@ module.exports = function(windowManager, createHelpWindow){
         });
     })
     ipcMain.on('kill_avrdude', async (event) => {
+
+        console.log(avrdude_ids)
         
         //TODO kill avrdude
         //if(child) child.kill()
-        console.log("avrdude killed")
-        event.sender.send("avrdude-done", "Flashing aborted")
+        _.each(avrdude_ids, (proc) => {
+            kill(proc, "SIGKILL", (error) => {
+                if (error){
+                    console.log("Well, not killed.", error)
+                    event.sender.send('avrdude-done', "Aborting failed.")
+                } else {
+                    event.sender.send("avrdude-done", "Flashing aborted")
+                }
+            })
+        })
     })
 
     ipcMain.on('sensors-list-request', async (event, arg) => {
