@@ -345,3 +345,7 @@ body::-webkit-scrollbar-thumb {
 .main-website-redir {
     cursor: pointer;
 }
+
+.kill-avr-btn {
+    background-color: #ff0000 !important;
+}

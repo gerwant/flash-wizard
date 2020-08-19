@@ -237,6 +237,8 @@ module.exports = function(windowManager, createHelpWindow){
                     console.log("Well, not killed.", error)
                     event.sender.send('avrdude-done', "Aborting failed.")
                 } else {
+                    idx = _.indexOf(avrdude_ids, proc);
+                    avrdude_ids.splice(idx, 1);
                     event.sender.send("avrdude-done", "Flashing aborted")
                 }
             })
