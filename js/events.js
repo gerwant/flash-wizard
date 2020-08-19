@@ -1,12 +1,18 @@
 const fs = require('fs')
 const path = require('path')
 
+
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
     $(`.${lanugage}.flag`).addClass("chosen-flag")
         $('.no-hex-trigger').removeClass("inactive-btn disabled")
         $('.tooltip-wrapper').removeAttr("data-tooltip")
-    
+    $('.error-modal').modal({
+        onHide: function(){
+            electron.ipcRenderer.send('reload');
+        }
+    }
+    )
 })
 
 function cutlabel(label, btn){
@@ -97,6 +103,9 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     textarea.scrollTop(textarea[0].scrollHeight)
 })
 
+electron.ipcRenderer.on('wizard-assistant-error', (event)=>{
+    $('.error-modal').modal("show")
+})
 
 $('.language-item').click(function(){
     

@@ -37,6 +37,10 @@ module.exports = function(windowManager, createHelpWindow){
 
     */
 
+    ipcMain.on('reload', ()=>{
+        windowManager.mainWindow.reload()
+    })
+
     ipcMain.on('change-language-request', function (event, atr) {
         i18n.changeLanguage(atr)
         windowManager.mainWindow.reload()
@@ -166,6 +170,7 @@ module.exports = function(windowManager, createHelpWindow){
         })
         .catch(error => {
           console.log(error);
+            event.sender.send('wizard-assistant-error')
         });
         
 
@@ -213,6 +218,7 @@ module.exports = function(windowManager, createHelpWindow){
         })
         .catch(error => {
           console.log(error);
+          event.sender.send('wizard-assistant-error')
         });
     })
     ipcMain.on('kill_avrdude', async (event) => {
@@ -233,6 +239,7 @@ module.exports = function(windowManager, createHelpWindow){
         })
         .catch(error => {
           console.log(error);
+          event.sender.send('wizard-assistant-error')
         });
         
     })

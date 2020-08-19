@@ -41,10 +41,13 @@ body {
     margin-top: 20px !important;   
 
 }
-.modal{
+.language-modal{
     background-color:  #3C404B !important;
     width: 80% !important;
     height: 80% !important;
+}
+.error-modal, .actions{
+    background-color:  #3C404B !important;
 }
 
 /*

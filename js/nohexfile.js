@@ -42,10 +42,12 @@ electron,ipcRenderer.on("language-popup", (event, args) =>{
         $(`.modal-flag.${lang}`).css({"filter": "none"})
         $(`.modal-flag.${lang}`).click(function(){
             electron.ipcRenderer.send('download-hex', element)
-            $('.modal').modal('hide')
+            $('.language-modal').modal('hide')
         })
     })
-    $('.modal').modal('show')
+    $(function () {
+        $('.language-modal').modal('show');
+   });
 })
 
 electron.ipcRenderer.on('dropdown-content', (event, args) => {
