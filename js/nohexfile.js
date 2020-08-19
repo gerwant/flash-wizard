@@ -37,15 +37,14 @@ electron,ipcRenderer.on("language-popup", (event, args) =>{
     let files = {}
     $('.modal-flag').css({"filter": "filter: grayscale(100%);"})
     args.files.forEach((element)=>{
+        if(element.charAt(element.length-7) !=='_') return
         let lang = element.slice(-6, -4).toLowerCase()
-        files[lang] = element
         $(`.modal-flag.${lang}`).css({"filter": "none"})
         $(`.modal-flag.${lang}`).click(function(){
-            electron.ipcRenderer.send('download-hex', lang)
+            electron.ipcRenderer.send('download-hex', element)
             $('.modal').modal('hide')
         })
     })
-    
     $('.modal').modal('show')
 })
 

@@ -120,11 +120,11 @@ module.exports = function(windowManager, createHelpWindow){
         flash_config[field] = value
     })
     
-    ipcMain.on('download-hex', (event, lang)=>{
+    ipcMain.on('download-hex', (event, filename)=>{
         let hex_path = isDev? path.join(__dirname, '../') : process.resourcesPath
         flash_config.file_path = path.join(hex_path, "firmware.hex")
         
-        let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/firmware_${lang.toUpperCase()}.hex`
+        let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/${filename}`
         console.log(link)
         fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
             if(err && err.code == 'ENOENT') {
