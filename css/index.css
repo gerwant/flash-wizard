@@ -81,6 +81,9 @@ body {
     padding: 0% !important;
 
 }
+.flag-item{
+    padding: 0 !important;
+}
 .modal-flag{
     filter: grayscale(100%);
 }
