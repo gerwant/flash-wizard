@@ -14,5 +14,11 @@
     "No ports": "Brak portów",
     "Other": "Inna",
     "RAMPS-based": "RAMPS i pochodne",
-    "We are working on it": "Pracujemy nad tym"
+    "We are working on it": "Pracujemy nad tym",
+    "Close": "Zamknij",
+    "Something went wrong!": "Coś poszło nie tak!",
+    "Abort": "Zatrzymaj",
+    "Choose the firmware language": "Wybierz język firmare'u",
+    "Sensor": "Czujnik",
+    "ABL sensor": "Czujnik ABL"
 }

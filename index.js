@@ -78,7 +78,7 @@ const createWelcomeWindow = async () => {
 
 
     await win.loadFile(path.join(__dirname, 'welcome.html'));
-    // win.webContents.closeDevTools()
+    win.webContents.closeDevTools()
     return win;
 };
 

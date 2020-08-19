@@ -79,7 +79,7 @@ module.exports = function(windowManager, createHelpWindow){
             avrdude_path = path.join(process.resourcesPath, "bin/")+avrdude_exec;
             avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf' //process.resourcesPath
         }
-        console.log(avrdude_path)
+        
         const avrdude_args = [
             '-C'+avrdude_config_path,
             '-p'+flash_config.processor,
@@ -89,7 +89,6 @@ module.exports = function(windowManager, createHelpWindow){
             '-D',
             '-Uflash:w:'+flash_config.file_path+':i'
         ]
-        console.log(avrdude_args)
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
         } else {
@@ -133,7 +132,6 @@ module.exports = function(windowManager, createHelpWindow){
         flash_config.file_path = path.join(hex_path, "firmware.hex")
         
         let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/${filename}`
-        console.log(link)
         fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
             if(err && err.code == 'ENOENT') {
                 // file doens't exist
@@ -165,15 +163,13 @@ module.exports = function(windowManager, createHelpWindow){
     ipcMain.on('update-sensor', (event, data)=> {
         hexpath_config.sensor = data.sensor
         
-        console.log(hexpath_config)
         
-        
-        axios.get(wizzardAssistant + `/dev/${hexpath_config.device}/${hexpath_config.sensor}`)
+        axios.get(wizzardAssistant + `/devs/${hexpath_config.device}/${hexpath_config.sensor}`)
         .then(response => {
             event.sender.send('language-popup', {files: response.data["devices"]})
         })
         .catch(error => {
-          console.log(error);
+          
             event.sender.send('wizard-assistant-error')
         });
         
