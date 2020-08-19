@@ -45,9 +45,9 @@ $('.flash-firmware-btn').click(()=>{
     
     document.getElementsByClassName('avrdude_output')[0].innerHTML = '';
     $('.bolt.icon').hide()
+    $('.flash-firmware-btn').hide()
+    $('.kill-avr-btn').show()
     $('.flash-progress').show("fade",()=>{
-        $('.flash-firmware-btn').hide()
-        $('.kill-avr-btn').show()
         electron.ipcRenderer.send('perform-flash', null)
     });
 })
