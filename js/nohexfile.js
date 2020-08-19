@@ -43,6 +43,7 @@ electron,ipcRenderer.on("language-popup", (event, args) =>{
         $(`.modal-flag.${lang}`).click(function(){
             electron.ipcRenderer.send('download-hex', element)
             $('.language-modal').modal('hide')
+            $('.mini-flag').attr('src', $(`.modal-flag.${lang}`).attr('src')).css({"display": 'block'})
         })
     })
     $(function () {

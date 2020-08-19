@@ -135,6 +135,3 @@ $('.sensor-dropdown').change(function(){
 $('.kill-avr-btn').click(function(){
     electron.ipcRenderer.send('kill_avrdude');
 })
-$('.mini-flag').click(function(){
-    $('.modal').modal('show')
-})

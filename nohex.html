@@ -60,16 +60,17 @@
                     <div class="ui active inline loader small flash-progress" style="display: none;"></div>
                     <h4 class="inactive-step-title noselect translate">Flash!</h4> 
                     <button class="inactive-btn step-btn disabled ui labeled icon button flash-firmware-btn">
-                        <div class="translate">Flash!</div>
+                        <div class="flash-wrapper" style="display: flex;">
+                            <img class="mini-flag en" val="en" src="static/flags/united-kingdom.svg" style="display: none;">
+                            <div class="translate" style="flex: 8">Flash!</div>
+                        </div>
                     </button>
-                        <!-- <img class="mini-flag en" val="en" src="static/flags/united-kingdom.svg" > -->
                     <button class="active-btn step-btn ui labeled icon button kill-avr-btn" style="display: none;">
                         <div class="translate">Abort</div>
                     </button>
                 </div>
             </div>
         </div>
-
         <div class="avrdude_output_wrapper" style="display: none; width: 100%; text-align: right;">
             <div class="ui form">
                 <textarea class="avrdude_output" wrap="soft" spellcheck="false"></textarea>
