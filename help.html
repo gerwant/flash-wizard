@@ -17,38 +17,36 @@
     <h1 class="faqheader">FAQ</h1>
 
     <div class="ui segment question-segment" style="width: 600px !important;">
-        <div class="question">
-            <h3 class="translate">sample question</h3>
-            <p class="translate">sample answer</p>
+        <div class="ui inverted accordion">
+            <div class="title">
+                <i class="dropdown icon"></i>
+                <h3 class="translate" style="display: inline-block; important">sample question</h3>
+            </div>
+            <div class="content">
+                <p class="translate transition hidden">sample answer</p>
+            </div>
+            <div class="title">
+                <i class="dropdown icon"></i>
+                <h3 class="translate" style="display: inline-block; important">sample question</h3>
+            </div>
+            <div class="content">
+                <p class="translate transition hidden">sample answer</p>
+            </div>
+            <div class="title">
+                <i class="dropdown icon"></i>
+                <h3 class="translate" style="display: inline-block; important">sample question</h3>
+            </div>
+            <div class="content">
+                <p class="translate transition hidden">sample answer</p>
+            </div>
+            <div class="title">
+                <i class="dropdown icon"></i>
+                <h3 class="translate" style="display: inline-block; important">sample question</h3>
+            </div>
+            <div class="content">
+                <p class="translate transition hidden">sample answer</p>
+            </div>
         </div>
-        
-        <div class="question">
-            <h3 class="translate">sample question</h3>
-            <p class="translate">sample answer</p>
-        </div>
-        
-
-      
-        <div class="question">
-            <h3 class="translate">sample question</h3>
-            <p class="translate">sample answer</p>
-        </div>
-        
-
-      
-        <div class="question">
-            <h3 class="translate">sample question</h3>
-            <p class="translate">sample answer</p>
-        </div>
-        
-
-      
-        <div class="question">
-            <h3 class="translate">sample question</h3>
-            <p class="translate">sample answer</p>
-        </div>
-    
-        
     </div>
 
     <div class="sticky-footer">
@@ -73,6 +71,8 @@
 
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="js/jquery-ui.js"></script>
+    <script src="js/semantic.min.js"></script>
+    <script>$('.ui.accordion').accordion();</script>
     <script>
             const electron = require('electron');
             let i18n = require('./js/i18n.js') 
@@ -94,11 +94,6 @@
     </script>
 </body>
 <style>
-    .question{
-        padding-bottom: 30px;
-
-        text-align: left;
-    }
     .faqheader{
         text-align: center;
         color: white;
