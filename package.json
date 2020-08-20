@@ -7,9 +7,9 @@
 	"repository": "https://gitlab.com/gerwant/flash-wizard",
 	"main": "index.js",
 	"author": {
-		"name": "Your Name",
-		"email": "user@gmail.com",
-		"url": "https://sindresorhus.com"
+		"name": "Garage Makezone",
+		"email": "garage.make.zone@gmail.com",
+		"url": "https://garage-makezone.eu"
 	},
 	"scripts": {
 		"postinstall": "electron-builder install-app-deps",

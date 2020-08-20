@@ -1,0 +1,16 @@
+version: 2.1
+jobs:
+  build_windows:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run: npm run build
+      - store_artifacts:
+          path: /root/project/build
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - build_windows
