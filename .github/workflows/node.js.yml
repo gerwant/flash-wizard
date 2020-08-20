@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build_windows_x64:
 
     runs-on: windows-latest
 
@@ -25,9 +25,31 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run dist
+    - run: npm run dist_win64
     - name: Archive production dist directory
       uses: actions/upload-artifact@v2
       with:
-        name: Built installer
+        name: Built 64-bit installer
+        path: dist/*.exe
+
+  build_windows_x32:
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+  
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm run dist_win32
+    - name: Archive production dist directory
+      uses: actions/upload-artifact@v2
+      with:
+        name: Built 32-bit installer
         path: dist/*.exe
