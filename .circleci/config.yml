@@ -5,6 +5,7 @@ jobs:
       - image: electronuserland/builder:wine
     steps:
       - checkout
+      - run: npm install
       - run: npm run dist
       - store_artifacts:
           path: /root/project/build
