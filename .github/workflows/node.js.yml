@@ -29,5 +29,5 @@ jobs:
     - name: Archive production dist directory
       uses: actions/upload-artifact@v2
       with:
-        name: dist
-        path: dist  
+        name: Built installer
+        path: dist/*.exe
