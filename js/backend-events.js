@@ -5,7 +5,7 @@ const axios = require('axios');
 const path = require('path');
 const spawn = require('child_process').spawn;
 const config = require('./config');
-const {ipcMain} = require('electron')
+const {ipcMain, app} = require('electron')
 const electron = require('electron')
 const _ = require('underscore')
 var download = require('download-file');
@@ -128,7 +128,7 @@ module.exports = function(windowManager, createHelpWindow){
     })
     
     ipcMain.on('download-hex', (event, filename)=>{
-        let hex_path = isDev? path.join(__dirname, '../') : process.resourcesPath
+        let hex_path = isDev? path.join(__dirname, '../') : app.getPath("userData")
         flash_config.file_path = path.join(hex_path, "firmware.hex")
         
         let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/${filename}`

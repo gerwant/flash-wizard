@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const { app } = require('electron')
 
 
 $(document).ready(function(){
@@ -77,7 +78,7 @@ electron.ipcRenderer.on('avrdude-response', (event, data)=>{
 })
 
 electron.ipcRenderer.on('avrdude-done', (event, data)=>{
-    let hex_path = isDev? path.join(__dirname, '../../') : process.resourcesPath
+    let hex_path = isDev? path.join(__dirname, '../../') : app.getPath("userData")
     $('.kill-avr-btn').hide()
     $('.flash-firmware-btn').show()
     
