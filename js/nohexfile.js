@@ -35,7 +35,8 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
 electron,ipcRenderer.on("language-popup", (event, args) =>{
     
     let files = {}
-    $('.modal-flag').css({"filter": "filter: grayscale(100%);"})
+    $('.modal-flag').css({"filter":  "grayscale(100%)"})
+    $(".modal-flag").prop("onclick", null).off("click");
     args.files.forEach((element)=>{
         if(element.charAt(element.length-7) !=='_') return
         let lang = element.slice(-6, -4).toLowerCase()

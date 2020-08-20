@@ -164,7 +164,7 @@ module.exports = function(windowManager, createHelpWindow){
         hexpath_config.sensor = data.sensor
         
         
-        axios.get(wizzardAssistant + `/devs/${hexpath_config.device}/${hexpath_config.sensor}`)
+        axios.get(wizzardAssistant + `/dev/${hexpath_config.device}/${hexpath_config.sensor}`)
         .then(response => {
             event.sender.send('language-popup', {files: response.data["devices"]})
         })
