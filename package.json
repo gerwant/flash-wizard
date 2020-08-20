@@ -97,6 +97,10 @@
 			"maintainer": "Garage Makezone",
 			"vendor": "Garage Makezone",
 			"description": "Flash .hex file to your 3D printer!"
+		},
+		"win": {
+			"target": "nsis",
+			"publisherName": "Garage Makezone"
 		}
 	}
 }
