@@ -31,6 +31,10 @@ body {
     -webkit-user-select: none; 
 }
 
+.noselect > * {
+    -webkit-user-select: none;
+}
+
 .select {
     
     -webkit-user-select: default; 
@@ -47,10 +51,14 @@ body {
 }
 .modal-header{
     background-color:  #3C404B !important;
-    text-align: center;
+    text-align: center !important;
     color: white;
     margin-top: 20px !important;   
-
+}
+.modal-header > img {
+    margin-top: 0px !important;
+    margin-bottom: -13px !important;
+    margin-right: 10px;
 }
 .language-modal{
     background-color:  #3C404B !important;
@@ -284,12 +292,13 @@ body::-webkit-scrollbar-thumb {
     top: 40%;
     right: 30px;
 }
+
 .logo3{
-    position: fixed;
+    /*position: fixed; */
     width: 50px;
     height: 50px;
-    left: 28%;
-    top: 10px;
+    /* left: 28%;
+    top: 10px; */
 }
 
 .logo-item{
@@ -360,7 +369,7 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
 }
 
-.main-website-redir {
+.main-website-redir, .github-redir, .fb-redir {
     cursor: pointer;
 }
 

@@ -24,8 +24,8 @@
             </div>
             <div class="content">
                 <p class="translate transition hidden">answer_1</p>
-                <a href="https://arduino.stackexchange.com/questions/17827/how-do-i-resolve-avrdude-stk500-recv-programmer-is-not-responding">StackOverflow</a>
                 <p class="translate transition hidden">Here you can find further tips how to solve that problem:</p>
+                <a href="https://arduino.stackexchange.com/questions/17827/how-do-i-resolve-avrdude-stk500-recv-programmer-is-not-responding">StackOverflow</a>
             </div>
             <div class="title">
                 <i class="dropdown icon"></i>
@@ -61,15 +61,15 @@
         </div>
     </div>
 
-    <div class="ui modal language-modal">
-        <img class="logo3" src="css/wizzard.png">
-        <h2 class="modal-header translate">Flash-Wizard</h2>
-        <div class="ui segment" style="background-color: #3C404B !important">
-            <h3>Version: 0.1.0</h3>
-            <h3>Made by Banda Popaprańców</h3>
-            <h3> <i class="code icon"> </i> with <i class="heart icon"></i></h3>
+    <div class="ui modal language-modal noselect">
+        <h2 class="modal-header"><img class="logo3 modal-header" src="css/wizzard.png">Flash Wizard</h2>
+        <div class="ui segment" style="background-color: #3C404B !important; border: 0px !important;">
+            <h3 class="version-h3"></h3>
+            <h3 class="translate">Created by Garage Makezone</h3>
+            <h3> <i class="code icon"> </i> with <i class="heart icon" style="color: #FF0000;"></i></h3>
             <i class="large github icon github-redir"></i>
             <i class="large facebook icon fb-redir"></i>
+            <i class="large youtube icon yt-redir"></i>
         </div>
     </div>
 
@@ -80,24 +80,23 @@
     <script>
             const electron = require('electron');
             let i18n = require('./js/i18n.js') 
+            const {version} = require('./package.json')
 
             //translating divs
             let toTranslate = document.getElementsByClassName("translate")
             for (var i = 0; i < toTranslate.length; i++) {
                 toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
             }
-            $('.main-website-redir').click(()=>{
-                electron.shell.openExternal('https://garage-makezone.eu')
-            })
-            $('.paypal-redir').click(()=>{
-                electron.shell.openExternal('https://paypal.me/helpgmz')
-            })
-            $('.github-redir').click(()=>{
-                electron.shell.openExternal('https://github.com/gerwant/flash-wizard')
-            })
-            $('.fb-redir').click(()=>{
-                electron.shell.openExternal('https://www.facebook.com/GarageMakezone')
-            })
+
+            let vstring = i18n.__("Version")
+            $('.version-h3').text(vstring+": "+version)
+
+            $('.main-website-redir').click(()=>{ electron.shell.openExternal('https://garage-makezone.eu') })
+            $('.paypal-redir').click(()=>{ electron.shell.openExternal('https://paypal.me/helpgmz') })
+            $('.github-redir').click(()=>{ electron.shell.openExternal('https://github.com/gerwant/flash-wizard') })
+            $('.fb-redir').click(()=>{ electron.shell.openExternal('https://www.facebook.com/GarageMakezone') })
+            $('.yt-redir').click(()=>{ electron.shell.openExternal('https://www.youtube.com/channel/UCFXql2ulfybkKO0qT_HHzKQ') })
+
             $('.popup-wizard').click(()=>{
                 $('.ui.modal').modal('show');
             })
@@ -105,6 +104,7 @@
                 electron.ipcRenderer.send('close-help-window');
             })
     </script>
+    <script src="js/events.js"></script>
 </body>
 <style>
     .faqheader{
