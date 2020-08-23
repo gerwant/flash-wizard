@@ -9,9 +9,6 @@ require('dotenv').config();
 const i18n = require('./js/i18n');
 const isDev = require('electron-is-dev');
 
-
-
-
 class WindowManager{
     constructor(){
         this.mainWindow;
@@ -162,10 +159,7 @@ app.on('activate', async () => {
 })();
 
 
-
 require('./js/backend-events')(windowManager, createHelpWindow)
-
-
 
 
 /*

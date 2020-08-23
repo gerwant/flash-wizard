@@ -31,6 +31,7 @@ let avrdude_ids = [];
 
 
 module.exports = function(windowManager, createHelpWindow){
+
     /*
 
     Communication with frontend.
