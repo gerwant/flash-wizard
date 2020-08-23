@@ -1,3 +1,30 @@
 {
+
+    "File": "",
+    "I have the .hex file": "",
+    "I don't have the .hex file": "",
+    "Do you have the .hex file?": "",
+    "Choose device": "",
+    "Devices": "",
+    "Choose file": "",
+    "Choose baudrate": "",
+    "Choose port": "",
+    "Flashing": "",
+    "Flash!": "",
+    "Confirm": "",
+    "No ports": "",
+    "Other": "",
+    "RAMPS-based": "",
+    "We are working on it": "",
+    "Close": "",
+    "Something went wrong!": "",
+    "Abort": "",
+    "Choose the firmware language": "",
+    "Sensor": "",
+    "ABL sensor": "",
+    "Here you can find further tips how to solve that problem:": "",
+    "answer_1": "",
+    "question_2": "",
+    "answer_2": ""
     
 }

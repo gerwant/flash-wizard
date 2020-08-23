@@ -14,5 +14,15 @@
     "No ports": "No hay puertos",
     "Other": "Otro",
     "RAMPS-based": "Basado en RAMPS",
-    "We are working on it": "Estamos trabajando en ello"
+    "We are working on it": "Estamos trabajando en ello",
+    "Close": "",
+    "Something went wrong!": "",
+    "Abort": "",
+    "Choose the firmware language": "",
+    "Sensor": "",
+    "ABL sensor": "",
+    "Here you can find further tips how to solve that problem:": "",
+    "answer_1": "",
+    "question_2": "",
+    "answer_2": ""
 }
