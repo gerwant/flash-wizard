@@ -1,7 +1,7 @@
 {
 	"name": "flash-wizard",
 	"productName": "Flash Wizard",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Flash .hex file to your 3D printer!",
 	"license": "MIT",
 	"repository": "https://gitlab.com/gerwant/flash-wizard",
