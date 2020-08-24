@@ -21,6 +21,7 @@
 		"dist_linux32": "electron-builder --linux --ia32 -p never",
 		"dist_win64": "electron-builder --windows --x64 -p never",
 		"dist_win32": "electron-builder --windows --ia32 -p never",
+		"dist_win": "electron-builder --windows --ia32 --x64 -p never",
 		"release": "np --yolo",
 		"publish": "electron-builder -p always"
 	},
