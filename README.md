@@ -3,6 +3,7 @@
 
 > Firmware flasher for your 3D printer!
 
+![build](https://github.com/gerwant/flash-wizard/workflows/Node.js%20CI/badge.svg)
 
 ## Install
 
