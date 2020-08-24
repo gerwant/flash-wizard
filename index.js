@@ -169,13 +169,13 @@ Autoupdater module.
 
 */
 
- autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
+ //autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
  autoUpdater.autoDownload = true;
  
- autoUpdater.setFeedURL({
-     provider: "generic",
-     url: "https://gitlab.com/gerwant/flash-wizard"
- });
+ //autoUpdater.setFeedURL({
+ //    provider: "generic",
+ //    url: "https://gitlab.com/gerwant/flash-wizard"
+ //});
  
  autoUpdater.on('checking-for-update', function () {
      sendStatusToWindow('Checking for update...');
