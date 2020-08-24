@@ -3,7 +3,7 @@
 <head>
     <head>
         <meta charset="utf-8">
-        <title>Flash Wizard</title>
+        <title>FAQ</title>
         <link rel="stylesheet" href="css/semantic.min.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="css/index.css">
@@ -11,7 +11,7 @@
 </head>
 <body style="overflow-y: scroll;">
 
-    <i class="go-back big question arrow circle left icon"></i>
+    <i class="arrow-back big question arrow circle left icon"></i>
 
 
     <h1 class="faqheader noselect">FAQ</h1>
@@ -100,7 +100,7 @@
             $('.popup-wizard').click(()=>{
                 $('.ui.modal').modal('show');
             })
-            $('.go-back').click(() => {
+            $('.arrow-back').click(() => {
                 electron.ipcRenderer.send('close-help-window');
             })
     </script>

@@ -202,7 +202,7 @@ body::-webkit-scrollbar-thumb {
     color: rgb(224, 223, 223);
 }
 
-.go-back{
+.go-back, .arrow-back{
     position: fixed;
     top: 15px !important;
     left: 10px !important;
@@ -368,7 +368,7 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
 }
 
-.main-website-redir, .github-redir, .fb-redir {
+.main-website-redir, .github-redir, .fb-redir, .yt-redir {
     cursor: pointer;
 }
 
