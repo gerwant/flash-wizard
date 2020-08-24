@@ -18,7 +18,7 @@
     "Close": "Zamknij",
     "Something went wrong!": "Coś poszło nie tak!",
     "Abort": "Zatrzymaj",
-    "Choose the firmware language": "Wybierz język firmare'u",
+    "Choose the firmware language": "Wybierz język firmware'u",
     "Sensor": "Czujnik",
     "ABL sensor": "Czujnik ABL",
     "Here you can find further tips how to solve that problem:": "Here you can find further tips how to solve that problem:",
@@ -26,6 +26,11 @@
     "question_2": "How to burn the bootloader?",
     "answer_2": "There are many tutorials about burning the bootloader. Below you can find links to some useful resources.It's not that hard. However, to make it even easier, we're planning to implement an automatic bootloader burning with exact instructions how to connect the printer to burn it right.We're happy to announce that v0.2 version of Flash Wizard will have such a feature.",
     "Version": "Wersja",
-    "Created by Garage Makezone": "Stworzone przez Garage Makezone"
+    "Created by Garage Makezone": "Stworzone przez Garage Makezone",
+    "Update available": "Dostępna aktualizacja",
+    "Do you want to download and install an update?": "Czy chcesz pobrać i zainstalować aktualizację?",
+    "In general, updates are important. It comes with better security, better overall performance and more features! We wouldn't bother you, if it wasn't anything important.": "Aktualizacje są ważne. Zapewniają większe bezpieczeństwo, lepszą wydajność i dodają nowe funkcję. Nie zawracalibyśmy Ci głowy gdyby to nie było coś ważnego.",
+    "Download now": "Pobierz teraz",
+    "Remind me later": "Przypomnij później"
 
 }

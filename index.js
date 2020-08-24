@@ -118,8 +118,8 @@ const createUpdateWindow = async () => {
         title: "Update available!",
         icon: iconPath,
         show: false,
-        width: 450,
-        height: 245,
+        width: 550,
+        height: 300,
         resizable: isDev ? true : false,
         webPreferences: {
             devTools: true,

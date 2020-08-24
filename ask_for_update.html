@@ -3,7 +3,7 @@
 <head>
     <head>
         <meta charset="utf-8">
-        <title>Update available</title>
+        <title class="translate">Update available</title>
         <link rel="stylesheet" href="css/semantic.min.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="css/index.css">
@@ -11,21 +11,23 @@
 </head>
 <body style="overflow-y: scroll;">
 
-    <h2 class="faqheader noselect">Do you want to download update and install it?</h1>
+    <h2 class="faqheader noselect translate">Do you want to download and install an update?</h2>
+    <div class="ui segment container" >
+        
+        <h4 class="content-update noselect translate">In general, updates are important. It comes with better security, better overall performance and more features! We wouldn't bother you, if it wasn't anything important.</h4>
+        
+        <div class="footer" style="margin-left: auto !important; margin-right: auto !important;">
+            
+            
+            <div class="ui button active-btn download-update translate" style="margin-right: 20px !important;">Download now</div>
 
-    <h4 class="content-update noselect">In general, updates are important. It comes with better security, better overall performance and more features! We wouldn't bother you if it wasn't anything important.
-    </h4>
-
-    <div class="sticky-footer">
-        <div class="ui horizontal">
-                <div class="ui button active-btn download-update translate">
-                    Download now
-                </div>
-                <div class="ui button active-btn close-update-win translate" style="background-color: #ff0000 !important;">
-                    No
-                </div>
+            <div class="ui button active-btn close-update-win translate" >Remind me later</div>
+            
         </div>
     </div>
+</div>
+
+        
 
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="js/jquery-ui.js"></script>
@@ -53,6 +55,8 @@
     .content-update {
         text-align: left;
         color: white;
+        font-weight: 100;
+        text-align: center;
         margin-top: 12px !important;
         padding-left: 15px;
     }
@@ -67,6 +71,13 @@
     }
     .horizontal{
         width: 100% !important;
+    }
+    .button{
+        width: 180px
+    }
+    .container{
+        margin-left: 50px !important;
+        margin-right: 50px !important;
     }
     
 </style>
