@@ -63,6 +63,10 @@ $('.avrdude_output').keydown(function(event){
     event.preventDefault();
 });
 
+electron.ipcRenderer.on('update-download-progress', (event, data) => {
+    $('.close-update-win').hide();
+})
+
 electron.ipcRenderer.on('hex-downloaded', (event) =>{
     
     stepTransition(2)
@@ -117,12 +121,24 @@ $('.flag').click(function(){
     electron.ipcRenderer.send('change-language-request', $(this).attr("val"));
 })
 
+$('.close-update-win').click( () => {
+    electron.ipcRenderer.send('close-update-win');
+})
+
+$('.download-update').click( () => {
+    document.getElementsByClassName('download-update')[0].innerHTML = '<div class="ui active inline mini inverted loader"></div>'
+    document.getElementsByClassName('close-update-win')[0].disabled = true;
+    electron.ipcRenderer.send('download-update');
+})
+
 $('.main-website-redir').click(()=>{
     electron.shell.openExternal('https://garage-makezone.eu')
 })
+
 $('.help-trigger').click(function(){
     electron.ipcRenderer.send('openHelpWindow');
 })
+
 $('.go-back').click(()=> {
     electron.ipcRenderer.send('goToWelcome');
     electron.ipcRenderer.send('kill_avrdude');

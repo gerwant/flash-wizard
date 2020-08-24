@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="utf-8">
+        <title>Update Available</title>
+        <link rel="stylesheet" href="css/semantic.min.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+</head>
+<body style="overflow-y: scroll;">
+
+    <h2 class="faqheader noselect">Do you want to download update and install it?</h1>
+
+    <h4 class="content-update noselect">In general, updates are important. It comes with better security, better overall performance and more features! We wouldn't bother you if it wasn't anything important.
+    </h4>
+
+    <div class="sticky-footer">
+        <div class="ui horizontal">
+                <div class="ui button active-btn download-update translate">
+                    Download now
+                </div>
+                <div class="ui button active-btn close-update-win translate" style="background-color: #ff0000 !important;">
+                    No
+                </div>
+        </div>
+    </div>
+
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/semantic.min.js"></script>
+    <script>$('.ui.accordion').accordion();</script>
+    <script>
+            const electron = require('electron');
+            let i18n = require('./js/i18n.js') 
+
+            //translating divs
+            let toTranslate = document.getElementsByClassName("translate")
+            for (var i = 0; i < toTranslate.length; i++) {
+                toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
+            }
+
+    </script>
+    <script src="js/events.js"></script>
+</body>
+<style>
+    .faqheader{
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+    }
+    .content-update {
+        text-align: left;
+        color: white;
+        margin-top: 12px !important;
+        padding-left: 15px;
+    }
+    .sticky-footer{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        height: 20%;
+        margin-top: -15px;
+        text-align: center;
+       
+    }
+    .horizontal{
+        width: 100% !important;
+    }
+    
+</style>
+</html>

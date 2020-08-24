@@ -1,7 +1,7 @@
 {
 	"name": "flash-wizard",
 	"productName": "Flash Wizard",
-	"version": "0.3.0",
+	"version": "0.1.0",
 	"description": "Flash .hex file to your 3D printer!",
 	"license": "MIT",
 	"repository": "https://gitlab.com/gerwant/flash-wizard",
@@ -22,7 +22,7 @@
 		"dist_win64": "electron-builder --windows --x64",
 		"dist_win32": "electron-builder --windows --ia32",
 		"release": "np --yolo",
-		"publish": "build -p always"
+		"publish": "electron-builder -p always"
 	},
 	"dependencies": {
 		"axios": "^0.19.2",
@@ -89,12 +89,14 @@
 		},
 		"linux": {
 			"target": [
-				"AppImage",
-				"deb"
+				"AppImage"
 			],
 			"category": "Network;Chat",
 			"executableName": "Flash Wizard",
-			"vendor": "Garage Makezone"
+			"vendor": "Garage Makezone",
+			"publish": {
+				"provider": "github"
+			}
 		},
 		"deb": {
 			"maintainer": "Garage Makezone",

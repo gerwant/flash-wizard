@@ -199,6 +199,12 @@ module.exports = function(windowManager, createHelpWindow){
         })();
     })
 
+    ipcMain.on('close-update-win', function (event, atr) {
+        if (windowManager.updateWindow) {
+            windowManager.updateWindow.close();
+        }
+    })
+
     ipcMain.on('goToWelcome', function (event, atr) {
         (async () => {
             windowManager.mainWindow.loadFile('welcome.html')
@@ -226,8 +232,6 @@ module.exports = function(windowManager, createHelpWindow){
 
         console.log(avrdude_ids)
         
-        //TODO kill avrdude
-        //if(child) child.kill()
         _.each(avrdude_ids, (proc) => {
             kill(proc, "SIGKILL", (error) => {
                 if (error){

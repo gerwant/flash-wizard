@@ -30,7 +30,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Built Windows 64-bit installer
-        path: dist/*.exe
+        path: |
+          dist/*.exe
+          dist/*.yml
 
   build_windows_x32:
 
@@ -52,7 +54,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Built Windows 32-bit installer
-        path: dist/*.exe
+        path: | 
+          dist/*.exe
+          dist/*.yml
 
   build_linux_x32:
 
@@ -74,7 +78,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Built Linux 32-bit AppImage
-        path: dist/*.AppImage
+        path: | 
+          dist/*.AppImage
+          dist/*.yml
 
   build_linux_x64:
 
@@ -96,4 +102,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Built Linux 64-bit AppImage
-        path: dist/*.AppImage
+        path: |
+          dist/*.AppImage
+          dist/*.yml

@@ -12,7 +12,9 @@ class WindowManager{
     constructor(){
         this.mainWindow;
         this.helpWindow;
+        this.updateWindow;
         this.isHelpOpen = false;
+        this.isUpdateOpen = false;
     }
 }
 let windowManager = new WindowManager
@@ -36,9 +38,10 @@ app.setAppUserModelId('com.garage-makezone.flash-wizard');
 // }
 
 // Prevent window from being garbage collected
-let mainWindow;
-let helpWindow;
-let isHelpOpen = false;
+//let mainWindow;
+//let helpWindow;
+//let updateWindow;
+//let isHelpOpen = false;
 
 let iconPath = (isDev)?'static/icon/wizzard.png': path.join(process.resourcesPath, "static/icon/wizzard.png")
 
@@ -110,6 +113,38 @@ const createHelpWindow = async () => {
     return win;
 };
 
+const createUpdateWindow = async () => {
+    const win = new BrowserWindow({
+        title: "Update available!",
+        icon: iconPath,
+        show: false,
+        width: 450,
+        height: 245,
+        resizable: isDev ? true : false,
+        webPreferences: {
+            devTools: true,
+            nodeIntegration: true
+        }
+    });
+    win.setMenu(null)
+
+    win.on('ready-to-show', () => {
+        win.show();
+        windowManager.isUpdateOpen = true;
+    });
+
+    win.on('closed', () => {
+        // Dereference the window
+        // For multiple windows store them in an array
+        windowManager.isUpdateOpen = false;
+        windowManager.updateWindow = null;
+    });
+
+    await win.loadFile(path.join(__dirname, 'ask_for_update.html'));
+    win.webContents.closeDevTools()
+    return win;
+};
+
 /*
 
 Handling app signals,
@@ -155,13 +190,13 @@ app.on('activate', async () => {
 	await app.whenReady();
     windowManager.mainWindow = await createWelcomeWindow();
  
-    autoUpdater.checkForUpdatesAndNotify(); // Check for updates
+    autoUpdater.checkForUpdates(); // Check for updates
 
 })();
 
 
 require('./js/backend-events')(windowManager, createHelpWindow)
-
+require('./js/autoupdate')(windowManager, createUpdateWindow)
 
 /*
 
@@ -170,48 +205,4 @@ Autoupdater module.
 */
 
  //autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
- autoUpdater.autoDownload = true;
  
- //autoUpdater.setFeedURL({
- //    provider: "generic",
- //    url: "https://gitlab.com/gerwant/flash-wizard"
- //});
- 
- autoUpdater.on('checking-for-update', function () {
-     sendStatusToWindow('Checking for update...');
- });
- 
- autoUpdater.on('update-available', function (info) {
-     sendStatusToWindow('Update available.');
- });
- 
- autoUpdater.on('update-not-available', function (info) {
-     sendStatusToWindow('Update not available.');
- });
- 
- autoUpdater.on('error', function (err) {
-     sendStatusToWindow('Error in auto-updater.');
- });
- 
- autoUpdater.on('download-progress', function (progressObj) {
-     sendStatusToWindow('Update downloaded; will install in 1 seconds');
-     let log_message = "Download speed: " + progressObj.bytesPerSecond;
-     log_message = log_message + ' - Downloaded ' + parseInt(progressObj.percent) + '%';
-     log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-     sendStatusToWindow(log_message);
- });
- 
- autoUpdater.on('update-downloaded', function (info) {
-     sendStatusToWindow('Update downloaded; will install in 1 seconds');
- });
-
- autoUpdater.on('update-downloaded', function (info) {
-     setTimeout(function () {
-         autoUpdater.quitAndInstall();
-     }, 1000);
- });
-
-
- function sendStatusToWindow(message) {
-     console.log(message);
- }
