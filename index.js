@@ -119,7 +119,7 @@ const createUpdateWindow = async () => {
         icon: iconPath,
         show: false,
         width: 550,
-        height: 240,
+        height: 300,
         resizable: isDev ? true : false,
         webPreferences: {
             devTools: true,
