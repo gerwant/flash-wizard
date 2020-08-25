@@ -10,7 +10,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build_windows_x64:
+
+  build_windows:
 
     runs-on: windows-latest
 
@@ -25,38 +26,63 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run dist_win64
+    - run: npm run dist_win
     - name: Archive production dist directory
       uses: actions/upload-artifact@v2
       with:
-        name: Built Windows 64-bit installer
+        name: Built Windows multi-arch installer
         path: |
           dist/*.exe
           dist/*.yml
 
-  build_windows_x32:
 
-    runs-on: windows-latest
+  #build_windows_x64:
 
-    strategy:
-      matrix:
-        node-version: [14.x]
+  #  runs-on: windows-latest
+
+  #  strategy:
+  #    matrix:
+  #      node-version: [14.x]
+
+  #  steps:
+  #  - uses: actions/checkout@v2
+  #  - name: Use Node.js ${{ matrix.node-version }}
+  #    uses: actions/setup-node@v1
+  #    with:
+  #      node-version: ${{ matrix.node-version }}
+  #  - run: npm install
+  #  - run: npm run dist_win64
+  #  - name: Archive production dist directory
+  #    uses: actions/upload-artifact@v2
+  #    with:
+  #      name: Built Windows 64-bit installer
+  #      path: |
+  #        dist/*.exe
+  #        dist/*.yml
+
+  #build_windows_x32:
+
+  #  runs-on: windows-latest
+
+  #  strategy:
+  #    matrix:
+  #      node-version: [14.x]
   
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run dist_win32
-    - name: Archive production dist directory
-      uses: actions/upload-artifact@v2
-      with:
-        name: Built Windows 32-bit installer
-        path: | 
-          dist/*.exe
-          dist/*.yml
+  #  steps:
+  #  - uses: actions/checkout@v2
+  #  - name: Use Node.js ${{ matrix.node-version }}
+  #    uses: actions/setup-node@v1
+  #    with:
+  #      node-version: ${{ matrix.node-version }}
+  #  - run: npm install
+  #  - run: npm run dist_win32
+  #  - name: Archive production dist directory
+  #    uses: actions/upload-artifact@v2
+  #    with:
+  #      name: Built Windows 32-bit installer
+  #      path: | 
+  #        dist/*.exe
+  #        dist/*.yml
 
   build_linux_x32:
 
