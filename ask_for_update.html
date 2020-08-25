@@ -18,7 +18,6 @@
         
         <div class="footer" style="margin-left: auto !important; margin-right: auto !important;">
             
-            
             <div class="ui button active-btn download-update translate" style="margin-right: 20px !important;">Download now</div>
 
             <div class="ui button active-btn close-update-win translate" >Remind me later</div>
@@ -27,21 +26,20 @@
     </div>
 </div>
 
-        
-
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/semantic.min.js"></script>
     <script>$('.ui.accordion').accordion();</script>
     <script>
-            const electron = require('electron');
-            let i18n = require('./js/i18n.js') 
 
-            //translating divs
-            let toTranslate = document.getElementsByClassName("translate")
-            for (var i = 0; i < toTranslate.length; i++) {
-                toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
-            }
+        const electron = require('electron');
+        let i18n = require('./js/i18n.js') 
+
+        //translating divs
+        let toTranslate = document.getElementsByClassName("translate")
+        for (var i = 0; i < toTranslate.length; i++) {
+            toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
+        }
 
     </script>
     <script src="js/events.js"></script>

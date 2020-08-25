@@ -87,8 +87,6 @@
             for (var i = 0; i < tooltips.length; i++) {
                 tooltips.item(i).setAttribute("data-tooltip", i18n.__(tooltips.item(i).getAttribute("data-tooltip")))
             }
-            // sorry Damian, jquery didn't work
-            // $('.translate').text(i18n.__($(this).text()))      
         </script>
         <script src="js/jquery-ui.js"></script>
         <script src="js/semantic.min.js"></script>
@@ -102,7 +100,6 @@
                 electron.ipcRenderer.send('openNohexWindow');
             })
             
-
         </script>
        
     </body>
