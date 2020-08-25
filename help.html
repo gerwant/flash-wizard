@@ -66,6 +66,8 @@
         <div class="ui segment" style="background-color: #3C404B !important; border: 0px !important;">
             <h3 class="version-h3"></h3>
             <h3 class="translate">Created by Garage Makezone</h3>
+            <p class="translate">Beautiful Wizard was created by Davide Tedeschi. Thank you very much!</p>
+            <i class="davide-fb large facebook icon" style="display: inline;"></i><i class="davide-thingiverse large globe icon"></i>
             <h3> <i class="code icon"> </i> with <i class="heart icon" style="color: #FF0000;"></i></h3>
             <i class="large github icon github-redir"></i>
             <i class="large facebook icon fb-redir"></i>
@@ -91,11 +93,13 @@
             let vstring = i18n.__("Version")
             $('.version-h3').text(vstring+": "+version)
 
-            $('.main-website-redir').click(()=>{ electron.shell.openExternal('https://garage-makezone.eu') })
+            //$('.main-website-redir').click(()=>{ electron.shell.openExternal('https://garage-makezone.eu') })
             $('.paypal-redir').click(()=>{ electron.shell.openExternal('https://paypal.me/helpgmz') })
             $('.github-redir').click(()=>{ electron.shell.openExternal('https://github.com/gerwant/flash-wizard') })
             $('.fb-redir').click(()=>{ electron.shell.openExternal('https://www.facebook.com/GarageMakezone') })
             $('.yt-redir').click(()=>{ electron.shell.openExternal('https://www.youtube.com/channel/UCFXql2ulfybkKO0qT_HHzKQ') })
+            $('.davide-fb').click(()=>{ electron.shell.openExternal('https://www.facebook.com/davide.tedeschi.3') })
+            $('.davide-thingiverse').click(()=>{ electron.shell.openExternal('https://www.thingiverse.com/thing:2867901') })
 
             $('.popup-wizard').click(()=>{
                 $('.ui.modal').modal('show');
@@ -147,6 +151,12 @@
         width: 100%;
         align-items: center;
         justify-content: center;
+    }
+
+    .davide-fb, .davide-thingiverse {
+        cursor: pointer !important;
+        margin-right: 5px !important;
+        margin-left: 5px !important;
     }
 </style>
 </html>

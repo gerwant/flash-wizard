@@ -55,7 +55,19 @@ module.exports = function(windowManager, createHelpWindow){
             let list_ports = []
             SerialPort.list().then(
              ports => {
-                
+                 console.log(ports)
+                 ports = _.filter(ports,  (el) => { // TODO: reimplement checking which port to display
+                     if ( (el.path.slice(-2)[0] == "S") ){
+                            if(el.path.slice(-1)[0] == "0") {
+                                return true
+                            } else {
+                                return false
+                            }
+                     } else if (el.path.slice(-3)[0] != "S") {
+                         return true
+                     }
+                 })
+                 console.log(ports)
                  event.sender.send('port-list-reply', ports);
                 },
              err => {
