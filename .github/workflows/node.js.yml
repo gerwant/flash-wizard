@@ -98,7 +98,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: sudo apk add --no-cache make gcc g++ python linux-headers udev
+    - run: sudo apt-get install make gcc g++ python linux-headers udev
     - run: npm install
     - run: npm run dist_linux32
     - name: Archive production dist directory
