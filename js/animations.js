@@ -22,10 +22,10 @@ function stepTransition(step){
     }
 }
 
-$('.flag').click(function(){
+function select_flag(flag){
     $('.chosen-flag').removeClass("chosen-flag")
-    $(this).addClass("chosen-flag")
-})
+    $(flag).addClass("chosen-flag")
+}
 
 $('.flash-firmware-btn').click(function(){
     $('.avrdude_output_wrapper').show("fade")

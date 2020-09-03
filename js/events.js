@@ -6,8 +6,6 @@ let app = remote.app
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
     $(`.${lanugage}.flag`).addClass("chosen-flag")
-        $('.no-hex-trigger').removeClass("inactive-btn disabled")
-        $('.tooltip-wrapper').removeAttr("data-tooltip")
     $('.error-modal').modal({
         onHide: function(){
             electron.ipcRenderer.send('reload');
@@ -117,9 +115,12 @@ $('.language-item').click(function(){
     
     electron.ipcRenderer.send('change-language-request', $(this).attr("val"));
 })
-$('.flag').click(function(){
+$('.flag').not('.desibled-flag').click(function(){
     electron.ipcRenderer.send('change-language-request', $(this).attr("val"));
+    select_flag(this)
 })
+
+
 
 $('.close-update-win').click( () => {
     electron.ipcRenderer.send('close-update-win');
@@ -153,3 +154,4 @@ $('.sensor-dropdown').change(function(){
 $('.kill-avr-btn').click(function(){
     electron.ipcRenderer.send('kill_avrdude');
 })
+
