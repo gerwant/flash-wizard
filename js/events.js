@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
-const { app } = require('electron')
-
+const { remote } = require('electron')
+let app = remote.app
 
 $(document).ready(function(){
     let lanugage = i18n.getLanguage()
