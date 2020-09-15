@@ -81,7 +81,15 @@ module.exports = function(windowManager, createHelpWindow){
     
         
     ipcMain.on('perform-flash', (event, arg) => {
-        const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
+        //const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
+        let avrdude_exec;
+        if (process.platform === "win32") {
+            avrdude_exec = 'avrdude.exe'
+        } else if (process.arch === "x64") {
+            avrdude_exec = 'avrdude'
+        } else {
+            avrdude_exec = 'x32avrdude'
+        }
     
         let avrdude_path = ''
         let avrdude_config_path = ''
