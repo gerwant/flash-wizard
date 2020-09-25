@@ -7,13 +7,11 @@
 
 ## Install
 
-*Linux and Windows 7+ are supported (64-bit only).*
-*On our way to provide 32-bit binaries also.*
-
+*Linux (AppImage) and Windows 7+ are supported (both 32- and 64-bit versions).*
 
 **macOS**
 
-*We didn't build it yet (mainly because of lack of macOS machines), but if community will alert such a need, we will provide solution.*
+*We didn't build it yet (mainly because of lack of macOS machines and barely any feedback from people), but if community will alert such a need, we will provide solution.*
 
 **Linux**
 
@@ -40,6 +38,10 @@ Built with [Node.js](https://nodejs.org/en/) + [Electron](https://electronjs.org
 $ npm install
 $ npm start
 ```
+
+### Issue reporting
+
+Feel free to report every bug you have found in Issues section. Also new ideas, concepts and modifications are welcome!
 
 ### Wizard Assistant
 
