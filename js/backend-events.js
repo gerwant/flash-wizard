@@ -56,17 +56,24 @@ module.exports = function(windowManager, createHelpWindow){
             SerialPort.list().then(
              ports => {
                  console.log(ports)
-                 ports = _.filter(ports,  (el) => { // TODO: reimplement checking which port to display
-                     if ( (el.path.slice(-2)[0] == "S") ){
-                            if(el.path.slice(-1)[0] == "0") {
-                                return true
-                            } else {
-                                return false
-                            }
-                     } else if (el.path.slice(-3)[0] != "S") {
-                         return true
-                     }
-                 })
+                 //ports = _.filter(ports,  (el) => { // TODO: reimplement checking which port to display
+                 //    if ( (el.path.slice(-2)[0] == "S") ){
+                 //           if(el.path.slice(-1)[0] == "0") {
+                 //               return true
+                 //           } else {
+                 //               return false
+                 //           }
+                 //    } else if (el.path.slice(-3)[0] != "S") {
+                 //        return true
+                 //    }
+                 //})
+                 ports = _.filter(ports, element => { // This solution seems to be good as long as all motherboards will have signed USB drivers
+                    if (element.vendorId || element.productId) {
+                        return true;
+                    }
+
+                    return false;
+                })
                  console.log(ports)
                  event.sender.send('port-list-reply', ports);
                 },
@@ -131,8 +138,9 @@ module.exports = function(windowManager, createHelpWindow){
         child.stderr.on('data', (data) => {
             let datastring = data.toString()
             console.log('stderr: ',datastring);
-            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')){
+            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')||datastring.includes('stk500_cmd')){
                 event.sender.send('avrdude-done', datastring)
+                killDudes(event)
             } else {
                 event.sender.send('avrdude-response', datastring)
             }
@@ -143,6 +151,21 @@ module.exports = function(windowManager, createHelpWindow){
             event.sender.send('avrdude-done', null)
         })
     })
+
+    function killDudes(event){
+        _.each(avrdude_ids, (proc) => {
+            kill(proc, "SIGKILL", (error) => {
+                if (error){
+                    console.log("Well, not killed.", error)
+                    event.sender.send('avrdude-done', "Aborting failed.")
+                } else {
+                    idx = _.indexOf(avrdude_ids, proc);
+                    avrdude_ids.splice(idx, 1);
+                    event.sender.send("avrdude-done", "Flashing aborted")
+                }
+            })
+        })
+    }
 
     ipcMain.on('send-config-request', function (event, value, field) {
         flash_config[field] = value
@@ -252,18 +275,7 @@ module.exports = function(windowManager, createHelpWindow){
 
         console.log(avrdude_ids)
         
-        _.each(avrdude_ids, (proc) => {
-            kill(proc, "SIGKILL", (error) => {
-                if (error){
-                    console.log("Well, not killed.", error)
-                    event.sender.send('avrdude-done', "Aborting failed.")
-                } else {
-                    idx = _.indexOf(avrdude_ids, proc);
-                    avrdude_ids.splice(idx, 1);
-                    event.sender.send("avrdude-done", "Flashing aborted")
-                }
-            })
-        })
+        killDudes(event)
     })
 
     ipcMain.on('sensors-list-request', async (event, arg) => {
