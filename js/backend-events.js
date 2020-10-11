@@ -109,13 +109,14 @@ module.exports = function(windowManager, createHelpWindow){
         }
         
         const avrdude_args = [
+            '-v',
             '-C'+avrdude_config_path,
             '-p'+flash_config.processor,
             '-carduino',
             '-P'+flash_config.port,
             '-b'+flash_config.baudrate,
             '-D',
-            '-Uflash:w:'+flash_config.file_path+':i'
+            '-Uflash:w:0:'+flash_config.file_path+':i'
         ]
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
