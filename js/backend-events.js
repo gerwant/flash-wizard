@@ -160,7 +160,7 @@ module.exports = function(windowManager, createHelpWindow){
             kill(proc, "SIGKILL", (error) => {
                 if (error){
                     console.log("Well, not killed.", error)
-                    event.sender.send('avrdude-done', "Aborting failed.")
+                    //event.sender.send('avrdude-done', "Aborting failed.")
                 } else {
                     idx = _.indexOf(avrdude_ids, proc);
                     avrdude_ids.splice(idx, 1);
