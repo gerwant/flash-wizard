@@ -128,7 +128,8 @@ module.exports = function(windowManager, createHelpWindow){
         child.stdout.on('data', (data) => {
             let datastring = data.toString()
             console.log('stdout: ', datastring);
-            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')){
+            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')||
+                datastring.includes('stk500_cmd')||datastring.includes('out of sync')){
                 event.sender.send('avrdude-done', datastring)
             } else {
                 event.sender.send('avrdude-response', datastring)
@@ -138,7 +139,9 @@ module.exports = function(windowManager, createHelpWindow){
         child.stderr.on('data', (data) => {
             let datastring = data.toString()
             console.log('stderr: ',datastring);
-            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')||datastring.includes('stk500_cmd')){
+            if (datastring.includes('avrdude done')||
+                datastring.includes('avrdude.exe done')||
+                datastring.includes('stk500_cmd')||datastring.includes('out of sync')){
                 event.sender.send('avrdude-done', datastring)
                 killDudes(event)
             } else {
