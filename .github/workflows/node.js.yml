@@ -26,6 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
+    - run: ./node_modules/.bin/electron-rebuild
     - run: npm run dist_win
     - name: Archive production dist directory
       uses: actions/upload-artifact@v2
@@ -100,6 +101,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: sudo apt-get install python build-essential gcc-multilib g++-multilib
     - run: npm install
+    - run: ./node_modules/.bin/electron-rebuild
     - run: npm run dist_linux32
     - name: Archive production dist directory
       uses: actions/upload-artifact@v2
@@ -124,6 +126,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
+    - run: ./node_modules/.bin/electron-rebuild
     - run: npm run dist_linux64
     - name: Archive production dist directory
       uses: actions/upload-artifact@v2
