@@ -108,6 +108,7 @@ module.exports = function(windowManager, createHelpWindow){
             avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf' //process.resourcesPath
         }
         
+        // TODO: Avrdude doesn't flash firmwares properly
         const avrdude_args = [
             '-v',
             '-C'+avrdude_config_path,
