@@ -68,7 +68,7 @@
 			"localization",
 			"static/icon"
 		],
-		"npmRebuild": true,
+		"npmRebuild": false,
 		"mac": {
 			"category": "public.app-category.social-networking",
 			"darkModeSupport": true
