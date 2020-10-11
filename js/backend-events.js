@@ -113,7 +113,7 @@ module.exports = function(windowManager, createHelpWindow){
             '-v',
             '-C'+avrdude_config_path,
             '-p'+flash_config.processor,
-            '-carduino',
+            '-cwiring',
             '-P'+flash_config.port,
             '-b'+flash_config.baudrate,
             '-D',
@@ -143,7 +143,8 @@ module.exports = function(windowManager, createHelpWindow){
             console.log('stderr: ',datastring);
             if (datastring.includes('avrdude done')||
                 datastring.includes('avrdude.exe done')||
-                datastring.includes('stk500_cmd')||datastring.includes('out of sync')){
+                datastring.includes('stk500_cmd')||datastring.includes('out of sync')||
+                datastring.includes('stk500v2_ReceiveMessage')){
                 event.sender.send('avrdude-done', datastring)
                 killDudes(event)
             } else {
