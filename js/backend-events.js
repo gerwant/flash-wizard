@@ -108,14 +108,16 @@ module.exports = function(windowManager, createHelpWindow){
             avrdude_config_path = path.join(process.resourcesPath, 'bin/')+'avrdude.conf' //process.resourcesPath
         }
         
+        // TODO: Avrdude doesn't flash firmwares properly
         const avrdude_args = [
+            '-v',
             '-C'+avrdude_config_path,
             '-p'+flash_config.processor,
-            '-carduino',
+            '-cwiring',
             '-P'+flash_config.port,
             '-b'+flash_config.baudrate,
             '-D',
-            '-Uflash:w:'+flash_config.file_path+':i'
+            '-Uflash:w:0:'+flash_config.file_path+':i'
         ]
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
@@ -128,7 +130,8 @@ module.exports = function(windowManager, createHelpWindow){
         child.stdout.on('data', (data) => {
             let datastring = data.toString()
             console.log('stdout: ', datastring);
-            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')){
+            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')||
+                datastring.includes('stk500_cmd')||datastring.includes('out of sync')){
                 event.sender.send('avrdude-done', datastring)
             } else {
                 event.sender.send('avrdude-response', datastring)
@@ -138,7 +141,10 @@ module.exports = function(windowManager, createHelpWindow){
         child.stderr.on('data', (data) => {
             let datastring = data.toString()
             console.log('stderr: ',datastring);
-            if (datastring.includes('avrdude done')||datastring.includes('avrdude.exe done')||datastring.includes('stk500_cmd')){
+            if (datastring.includes('avrdude done')||
+                datastring.includes('avrdude.exe done')||
+                datastring.includes('stk500_cmd')||datastring.includes('out of sync')||
+                datastring.includes('stk500v2_ReceiveMessage')){
                 event.sender.send('avrdude-done', datastring)
                 killDudes(event)
             } else {
@@ -157,7 +163,7 @@ module.exports = function(windowManager, createHelpWindow){
             kill(proc, "SIGKILL", (error) => {
                 if (error){
                     console.log("Well, not killed.", error)
-                    event.sender.send('avrdude-done', "Aborting failed.")
+                    //event.sender.send('avrdude-done', "Aborting failed.")
                 } else {
                     idx = _.indexOf(avrdude_ids, proc);
                     avrdude_ids.splice(idx, 1);
