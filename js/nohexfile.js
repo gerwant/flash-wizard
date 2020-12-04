@@ -32,7 +32,7 @@ electron.ipcRenderer.on('port-list-reply', function (event, args) {
     })
 });
 
-electron,ipcRenderer.on("language-popup", (event, args) =>{
+electron.ipcRenderer.on("language-popup", (event, args) =>{
     
     let files = {}
     $('.modal-flag').css({"filter":  "grayscale(100%)"})

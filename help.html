@@ -16,16 +16,16 @@
     <h1 class="faqheader noselect">FAQ</h1>
 
     <div class="ui segment question-segment" style="width: 600px !important; text-align: left;">
-        <div class="ui inverted accordion">
-            <div class="title">
+        <div class="ui inverted accordion faq-section">
+            <!--<div class="title">
                 <i class="dropdown icon"></i>
-                <h3 class="translate question">avrdude: stk500_recv(): programmer is not responding</h3>
+                <h3 class="translate question"></h3>
             </div>
             <div class="content">
                 <p class="translate transition hidden">answer_1</p>
                 <p class="translate transition hidden">Here you can find further tips how to solve that problem:</p>
                 <a href="https://arduino.stackexchange.com/questions/17827/how-do-i-resolve-avrdude-stk500-recv-programmer-is-not-responding">StackOverflow</a>
-            </div>
+            </div> 
             <div class="title">
                 <i class="dropdown icon"></i>
                 <h3 class="translate question">question_2</h3>
@@ -36,7 +36,7 @@
                 <a href="https://www.youtube.com/watch?v=RQIizXtf9oo">Youtube (EN)</a> <br/>
                 <a href="https://www.youtube.com/watch?v=FyJrWJU-FHo">Youtube (PL)</a> <br/>
                 <a href="https://www.instructables.com/id/HOW-TO-FIX-ANET-BRICKED-BOARD-USING-AN-ARDUINO-UNO/">instructables.com</a>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -76,12 +76,14 @@
             const electron = require('electron');
             let i18n = require('./js/i18n.js') 
             const {version} = require('./package.json')
+            const _ = require('underscore')
 
             //translating divs
             let toTranslate = document.getElementsByClassName("translate")
             for (var i = 0; i < toTranslate.length; i++) {
                 toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)
             }
+
 
             let vstring = i18n.__("Version")
             $('.version-h3').text(vstring+": "+version)
@@ -100,6 +102,35 @@
             $('.arrow-back').click(() => {
                 electron.ipcRenderer.send('close-help-window');
             })
+
+            // Dynamic FAQ
+            electron.ipcRenderer.on("faq-content", (event, data) => {
+                let faqcontainer = $(".faq-section");
+                if (data){
+                    faqs = data["faq"];
+                    faqs.forEach((element)=>{
+                        let title = document.createElement('div')
+                        title.className = "title"
+                        let ddicon = document.createElement('i')
+                        ddicon.className = "dropdown icon"
+                        let h3title = document.createElement('h3')
+                        h3title.className = "question"
+                        h3title.innerHTML = element.title;
+                        title.append(ddicon);
+                        title.append(h3title);
+                        faqcontainer.append(title);
+                        let answer = document.createElement('div')
+                        answer.className = "content";
+                        let p1 = document.createElement('p')
+                        p1.className = "transition hidden"
+                        p1.innerHTML = element.content;
+                        answer.append(p1);
+                        faqcontainer.append(answer);
+                    })
+                }
+            })
+            electron.ipcRenderer.send('update-faq');
+
     </script>
     <script src="js/events.js"></script>
 </body>

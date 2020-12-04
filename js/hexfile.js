@@ -28,14 +28,17 @@ $('.refresh-ports').click(function(){
     electron.ipcRenderer.send('port-list-request');
 })
 
-$('.processor-item').click(function(){
+//$('.processor-item').click(function(){
+//$('.processor-item').on("click", '.processor-item', ()=>{
    
-    electron.ipcRenderer.send('port-list-request');
-})
+//})
 
-$('.processor-item').click(function(){
-    electron.ipcRenderer.send('send-config-request', $(this).data("processor"), "processor");
-    electron.ipcRenderer.send('send-config-request', $(this).data("baudrate"), "baudrate")
+//$('.processor-item').click(function(){
+$(document).on("click", '.processor-item', () => {
+    electron.ipcRenderer.send('port-list-request');
+
+    electron.ipcRenderer.send('send-config-request', $(this).attr("data-processor"), "processor");
+    electron.ipcRenderer.send('send-config-request', $(this).attr("data-baudrate"), "baudrate")
     stepTransition(1)
 })
 

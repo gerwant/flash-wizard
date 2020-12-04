@@ -175,6 +175,7 @@ module.exports = function(windowManager, createHelpWindow){
 
     ipcMain.on('send-config-request', function (event, value, field) {
         flash_config[field] = value
+        console.log(flash_config)
     })
     
     ipcMain.on('download-hex', (event, filename)=>{
@@ -224,6 +225,28 @@ module.exports = function(windowManager, createHelpWindow){
         });
         
 
+    })
+
+    ipcMain.on('update-faq', (event, data) => {
+        axios.get(wizzardAssistant + `/faq`)
+        .then(response => {
+            //console.log("FAQ response: ", response.data)
+            event.sender.send('faq-content', response.data);
+        })
+        .catch(error => {
+            event.sender.send('faq-content-error');
+        })
+    })
+
+    ipcMain.on('update_hex_file', (event, data) => {
+        axios.get(wizzardAssistant + `/hex_file`)
+        .then(response => {
+            //console.log("FAQ response: ", response.data)
+            event.sender.send('hex_file_content', response.data);
+        })
+        .catch(error => {
+            event.sender.send('hex_content_error');
+        })
     })
 
     ipcMain.on('openMainWindow', function (event, atr) {
