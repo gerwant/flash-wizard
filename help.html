@@ -110,11 +110,11 @@
                     faqs = data["faq"];
                     faqs.forEach((element)=>{
                         let title = document.createElement('div')
-                        title.className = "title"
+                        title.className = "title noselect"
                         let ddicon = document.createElement('i')
-                        ddicon.className = "dropdown icon"
+                        ddicon.className = "dropdown icon noselect"
                         let h3title = document.createElement('h3')
-                        h3title.className = "question"
+                        h3title.className = "question noselect"
                         h3title.innerHTML = element.title;
                         title.append(ddicon);
                         title.append(h3title);
