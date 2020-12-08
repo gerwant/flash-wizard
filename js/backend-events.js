@@ -117,7 +117,7 @@ module.exports = function(windowManager, createHelpWindow){
             '-P'+flash_config.port,
             '-b'+flash_config.baudrate,
             '-D',
-            '-Uflash:w:0:'+flash_config.file_path+':i'
+            '-Uflash:w:'+flash_config.file_path+':i'
         ]
         if (process.platform === "win32"){
             child = spawn('cmd.exe', ['/c', avrdude_path].concat(avrdude_args))
@@ -182,7 +182,7 @@ module.exports = function(windowManager, createHelpWindow){
         let hex_path = isDev? path.join(__dirname, '../') : app.getPath("userData")
         flash_config.file_path = path.join(hex_path, "firmware.hex")
         
-        let link = `http://gmz.webd.pro/firmwares/${hexpath_config.device}/${hexpath_config.sensor}/${filename}`
+        let link = `http://gmz.webd.pro/firmwares/no_hex_file/${hexpath_config.device}/${hexpath_config.sensor}/${filename}`
         fs.unlink(path.join(hex_path, "firmware.hex"), function(err) {
             if(err && err.code == 'ENOENT') {
                 // file doens't exist

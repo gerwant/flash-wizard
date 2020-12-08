@@ -416,7 +416,7 @@ body::-webkit-scrollbar-thumb {
 
 .eras-font{
     display: inline-block;
-    font-weight: 400;
+    font-weight: 380;
     font-family: "Eras ITC", "Eras Light ITC",  sans-serif ;
     font-size: large;
     color: white;
