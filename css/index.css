@@ -68,7 +68,7 @@ body {
 
 .donate-modal{
     background-color:  #3C404B !important;
-    width: 50% !important;
+    width: 75% !important;
     height: 50% !important;
 }
 
@@ -82,7 +82,6 @@ body {
     color: white;
     font-size: medium;
     margin: 10px 20px;
-    text-align: justify;
 }
 
 .donate-wrapper{
