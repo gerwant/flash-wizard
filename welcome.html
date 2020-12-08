@@ -95,9 +95,11 @@
         <script>
             $('.hex-trigger').click(function(){
                 electron.ipcRenderer.send('openMainWindow');
+                electron.ipcRenderer.send('forceClose', false)
             })
             $('.no-hex-trigger').click(function(){
                 electron.ipcRenderer.send('openNohexWindow');
+                electron.ipcRenderer.send('forceClose', false)
             })
             
         </script>

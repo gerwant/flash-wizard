@@ -40,6 +40,11 @@ $('input[type="file"]').change((event)=>{
    
 })
 
+$('.exit-app-btn').click(()=>{
+    electron.ipcRenderer.send('forceClose', true)
+    remote.getCurrentWindow().close()
+})
+
 $('.flash-firmware-btn').click(()=>{
     console.log('Flash fired')
     
@@ -72,6 +77,10 @@ $('.close.icon').click(() =>
 
 electron.ipcRenderer.on('update-download-progress', (event, data) => {
     $('.close-update-win').hide();
+})
+
+electron.ipcRenderer.on('donate-popup', () => {
+    $('.donate-modal').modal('show');
 })
 
 electron.ipcRenderer.on('hex-downloaded', (event) =>{
@@ -115,9 +124,6 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     let textarea = $('.avrdude_output')
     textarea.scrollTop(textarea[0].scrollHeight)
 
-    if(data!="Flashing aborted"){
-        $('.donate-modal').modal('show');
-    }
 
 })
 
@@ -161,6 +167,7 @@ $('.help-trigger').click(function(){
 $('.go-back').click(()=> {
     electron.ipcRenderer.send('goToWelcome');
     electron.ipcRenderer.send('kill_avrdude');
+    electron.ipcRenderer.send('forceClose', true)
 
 })
 $('.processor-dropdown').change(function(){

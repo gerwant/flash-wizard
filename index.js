@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const { autoUpdater }= require("electron-updater");
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
@@ -8,6 +8,7 @@ require('dotenv').config();
 const i18n = require('./js/i18n');
 const isDev = require('electron-is-dev');
 
+let forceClose = true;
 class WindowManager{
     constructor(){
         this.mainWindow;
@@ -75,6 +76,15 @@ const createWelcomeWindow = async () => {
         windowManager.mainWindow = undefined;
     });
 
+    win.on('close', (e)=>{
+        if(forceClose){
+            app.quit()
+        }
+        else{
+            e.preventDefault();
+            win.webContents.send('donate-popup')
+        }
+    })
 
     await win.loadFile(path.join(__dirname, 'welcome.html'));
     win.webContents.closeDevTools()
@@ -185,6 +195,8 @@ app.on('activate', async () => {
     }
 });
 
+
+
 // Create first welcome screen when app is ready.
 (async () => {
 	await app.whenReady();
@@ -193,7 +205,6 @@ app.on('activate', async () => {
     autoUpdater.checkForUpdates(); // Check for updates
 
 })();
-
 
 require('./js/backend-events')(windowManager, createHelpWindow)
 require('./js/autoupdate')(windowManager, createUpdateWindow)
@@ -205,4 +216,4 @@ Autoupdater module.
 */
 
  //autoUpdater.requestHeaders = { "PRIVATE-TOKEN": "Personal access Token" };
- 
+ ipcMain.on('forceClose', (event, data) => forceClose = data)

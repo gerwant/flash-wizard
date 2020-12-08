@@ -178,6 +178,7 @@ module.exports = function(windowManager, createHelpWindow){
         console.log(flash_config)
     })
     
+    
     ipcMain.on('download-hex', (event, filename)=>{
         let hex_path = isDev? path.join(__dirname, '../') : app.getPath("userData")
         flash_config.file_path = path.join(hex_path, "firmware.hex")
