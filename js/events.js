@@ -61,6 +61,11 @@ $('.avrdude_output').keydown(function(event){
     event.preventDefault();
 });
 
+$('.paypal-redir').click(()=>{
+    $('.language-modal').modal('hide');
+    electron.shell.openExternal('https://paypal.me/helpgmz');
+})
+
 electron.ipcRenderer.on('update-download-progress', (event, data) => {
     $('.close-update-win').hide();
 })
@@ -105,6 +110,11 @@ electron.ipcRenderer.on('avrdude-done', (event, data)=>{
     document.getElementsByClassName('avrdude_output')[0].innerHTML += data;
     let textarea = $('.avrdude_output')
     textarea.scrollTop(textarea[0].scrollHeight)
+
+    if(data!="Flashing aborted"){
+        $('.donate-modal').modal('show');
+    }
+
 })
 
 electron.ipcRenderer.on('wizard-assistant-error', (event)=>{

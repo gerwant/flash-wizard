@@ -65,6 +65,19 @@ body {
     width: 80% !important;
     height: 80% !important;
 }
+
+.donate-modal{
+    background-color:  #3C404B !important;
+    width: 50% !important;
+    height: 50% !important;
+}
+
+.donate-modal-btn{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 .about-wizard-modal{
 
     background-color:  #3C404B !important;
