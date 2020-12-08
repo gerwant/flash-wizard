@@ -62,9 +62,13 @@ $('.avrdude_output').keydown(function(event){
 });
 
 $('.paypal-redir').click(()=>{
-    $('.language-modal').modal('hide');
+    $('.donate-modal').modal('hide');
     electron.shell.openExternal('https://paypal.me/helpgmz');
 })
+
+$('.close.icon').click(() => 
+    $('.donate-modal').modal('hide')
+)
 
 electron.ipcRenderer.on('update-download-progress', (event, data) => {
     $('.close-update-win').hide();

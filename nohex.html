@@ -124,10 +124,16 @@
       </div>
 
       <div class="ui modal donate-modal">
-            <h2 class="modal-header translate noselect">Płać</h2>
-            <div class="sticky-footer">
+            <div class="donate-wrapper">
+                <i class="pointer close icon icon"></i>
+                <h2 class="modal-header translate noselect translate">Płać</h2>
+
+                <div class="donate-content translate">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat provident minima culpa quaerat officiis perspiciatis ab ratione fuga, sed nihil impedit delectus veritatis veniam tenetur sequi, dolores aspernatur amet mollitia!
+                </div>
+                
                 <div class="ui button active-btn paypal-redir donate-modal-btn translate">Donate</div>
-            </div>
+            </div>        
       </div>
 
       <div class="ui tiny modal error-modal noselect">
@@ -145,7 +151,6 @@
             let i18n = require('./js/i18n.js');
             const _ = require('underscore');
             const isDev = require('electron-is-dev')
-
             let toTranslate = document.getElementsByClassName("translate")
             for (var i = 0; i < toTranslate.length; i++) {
                 toTranslate.item(i).textContent = i18n.__(toTranslate.item(i).textContent)

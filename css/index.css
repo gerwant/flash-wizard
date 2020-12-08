@@ -73,10 +73,30 @@ body {
 }
 
 .donate-modal-btn{
-    margin-left: auto;
-    margin-right: auto;
+    position: fixed !important;
+    right: 10px !important;
+    bottom: 0px !important;
 }
 
+.donate-content{
+    color: white;
+    font-size: medium;
+    margin: 10px 20px;
+    text-align: justify;
+}
+
+.donate-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.close.icon{
+    position: fixed;
+    right: 5px;
+    top: 10px;
+    cursor: pointer;
+    color: white;
+}
 
 .about-wizard-modal{
 
