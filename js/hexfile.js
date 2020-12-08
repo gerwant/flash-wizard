@@ -36,9 +36,8 @@ $('.refresh-ports').click(function(){
 //$('.processor-item').click(function(){
 $(document).on("click", '.processor-item', (event) => {
     electron.ipcRenderer.send('port-list-request');
-
-    electron.ipcRenderer.send('send-config-request', event.target.getAttribute('data-processor'), "processor");
-    electron.ipcRenderer.send('send-config-request', event.target.getAttribute('data-baudrate'), "baudrate")
+    electron.ipcRenderer.send('send-config-request', $(this).attr("data-processor"), "processor");
+    electron.ipcRenderer.send('send-config-request', $(this).attr("data-baudrate"), "baudrate")
     stepTransition(1)
 })
 

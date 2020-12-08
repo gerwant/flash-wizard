@@ -136,6 +136,10 @@ $('.main-website-redir').click(()=>{
     electron.shell.openExternal('https://garage-makezone.eu')
 })
 
+$('.shop-website-redir').click(()=>{
+    electron.shell.openExternal('https://shop.garage-makezone.eu/')
+})
+
 $('.help-trigger').click(function(){
     electron.ipcRenderer.send('openHelpWindow');
 })
