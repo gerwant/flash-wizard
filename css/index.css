@@ -414,3 +414,11 @@ body::-webkit-scrollbar-thumb {
 .kill-avr-btn {
     background-color: #ff0000 !important;
 }
+
+.eras-font{
+    display: inline-block;
+    font-weight: 400;
+    font-family: "Eras ITC", "Eras Light ITC",  sans-serif ;
+    font-size: large;
+    color: white;
+}
