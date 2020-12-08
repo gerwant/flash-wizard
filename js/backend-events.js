@@ -113,7 +113,7 @@ module.exports = function(windowManager, createHelpWindow){
             '-v',
             '-C'+avrdude_config_path,
             '-p'+flash_config.processor,
-            '-cwiring',
+            '-carduino',
             '-P'+flash_config.port,
             '-b'+flash_config.baudrate,
             '-D',
