@@ -74,24 +74,24 @@ body {
 
 .donate-modal-btn{
     margin-right: 10px !important;
-    float: right !important;
+    margin-left: 10px !important;
 }
 
 .exit-app-btn{
-    margin-right: 10px !important;
-    float: right !important;
+    margin-right: 8px !important;
 }
 
 .donate-btns-wrapper{
-    width: 100%;
-    position: fixed;
-    bottom: 0px;
+    /*width: 100%;*/
+    float: right !important;
+    margin-right: 10px;
+    bottom: 5px;
 }
 
 .donate-content{
     color: white;
     font-size: medium;
-    margin: 10px 20px;
+    margin: 5px 20px;
 }
 
 .donate-wrapper{
