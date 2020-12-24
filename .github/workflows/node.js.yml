@@ -99,6 +99,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: sudo apt-get update
     - run: sudo apt-get install python build-essential gcc-multilib g++-multilib
     - run: npm install
     - run: ./node_modules/.bin/electron-rebuild
@@ -125,6 +126,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: sudo apt-get update
     - run: npm install
     - run: ./node_modules/.bin/electron-rebuild
     - run: npm run dist_linux64
