@@ -14,7 +14,8 @@ import path from 'path';
 import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import MenuBuilder from './menu';
+
+const isDev = require('electron-is-dev');
 
 export default class AppUpdater {
   constructor() {
@@ -69,8 +70,9 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 740,
+    height: 480,
+    resizable: isDev ? true : false,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
@@ -97,14 +99,13 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  mainWindow.setMenu(null)
 
   // Open urls in the user's browser
-  mainWindow.webContents.on('new-window', (event, url) => {
-    event.preventDefault();
-    shell.openExternal(url);
-  });
+  // mainWindow.webContents.on('new-window', (event, url) => {
+  //   event.preventDefault();
+  //   shell.openExternal(url);
+  // });
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
