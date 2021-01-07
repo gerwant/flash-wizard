@@ -438,6 +438,12 @@
      color: white;
  }
  
- 
+.flags-container {
+    padding: 0 !important;
+    margin-bottom: 5%;
+    margin-top: 3% !important;
+}
 
-
+/*.window-title {
+    margin-left: 330px !important;
+} */

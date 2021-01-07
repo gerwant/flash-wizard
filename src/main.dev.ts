@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell, Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
@@ -62,24 +62,29 @@ const createWindow = async () => {
 
   const RESOURCES_PATH = app.isPackaged
     ? path.join(process.resourcesPath, 'resources')
-    : path.join(__dirname, '../resources');
+    : path.join(__dirname, '../assets');
 
   const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
   mainWindow = new BrowserWindow({
+    title: "Flash Wizard",
     show: false,
     width: 740,
     height: 480,
     resizable: isDev ? true : false,
-    icon: getAssetPath('icon.png'),
+    icon: getAssetPath('wizzard.png'),
+    titleBarStyle: "hidden",
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   });
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
+  Menu.setApplicationMenu(null);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -98,8 +103,6 @@ const createWindow = async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  mainWindow.setMenu(null)
 
   // Open urls in the user's browser
   // mainWindow.webContents.on('new-window', (event, url) => {

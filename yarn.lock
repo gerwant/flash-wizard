@@ -3907,6 +3907,11 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+custom-electron-titlebar@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/custom-electron-titlebar/-/custom-electron-titlebar-3.2.5.tgz#0cc98fccc02c7fd67aeaec2abb6c5e88433d7121"
+  integrity sha512-9tzTtvrsBec9lFi9Mg8nfwARn82mVgrYiiCYmBwJFYC0YhsyUYZfPyw4fd6hq+XHQbD+f72i9uqhukl5brhZZw==
+
 damerau-levenshtein@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.6.tgz#143c1641cb3d85c60c32329e26899adea8701791"
