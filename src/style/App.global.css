@@ -251,14 +251,14 @@
 
  .help-trigger{
      position: fixed;
-     top: 15px !important;
+     top: 40px !important;
      right: 10px !important;
      color: rgb(224, 223, 223);
  }
 
  .go-back, .arrow-back{
      position: fixed;
-     top: 15px !important;
+     top: 40px !important;
      left: 10px !important;
      color: rgb(224, 223, 223);
  }

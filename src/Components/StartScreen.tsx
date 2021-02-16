@@ -64,11 +64,11 @@ const StartScreen = () => {
           </Segment>
           <Segment >
                 <Header >{strings.mainMenuHeader}</Header>
-                <Link to="/hex">
+                <Link draggable="false" to="/hex">
                   <Button className="hex-trigger noselect" >{strings.hexBtn}</Button>
                 </Link>
                 <br/>
-                <Link to="/nohex">
+                <Link draggable="false" to="/nohex">
                   <Button className="no-hex-trigger active-btn noselect">{strings.nohexBtn}</Button>
                 </Link>
           </Segment>
