@@ -17,6 +17,24 @@ import log from 'electron-log';
 
 const isDev = require('electron-is-dev');
 
+
+let forceClose = true;
+class WindowManager{
+  mainWindow: any;
+  helpWindow: any;
+  updateWindow: any;
+  isHelpOpen: boolean;
+  isUpdateOpen: boolean;
+    constructor(){
+        this.mainWindow;
+        this.helpWindow;
+        this.updateWindow;
+        this.isHelpOpen = false;
+        this.isUpdateOpen = false;
+    }
+}
+let windowManager = new WindowManager
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -134,3 +152,37 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
+
+const createHelpWindow = async () => {
+  const win = new BrowserWindow({
+      title: "Flash Wizard",
+      // icon: iconPath,
+      show: false,
+      width: 740,
+      height: 480,
+      resizable: isDev ? true : false,
+      webPreferences: {
+          devTools: true,
+          nodeIntegration: true
+      }
+  });
+  win.setMenu(null)
+
+  win.on('ready-to-show', () => {
+      win.show();
+      windowManager.isHelpOpen = true;
+  });
+
+  win.on('closed', () => {
+      // Dereference the window
+      // For multiple windows store them in an array
+      windowManager.isHelpOpen = false;
+      windowManager.helpWindow = null;
+  });
+
+  await win.loadFile(path.join(__dirname, 'help.html'));
+  win.webContents.closeDevTools()
+  return win;
+};
+
+require('./js/backend-events')(windowManager, createHelpWindow)
