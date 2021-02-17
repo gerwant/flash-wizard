@@ -75,11 +75,11 @@ const StartScreen = () => {
         </Segment>
         <Segment>
           <Header>{strings.mainMenuHeader}</Header>
-          <Link draggable="false" to="/hex">
+          <Link draggable="false" to="/hex" style={{ textDecoration: 'none', outline: 'none' }}>
             <Button className="hex-trigger noselect">{strings.hexBtn}</Button>
           </Link>
           <br />
-          <Link draggable="false" to="/nohex">
+          <Link draggable="false" to="/nohex" style={{ textDecoration: 'none', outline: 'none' }}>
             <Button className="no-hex-trigger active-btn noselect">
               {strings.nohexBtn}
             </Button>

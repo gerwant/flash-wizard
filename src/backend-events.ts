@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { BrowserWindow } from 'electron';
 
 const SerialPort = require('serialport');
 const isDev = require('electron-is-dev');
-const i18n = require('./i18n');
 const axios = require('axios');
 const path = require('path');
 const spawn = require('child_process').spawn;
-const config = require('./config');
 const { ipcMain, app } = require('electron');
 const electron = require('electron');
 const _ = require('underscore');
@@ -51,21 +50,11 @@ module.exports = function (windowManager, createHelpWindow) {
 
   ipcMain.on('port-list-request', function (event, arg) {
     function listPorts() {
-      let list_ports = [];
+      const list_ports = [];
       SerialPort.list().then(
         (ports) => {
           console.log(ports);
-          //ports = _.filter(ports,  (el) => { // TODO: reimplement checking which port to display
-          //    if ( (el.path.slice(-2)[0] == "S") ){
-          //           if(el.path.slice(-1)[0] == "0") {
-          //               return true
-          //           } else {
-          //               return false
-          //           }
-          //    } else if (el.path.slice(-3)[0] != "S") {
-          //        return true
-          //    }
-          //})
+          
           ports = _.filter(ports, (element) => {
             // This solution seems to be good as long as all motherboards will have signed USB drivers
             if (element.vendorId || element.productId) {
@@ -87,7 +76,7 @@ module.exports = function (windowManager, createHelpWindow) {
   });
 
   ipcMain.on('perform-flash', (event, arg) => {
-    //const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
+    // const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
     let avrdude_exec;
     if (process.platform === 'win32') {
       avrdude_exec = 'avrdude.exe';
