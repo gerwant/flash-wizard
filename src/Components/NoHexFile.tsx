@@ -26,6 +26,7 @@ const NoHexFile = () => {
           src={logo}
           width="auto"
           height="150px"
+          alt="Main website logo link."
         />
       </div>
 
