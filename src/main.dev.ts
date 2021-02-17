@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 /* eslint global-require: off, no-console: off */
 
 /**
@@ -17,23 +18,28 @@ import log from 'electron-log';
 
 const isDev = require('electron-is-dev');
 
-
 let forceClose = true;
-class WindowManager{
+class WindowManager {
   mainWindow: any;
+
   helpWindow: any;
+
   updateWindow: any;
+
   isHelpOpen: boolean;
+
   isUpdateOpen: boolean;
-    constructor(){
-        this.mainWindow;
-        this.helpWindow;
-        this.updateWindow;
-        this.isHelpOpen = false;
-        this.isUpdateOpen = false;
-    }
+
+  constructor() {
+    this.mainWindow = null;
+    this.helpWindow = null;
+    this.updateWindow = null;
+    this.isHelpOpen = false;
+    this.isUpdateOpen = false;
+  }
 }
-let windowManager = new WindowManager
+
+const windowManager = new WindowManager();
 
 export default class AppUpdater {
   constructor() {
@@ -87,13 +93,13 @@ const createWindow = async () => {
   };
 
   mainWindow = new BrowserWindow({
-    title: "Flash Wizard",
+    title: 'Flash Wizard',
     show: false,
     width: 740,
     height: 480,
     resizable: isDev ? true : false,
     icon: getAssetPath('wizzard.png'),
-    titleBarStyle: "hidden",
+    titleBarStyle: 'hidden',
     frame: false,
     webPreferences: {
       nodeIntegration: true,
@@ -155,34 +161,34 @@ app.on('activate', () => {
 
 const createHelpWindow = async () => {
   const win = new BrowserWindow({
-      title: "Flash Wizard",
-      // icon: iconPath,
-      show: false,
-      width: 740,
-      height: 480,
-      resizable: isDev ? true : false,
-      webPreferences: {
-          devTools: true,
-          nodeIntegration: true
-      }
+    title: 'Flash Wizard',
+    // icon: iconPath,
+    show: false,
+    width: 740,
+    height: 480,
+    resizable: isDev ? true : false,
+    webPreferences: {
+      devTools: true,
+      nodeIntegration: true,
+    },
   });
-  win.setMenu(null)
+  win.setMenu(null);
 
   win.on('ready-to-show', () => {
-      win.show();
-      windowManager.isHelpOpen = true;
+    win.show();
+    windowManager.isHelpOpen = true;
   });
 
   win.on('closed', () => {
-      // Dereference the window
-      // For multiple windows store them in an array
-      windowManager.isHelpOpen = false;
-      windowManager.helpWindow = null;
+    // Dereference the window
+    // For multiple windows store them in an array
+    windowManager.isHelpOpen = false;
+    windowManager.helpWindow = null;
   });
 
   await win.loadFile(path.join(__dirname, 'help.html'));
-  win.webContents.closeDevTools()
+  win.webContents.closeDevTools();
   return win;
 };
 
-require('./js/backend-events')(windowManager, createHelpWindow)
+require('./backend-events')(windowManager, createHelpWindow);
