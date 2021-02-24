@@ -25,10 +25,10 @@ export default merge(baseConfig, {
 
   target: 'electron-main',
 
-  entry: './src/main.dev.ts',
+  entry: './src/Backend/main.dev.ts',
 
   output: {
-    path: path.join(__dirname, '../../'),
+    path: path.join(__dirname, '../../../'),
     filename: './src/main.prod.js',
   },
 

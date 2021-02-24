@@ -107,7 +107,7 @@ const createWindow = async () => {
     },
   });
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/../index.html`);
   Menu.setApplicationMenu(null);
 
   // @TODO: Use 'ready-to-show' event

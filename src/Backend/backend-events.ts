@@ -26,7 +26,7 @@ let hexpath_config = {
   sensor: null,
 };
 
-let wizzardAssistant = 'http://161.97.90.147:3000';
+let wizzardAssistant = 'http://vm1.garage-makezone.eu:3000';
 
 let avrdude_ids = [];
 
