@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 class userData {
-    constructor(options) {
+    constructor(options: Object) {
     // Renderer process has to get `app` module via `remote`, whereas the main process can get it directly
     // app.getPath('userData') will return a string of the user's app data directory path.
         const userDataPath = (electron.app || electron.remote.app).getPath('userData');

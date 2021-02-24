@@ -23,6 +23,12 @@ const Navigator = () => {
           name="help circle"
           className="help-trigger pointer"
         />
+        <Icon
+          inverted
+          size="big"
+          name="setting"
+          className="settings-trigger pointer"
+        />
       </div>
       <div className="logo-wrapper">
         <img

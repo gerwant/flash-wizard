@@ -17,6 +17,9 @@ import Navigator from './Navigator';
 import DeviceChooser from './HexFile/DeviceChooser';
 import PortChooser from './HexFile/PortChooser';
 import FileChooser from './HexFile/FileChooser';
+import FlashTrigger from './HexFile/FlashTrigger';
+
+import AvrdudeOutput from './HexFile/AvrdudeOutput';
 
 const HexFile = () => {
   return (
@@ -36,15 +39,13 @@ const HexFile = () => {
           <FileChooser />
 
           <List.Item className="horizontal-line" />
-          <List.Item className="step step4">
-            <Icon inverted name="bolt" size="big" className="step-icon" />
-            <Header as="h4" className="active-step-title noselect center">
-              Flash!
-            </Header>
-            <Button className="active-btn step-btn icon button flash-firmware-btn center">Flash!</Button> 
-          </List.Item>
+
+          <FlashTrigger />
+          
         </List>
       </div>
+
+      <AvrdudeOutput/>
 
       <Footer />
     </div>
