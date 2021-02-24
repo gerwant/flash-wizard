@@ -3,6 +3,11 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 
+@import 'modals.css';
+@import 'icons.css';
+@import 'containers.css';
+@import 'buttons.css';
+
 html,
 body {
     padding: 0;
@@ -29,146 +34,56 @@ body {
     font-feature-settings: 'liga', 'clig', 'kern';
     background-color: #3C404B ;
     overflow: hidden;
-
-
 }
+
+body::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+    background-color: #3C404B;
+    outline: none;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: none;
+}
+
+body::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 7px;
+    background-color:  #272A31;
+}
+
 .noselect{
+    user-select: none;
     -webkit-user-select: none;
 }
 
 .noselect > * {
+    user-select: none;
     -webkit-user-select: none;
 }
 
 .select {
-
+    user-select: default;
     -webkit-user-select: default;
-
-  }
-.welcome-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.box {
-    display: flex;
-    height: 100%;
-}
-.modal-header{
-    background-color:  #3C404B !important;
-    text-align: center !important;
-    color: white;
-    margin-top: 20px !important;
-}
-.modal-header > img {
-    margin-top: 0px !important;
-    margin-bottom: -13px !important;
-    margin-right: 10px;
-}
-.language-modal{
-    background-color:  #3C404B !important;
-    width: 80% !important;
-    height: 80% !important;
-}
-
-.donate-modal{
-    background-color:  #3C404B !important;
-    width: 75% !important;
-    height: 50% !important;
-}
-
-.donate-modal-btn{
-    margin-right: 10px !important;
-    margin-left: 10px !important;
-}
-
-.exit-app-btn{
-    margin-right: 8px !important;
-}
-
-.donate-btns-wrapper{
-    /*width: 100%;*/
-    float: right !important;
-    margin-right: 10px;
-    bottom: 5px;
-}
-
-.donate-content{
-    color: white;
-    font-size: medium;
-    margin: 5px 20px;
-}
-
-.donate-wrapper{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.close.icon{
-    position: fixed;
-    right: 5px;
-    top: 10px;
-    cursor: pointer;
-    color: white;
-}
-
-.about-wizard-modal{
-
-    background-color:  #3C404B !important;
-    width: 80% !important;
-}
-
-.error-modal, .actions{
-    background-color:  #3C404B !important;
 }
 
 .header{
     color: white !important;
 }
-.active-icon{
-    color: rgb(224, 223, 223);
-}
-.inactive-icon{
-    color: rgb(77, 77, 77);
-}
+
 .active-step-title{
     color: rgb(224, 223, 223);
     margin-top: 10px !important;
 }
+
 .inactive-step-title{
     color: rgb(77, 77, 77);
     margin-top: 10px !important;
 }
-.flag, .modal-flag{
-    width: 100px;
-    height: 70px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding: 0% !important;
 
-}
-.flag-item{
-    padding: 0 !important;
-}
-.modal-flag{
-    filter: grayscale(100%);
-}
-.chosen-flag{
-    border: grey solid thin;
-    border-radius: 5%;
-}
-.mini-flag{
-    /* position: fixed;
-    right: 135px;
-    top: 225px; */
-    flex: 2;
-    margin-top: -8px;
-    margin-bottom: -45px;
-    margin-left: 8px;
-    margin-right: -10px;
-    height: 30px;
-    width: auto;
-}
 .hex-trigger, .no-hex-trigger{
     width: 250px !important;
     background-color: #1E8449 !important;
@@ -181,91 +96,6 @@ body {
     margin-bottom: 0 !important;
 }
 
-.button{
-     margin-bottom: 10px !important;
-     margin-left: auto !important;
-     margin-right: auto !important;
-     text-align: center !important;
-}
-
-.step{
-     text-align: center;
-     width: 140px;
-
-}
-
-.list-wrapper{
-     display: flex;
-     margin-top: 20% !important;
-     margin-left: auto !important;
-     margin-right: auto !important;
-     justify-content: center;
-
-}
-.welcome-wrapper{
-     display: block;
-     position: relative;
-     margin-bottom: auto;
-     margin-top: auto;
-}
-.segment{
-    color: white;
-    position: relative;
-    background-color: #272A31 !important;
-    text-align: center;
-    width: 400px!important;
-    margin-top: 0px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    border-radius: 5px;
-}
-body::-webkit-scrollbar {
-    width: 14px;
-    height: 18px;
-    background-color: #3C404B;
-    outline: none;
-
-  }
-
-body::-webkit-scrollbar-track {
-    box-shadow: none;
-
-
-  }
-
-body::-webkit-scrollbar-thumb {
-    height: 6px;
-    border: 4px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    border-radius: 7px;
-    background-color:  #272A31;
-}
-
-.help-trigger{
-    position: fixed;
-    top: 40px !important;
-    right: 10px !important;
-    color: rgb(224, 223, 223);
-}
-
-.settings-trigger {
-    position: fixed;
-    right: 10px !important;
-    top: 75px !important;
-    transition: transform .6s ease-in-out;
-}
-
-.settings-trigger:hover {
-    transform: rotate(60deg);
-}
-
-.go-back, .arrow-back{
-    position: fixed;
-    top: 40px !important;
-    left: 10px !important;
-    color: rgb(224, 223, 223);
-}
-
 .centered {
     position: relative;
     top: 50%;
@@ -273,12 +103,6 @@ body::-webkit-scrollbar-thumb {
     margin-left: auto;
     margin-right: auto;
 }
-
-.ui.labeled.icon.button {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
 
 .opt {
     color: #fff;
@@ -291,101 +115,6 @@ body::-webkit-scrollbar-thumb {
           rgb(0, 0, 0) 2.88051px -0.838247px 0px;
 }
 
-.choose-file, .processor-dropdown, .baudrate-dropdown,
-.sensor-dropdown {
-    margin-right: 0 !important;
-    padding-right: 0 !important;
-
-}
-
-.dropdown {
-    /*width: 70%;*/
-    margin-right: 0 !important;
-}
-
-.language-dropdown{
-    position: absolute !important;
-    margin-top: 10px !important;
-    margin-left: 10px !important;
-    width: 150px;
-}
-.logo1{
-    position: fixed;
-    width: 185px;
-    height: 185px;
-    top: 125px;
-    left: -14px;
-}
-.logo2{
-    position: fixed;
-    right: 0;
-    width: 130px;
-    height: 130px;
-    top: 160px;
-    right: 15px;
-}
-
-.logo3{
-    /*position: fixed; */
-    width: 50px;
-    height: 50px;
-    /* left: 28%;
-    top: 10px; */
-}
-
-.logo-item{
-    width: 30%;
-}
-.logo-list{
-    width: 100%;
-}
-.port-dropdown-label, .processor-dropdown-label, .processor-dropdown,
-.sensor-dropdown-label {
-    text-align: left !important;
-}
-
-.step-btn{
-    text-align: center !important;
-    width: 130px !important;
-    margin-right: auto !important;
-    margin-top: 13px !important;
-    padding-left: 0px !important;
-    /*margin-left: auto;*/
-
-}
-
-.inactive-btn{
-    color: white !important;
-    background-color: grey !important;
-}
-
-.active-btn{
-    color: white !important;
-    background-color: #1E8449 !important;
-
-}
-
-.avrdude_output_wrapper {
-    height: 120px !important;
-}
-
-.avrdude_output_wrapper > .ui.form {
-    height: 100% !important;
-}
-
-.avrdude_output {
-    display: block;
-    position: relative;
-    width: 80% !important;
-    height: 100% !important;
-    margin-right: auto !important;
-    margin-left: auto !important;
-    white-space: nowrap;
-    overflow: auto;
-    background-color: grey !important;
-}
-
-
 .horizontal-line {
     position: relative;
     top: -76px;
@@ -395,36 +124,12 @@ body::-webkit-scrollbar-thumb {
     padding: 0px 0 0 0 !important;
     left: -50px;
     margin-right: -100px;
-
 }
 
-.syringe-icon {
-    padding-left: 5px !important;
-    transform: rotate(-45deg)
-}
-
-.logo-wrapper {
-    text-align: center;
-    margin-bottom: -130px;
-}
-
-.subtext-wrapper {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-}
-
-.main-website-redir, .github-redir, .fb-redir, .yt-redir,.shop-website-redir, .pointer ,.flag{
+.main-website-redir, .github-redir, 
+.fb-redir, .yt-redir, .pointer,
+.shop-website-redir, .flag {
     cursor: pointer;
-}
-
-.flash-firmware-btn {
-    text-align: center !important;
-}
-
-.kill-avr-btn {
-    background-color: #ff0000 !important;
 }
 
 .eras-font{
@@ -435,9 +140,14 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 
-.flags-container {
-    padding: 0 !important;
-    margin-bottom: 5%;
-    margin-top: 3% !important;
+.segment{
+    color: white;
+    position: relative;
+    background-color: #272A31 !important;
+    text-align: center;
+    width: 400px!important;
+    margin-top: 0px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 5px;
 }
-

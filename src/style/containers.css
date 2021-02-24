@@ -1,0 +1,64 @@
+.flags-container {
+    padding: 0 !important;
+    margin-bottom: 5%;
+    margin-top: 3% !important;
+}
+
+.list-wrapper{
+    display: flex;
+    margin-top: 20% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center;
+
+}
+
+.box {
+    display: flex;
+    height: 100%;
+}
+
+.step {
+     text-align: center;
+     width: 140px;
+}
+
+.welcome-wrapper{
+    display: block;
+    position: relative;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.welcome-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtext-wrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.avrdude_output_wrapper {
+    height: 120px !important;
+}
+
+.avrdude_output_wrapper > .ui.form {
+    height: 100% !important;
+}
+
+.avrdude_output {
+    display: block;
+    position: relative;
+    width: 80% !important;
+    height: 100% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    white-space: nowrap;
+    overflow: auto;
+    background-color: grey !important;
+}

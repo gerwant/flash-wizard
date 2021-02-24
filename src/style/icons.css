@@ -1,0 +1,83 @@
+.syringe-icon {
+    padding-left: 5px !important;
+    transform: rotate(-45deg)
+}
+
+.logo1{
+    position: fixed;
+    width: 185px;
+    height: 185px;
+    top: 125px;
+    left: -14px;
+}
+
+.logo2{
+    position: fixed;
+    right: 0;
+    width: 130px;
+    height: 130px;
+    top: 160px;
+    right: 15px;
+}
+
+.logo3{
+    /*position: fixed; */
+    width: 50px;
+    height: 50px;
+    /* left: 28%;
+    top: 10px; */
+}
+
+.logo-item{
+    width: 30%;
+}
+
+.logo-list{
+    width: 100%;
+}
+
+.logo-wrapper {
+    text-align: center;
+    margin-bottom: -130px;
+}
+
+.close.icon{
+    position: fixed;
+    right: 5px;
+    top: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.active-icon{
+    color: rgb(224, 223, 223);
+}
+
+.inactive-icon{
+    color: rgb(77, 77, 77);
+}
+
+.go-back, .arrow-back{
+    position: fixed;
+    top: 40px !important;
+    left: 10px !important;
+    color: rgb(224, 223, 223);
+}
+
+.help-trigger{
+    position: fixed;
+    top: 40px !important;
+    right: 10px !important;
+    color: rgb(224, 223, 223);
+}
+
+.settings-trigger {
+    position: fixed;
+    right: 10px !important;
+    top: 75px !important;
+    transition: transform .6s ease-in-out;
+}
+
+.settings-trigger:hover {
+    transform: rotate(60deg);
+}
