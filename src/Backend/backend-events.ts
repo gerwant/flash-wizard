@@ -30,23 +30,14 @@ let wizzardAssistant = 'http://vm1.garage-makezone.eu:3000';
 
 let avrdude_ids = [];
 
-module.exports = function (windowManager, createHelpWindow) {
+module.exports = function (windowManager) {
   /*
 
     Communication with frontend.
     Events defined to perform actions 
     basing on frontend signals.
 
-    */
-
-  ipcMain.on('reload', () => {
-    windowManager.mainWindow.reload();
-  });
-
-  ipcMain.on('change-language-request', function (event, atr) {
-    i18n.changeLanguage(atr);
-    windowManager.mainWindow.reload();
-  });
+  */
 
   ipcMain.on('port-list-request', function (event, arg) {
     function listPorts() {
@@ -97,7 +88,6 @@ module.exports = function (windowManager, createHelpWindow) {
         path.join(process.resourcesPath, 'bin/') + 'avrdude.conf'; //process.resourcesPath
     }
 
-    // TODO: Avrdude doesn't flash firmwares properly
     const avrdude_args = [
       '-v',
       '-C' + avrdude_config_path,

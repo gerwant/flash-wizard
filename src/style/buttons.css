@@ -5,27 +5,8 @@
     text-align: center !important;
 }
 
-.flash-firmware-btn {
-    text-align: center !important;
-}
-
 .kill-avr-btn {
     background-color: #ff0000 !important;
-}
-
-.choose-file, .processor-dropdown, 
-.baudrate-dropdown, .sensor-dropdown {
-    margin-right: 0 !important;
-    padding-right: 0 !important;
-}
-
-.exit-app-btn{
-    margin-right: 8px !important;
-}
-
-.inactive-btn{
-    color: white !important;
-    background-color: grey !important;
 }
 
 .active-btn{
@@ -33,12 +14,24 @@
     background-color: #1E8449 !important;
 }
 
+.inactive-btn{
+    color: white !important;
+    background-color: grey !important;
+}
+
 .step-btn {
-    text-align: center !important;
     width: 130px !important;
-    margin-right: auto !important;
     margin-top: 13px !important;
-    padding-left: 0px !important;
+}
+
+.choose-file, .baudrate-dropdown, .sensor-dropdown {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    text-align: center !important;
+}
+
+.exit-app-btn{
+    margin-right: 8px !important;
 }
 
 .ui.labeled.icon.button {

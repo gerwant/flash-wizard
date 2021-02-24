@@ -12,132 +12,18 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, Menu } from 'electron';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
+import { app } from 'electron';
 
-const isDev = require('electron-is-dev');
-
-let forceClose = true;
-class WindowManager {
-  mainWindow: any;
-
-  helpWindow: any;
-
-  updateWindow: any;
-
-  isHelpOpen: boolean;
-
-  isUpdateOpen: boolean;
-
-  constructor() {
-    this.mainWindow = null;
-    this.helpWindow = null;
-    this.updateWindow = null;
-    this.isHelpOpen = false;
-    this.isUpdateOpen = false;
-  }
-}
-
-const windowManager = new WindowManager();
-
-export default class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
-
-let mainWindow: BrowserWindow | null = null;
+import windowManager from './WindowManager';
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
 
-if (
-  process.env.NODE_ENV === 'development' ||
-  process.env.DEBUG_PROD === 'true'
-) {
+if ( process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
   require('electron-debug')();
 }
-
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer');
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  const extensions = ['REACT_DEVELOPER_TOOLS'];
-
-  return installer
-    .default(
-      extensions.map((name) => installer[name]),
-      forceDownload
-    )
-    .catch(console.log);
-};
-
-const createWindow = async () => {
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.DEBUG_PROD === 'true'
-  ) {
-    await installExtensions();
-  }
-
-  const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'resources')
-    : path.join(__dirname, '../assets');
-
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
-
-  mainWindow = new BrowserWindow({
-    title: 'Flash Wizard',
-    show: false,
-    width: 740,
-    height: 480,
-    resizable: isDev ? true : false,
-    icon: getAssetPath('wizzard.png'),
-    titleBarStyle: 'hidden',
-    frame: false,
-    webPreferences: {
-      nodeIntegration: true,
-      enableRemoteModule: true,
-    },
-  });
-
-  mainWindow.loadURL(`file://${__dirname}/../index.html`);
-  Menu.setApplicationMenu(null);
-
-  // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-  mainWindow.webContents.on('did-finish-load', () => {
-    if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined');
-    }
-    if (process.env.START_MINIMIZED) {
-      mainWindow.minimize();
-    } else {
-      mainWindow.show();
-      mainWindow.focus();
-    }
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  // Open urls in the user's browser
-  // mainWindow.webContents.on('new-window', (event, url) => {
-  //   event.preventDefault();
-  //   shell.openExternal(url);
-  // });
-
-  // Remove this if your app does not use auto updates
-  // eslint-disable-next-line
-  new AppUpdater();
-};
 
 /**
  * Add event listeners...
@@ -151,44 +37,12 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.whenReady().then(createWindow).catch(console.log);
+app.whenReady().then(windowManager.createWindow).catch(console.log);
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) createWindow();
+  if (windowManager.mainWindow === null) windowManager.createWindow();
 });
 
-const createHelpWindow = async () => {
-  const win = new BrowserWindow({
-    title: 'Flash Wizard',
-    // icon: iconPath,
-    show: false,
-    width: 740,
-    height: 480,
-    resizable: isDev ? true : false,
-    webPreferences: {
-      devTools: true,
-      nodeIntegration: true,
-    },
-  });
-  win.setMenu(null);
-
-  win.on('ready-to-show', () => {
-    win.show();
-    windowManager.isHelpOpen = true;
-  });
-
-  win.on('closed', () => {
-    // Dereference the window
-    // For multiple windows store them in an array
-    windowManager.isHelpOpen = false;
-    windowManager.helpWindow = null;
-  });
-
-  await win.loadFile(path.join(__dirname, 'help.html'));
-  win.webContents.closeDevTools();
-  return win;
-};
-
-require('./backend-events')(windowManager, createHelpWindow);
+require('./backend-events')(windowManager);

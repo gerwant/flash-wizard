@@ -1,6 +1,8 @@
 import React from 'react';
 import { List, Header, Button, Icon } from 'semantic-ui-react';
 
+const ipc = require('electron').ipcRenderer;
+
 const FlashTrigger = () => {
 
     return (
@@ -10,8 +12,8 @@ const FlashTrigger = () => {
               Flash!
             </Header>
             <Button 
-                className="active-btn step-btn icon button flash-firmware-btn center"
-                onClick={() => {console.log("Flash fired.")}}
+                className="active-btn step-btn icon button center"
+                onClick={() => {ipc.send('kek')}}
                 icon={null}
             >
                 Flash!

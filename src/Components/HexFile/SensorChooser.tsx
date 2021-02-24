@@ -12,7 +12,7 @@ const SensorChooser = () => {
       <Dropdown
         text="ABL"
         icon={null}
-        className="icon active-btn step-btn processor-dropdown button"
+        className="icon active-btn step-btn button"
         floating
         scrolling
       >

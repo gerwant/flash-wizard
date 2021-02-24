@@ -11,7 +11,7 @@ const PortChooser = () => {
       <Dropdown
         text="Port"
         icon={null}
-        className="icon active-btn step-btn processor-dropdown button"
+        className="icon active-btn step-btn button"
         floating
         scrolling
       >

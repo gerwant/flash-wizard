@@ -13,7 +13,7 @@ const PortChooser = () => {
         Choose file
       </Header>
       <Button
-        className="active-btn step-btn icon button flash-firmware-btn center"
+        className="active-btn step-btn icon button center"
         content="File"
         labelPosition="left"
         icon={null}

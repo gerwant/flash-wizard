@@ -11,7 +11,7 @@ const DeviceChooser = () => {
       <Dropdown
         text="Devices"
         icon={null}
-        className="icon active-btn step-btn processor-dropdown button"
+        className="icon active-btn step-btn button"
         floating
         scrolling
       >
