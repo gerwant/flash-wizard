@@ -398,6 +398,11 @@ body::-webkit-scrollbar-thumb {
 
 }
 
+.syringe-icon {
+    padding-left: 5px !important;
+    transform: rotate(-45deg)
+}
+
 .logo-wrapper {
     text-align: center;
     margin-bottom: -130px;
