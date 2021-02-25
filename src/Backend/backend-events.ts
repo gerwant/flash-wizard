@@ -13,24 +13,12 @@ const download = require('download-file');
 const fs = require('fs');
 const kill = require('tree-kill');
 
-let child = null; // implemented
-let flash_config = {
-  port: null,
-  file_path: null,
-  baudrate: null,
-  processor: null,
-};
-
-let hexpath_config = {
-  device: null,
-  sensor: null,
-};
+import flasher from './Flasher';
 
 let wizzardAssistant = 'http://vm1.garage-makezone.eu:3000'; // implemented
 
 let avrdude_ids = []; // implemented
 
-module.exports = function (windowManager) {
   /*
 
     Communication with frontend.
@@ -39,34 +27,7 @@ module.exports = function (windowManager) {
 
   */
 
- /* ipcMain.on('port-list-request', function (event, arg) {
-    function listPorts() {
-      const list_ports = [];
-      SerialPort.list().then(
-        (ports) => {
-          console.log(ports);
-          
-          ports = _.filter(ports, (element) => {
-            // This solution seems to be good as long as all motherboards will have signed USB drivers
-            if (element.vendorId || element.productId) {
-              return true;
-            }
-
-            return false;
-          });
-          console.log(ports);
-          event.sender.send('port-list-reply', ports);
-        },
-        (err) => {
-          console.error('Error listing ports', err);
-        }
-      );
-    }
-
-    listPorts();
-  });
-  */
-
+  /*
   ipcMain.on('perform-flash', (event, arg) => {
     // const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
     let avrdude_exec;
@@ -144,81 +105,8 @@ module.exports = function (windowManager) {
       event.sender.send('avrdude-done', null);
     });
   });
-
-  /*
-  function killDudes(event) {
-    _.each(avrdude_ids, (proc) => {
-      kill(proc, 'SIGKILL', (error) => {
-        if (error) {
-          console.log('Well, not killed.', error);
-          //event.sender.send('avrdude-done', "Aborting failed.")
-        } else {
-          idx = _.indexOf(avrdude_ids, proc);
-          avrdude_ids.splice(idx, 1);
-          event.sender.send('avrdude-done', 'Flashing aborted');
-        }
-      });
-    });
-  }
   */
 
-  /*
-  ipcMain.on('send-config-request', function (event, value, field) {
-    flash_config[field] = value;
-    console.log(flash_config);
-  });
-  */
-
-  ipcMain.on('download-hex', (event, filename) => {
-    let hex_path = isDev
-      ? path.join(__dirname, '../')
-      : app.getPath('userData');
-    flash_config.file_path = path.join(hex_path, 'firmware.hex');
-
-    let link = `http://gmz.webd.pro/firmwares/no_hex_file/${hexpath_config.device}/${hexpath_config.sensor}/${filename}`;
-    fs.unlink(path.join(hex_path, 'firmware.hex'), function (err) {
-      if (err && err.code == 'ENOENT') {
-        // file doens't exist
-        console.info("File doesn't exist, won't remove it.");
-      } else if (err) {
-        // other errors, e.g. maybe we don't have enough permission
-        console.error('Error occurred while trying to remove file');
-      } else {
-        console.info(`removed`);
-      }
-    });
-
-    let options = {
-      directory: hex_path,
-      filename: 'firmware.hex',
-    };
-
-    download(link, options, function (err) {
-      if (err) {
-        event.sender.send('hex-download-fail');
-      } else {
-        event.sender.send('hex-downloaded');
-      }
-    });
-  });
-
-  ipcMain.on('update-sensor', (event, data) => {
-    hexpath_config.sensor = data.sensor;
-
-    axios
-      .get(
-        wizzardAssistant +
-          `/dev/${hexpath_config.device}/${hexpath_config.sensor}`
-      )
-      .then((response) => {
-        event.sender.send('language-popup', {
-          files: response.data['devices'],
-        });
-      })
-      .catch((error) => {
-        event.sender.send('wizard-assistant-error');
-      });
-  });
 
   ipcMain.on('update-faq', (event, data) => {
     axios
@@ -244,47 +132,6 @@ module.exports = function (windowManager) {
       });
   });
 
-  ipcMain.on('openMainWindow', function (event, atr) {
-    (async () => {
-      windowManager.mainWindow.loadFile('index.html');
-    })();
-  });
-
-  ipcMain.on('openNohexWindow', function (e, atr) {
-    (async () => {
-      windowManager.mainWindow.loadFile('nohex.html');
-    })();
-  });
-
-  ipcMain.on('openHelpWindow', function (event, atr) {
-    (async () => {
-      if (windowManager.isHelpOpen) {
-        return;
-      } else {
-        windowManager.helpWindow = await createHelpWindow();
-      }
-    })();
-  });
-
-  ipcMain.on('close-update-win', function (event, atr) {
-    if (windowManager.updateWindow) {
-      windowManager.updateWindow.close();
-    }
-  });
-
-  ipcMain.on('goToWelcome', function (event, atr) {
-    (async () => {
-      windowManager.mainWindow.loadFile('welcome.html');
-    })();
-  });
-
-  ipcMain.on('close-help-window', function (event, atr) {
-    (async () => {
-      windowManager.helpWindow.close();
-      windowManager.isHelpOpen = false;
-    })();
-  });
-
   ipcMain.on('devices-list-request', async (event, arg) => {
     axios
       .get(wizzardAssistant + '/devices')
@@ -302,16 +149,16 @@ module.exports = function (windowManager) {
   ipcMain.on('kill_avrdude', async (event) => {
     console.log(avrdude_ids);
 
-    killDudes(event);
+    flasher.killDudes(event);
   });
 
   ipcMain.on('sensors-list-request', async (event, arg) => {
-    hexpath_config.device = arg.device;
+    flasher.selectedOnlineConfiguration.device = arg.device;
     axios
-      .get(wizzardAssistant + `/${hexpath_config.device}`)
+      .get(wizzardAssistant + `/${flasher.selectedOnlineConfiguration.device}`)
       .then((response) => {
-        flash_config.baudrate = response.data['baudrate'];
-        flash_config.processor = response.data['processor'];
+        flasher.config.baudrate = response.data['baudrate'];
+        flasher.config.processor = response.data['processor'];
         event.sender.send('dropdown-content', {
           dropdown: 'sensors',
           content: response.data['sensors'],
@@ -322,4 +169,3 @@ module.exports = function (windowManager) {
         event.sender.send('wizard-assistant-error');
       });
   });
-};

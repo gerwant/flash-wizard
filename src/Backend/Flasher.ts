@@ -84,14 +84,70 @@ class Flasher {
         })
     }
 
-    run(): void {
+    run(event: any): void {
+        const avrdude_args = [
+          '-v',
+          '-C' + this.avrdude_config_path,
+          '-p' + this.config.processor,
+          '-carduino',
+          '-P' + this.config.port,
+          '-b' + this.config.baudrate,
+          '-D',
+          '-Uflash:w:' + this.config.filepath + ':i',
+        ];
 
-    }
+        let child = null;
+        if (process.platform === 'win32') {
+          child = spawn('cmd.exe', ['/c', this.avrdude_path].concat(avrdude_args));
+        } else {
+          child = spawn(this.avrdude_path, avrdude_args);
+        }
+
+        this.avrdude_ids.push(child.pid);
+
+        child.stdout.on('data', (data) => {
+          let datastring = data.toString();
+          console.log('stdout: ', datastring);
+          if (
+            datastring.includes('avrdude done') ||
+            datastring.includes('avrdude.exe done') ||
+            datastring.includes('stk500_cmd') ||
+            datastring.includes('out of sync')
+          ) {
+            event.sender.send('avrdude-done', datastring);
+          } else {
+            event.sender.send('avrdude-response', datastring);
+          }
+        });
+
+        child.stderr.on('data', (data: any) => {
+          let datastring = data.toString();
+          console.log('stderr: ', datastring);
+          if (
+            datastring.includes('avrdude done') ||
+            datastring.includes('avrdude.exe done') ||
+            datastring.includes('stk500_cmd') ||
+            datastring.includes('out of sync') ||
+            datastring.includes('stk500v2_ReceiveMessage')
+          ) {
+            event.sender.send('avrdude-done', datastring);
+            this.killDudes(event);
+          } else {
+            event.sender.send('avrdude-response', datastring);
+          }
+        });
+
+        child.on('error', (err: any) => {
+          console.log('ERROR DURING STARTUP', err);
+          event.sender.send('avrdude-done', null);
+        });
+        }
 
 }
 
 const flasher = new Flasher;
 
+// TODO: Has to be replaced with string constant
 ipcMain.on('port-list-request', (event: any, arg: any) => {
     SerialPort.list().then(
       (ports: any) => {
@@ -116,7 +172,7 @@ ipcMain.on('port-list-request', (event: any, arg: any) => {
 
 // TODO: Has to be replaced with string constant
 ipcMain.on('perform-flash', (event, arg) => {
-    flasher.run();
+    flasher.run(event);
 });
 
 // TODO: Has to be replaced with string constant
@@ -125,7 +181,50 @@ ipcMain.on('send-config-request', function (event: any, value: string, field: an
     console.log("Updated flasher config: ", flasher.config);
 });
 
+// TODO: Has to be replaced with string constant
 ipcMain.on('download-hex', (event, filename) => {
     const hex_path = isDev ? path.join(__dirname, '../../') : app.getPath('userData');
     flasher.config.filepath = path.join(hex_path, 'firmware.hex');
+
+    let link = `http://gmz.webd.pro/firmwares/no_hex_file/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}/${filename}`;
+
+    fs.unlink(path.join(hex_path, 'firmware.hex'), function (err) {
+      if (err && (err.code == 'ENOENT')) {
+        // file doens't exist
+        console.info("File doesn't exist, won't delete it.");
+      } else if (err) {
+        // other errors, e.g. maybe we don't have enough permission
+        console.error('Error occurred while trying to remove the file');
+      } else {
+        console.info(`firmware.hex deleted.`);
+      }
+    });
+
+    let options = {
+      directory: hex_path,
+      filename: 'firmware.hex',
+    };
+
+    download(link, options, (err) => {
+      if (err) {
+        event.sender.send('hex-download-fail');
+      } else {
+        event.sender.send('hex-downloaded');
+      }
+    });
+});
+
+// TODO: Has to be replaced with string constant
+ipcMain.on('update-sensor', (event: any, data: any) => {
+    flasher.selectedOnlineConfiguration.sensor = data.sensor;
+
+    axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
+      .then((response: any) => {
+        event.sender.send('language-popup', {
+          files: response.data['devices'],
+        });
+      })
+      .catch((error: any) => {
+        event.sender.send('wizard-assistant-error');
+      });
 });

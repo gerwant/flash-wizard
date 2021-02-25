@@ -45,4 +45,4 @@ app.on('activate', () => {
   if (windowManager.mainWindow === null) windowManager.createWindow();
 });
 
-require('./backend-events')(windowManager);
+require('./backend-events');
