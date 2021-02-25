@@ -1,7 +1,7 @@
 .flags-container {
     padding: 0 !important;
-    margin-bottom: 5%;
     margin-top: 3% !important;
+    margin-bottom: 5%;
 }
 
 .list-wrapper{
@@ -27,7 +27,7 @@
     display: block;
     position: relative;
     margin-bottom: auto;
-    margin-top: auto;
+    margin-top: 1%;
 }
 
 .welcome-body{
