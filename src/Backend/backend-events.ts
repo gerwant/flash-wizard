@@ -13,7 +13,7 @@ const download = require('download-file');
 const fs = require('fs');
 const kill = require('tree-kill');
 
-let child = null;
+let child = null; // implemented
 let flash_config = {
   port: null,
   file_path: null,
@@ -26,9 +26,9 @@ let hexpath_config = {
   sensor: null,
 };
 
-let wizzardAssistant = 'http://vm1.garage-makezone.eu:3000';
+let wizzardAssistant = 'http://vm1.garage-makezone.eu:3000'; // implemented
 
-let avrdude_ids = [];
+let avrdude_ids = []; // implemented
 
 module.exports = function (windowManager) {
   /*
@@ -39,7 +39,7 @@ module.exports = function (windowManager) {
 
   */
 
-  ipcMain.on('port-list-request', function (event, arg) {
+ /* ipcMain.on('port-list-request', function (event, arg) {
     function listPorts() {
       const list_ports = [];
       SerialPort.list().then(
@@ -65,6 +65,7 @@ module.exports = function (windowManager) {
 
     listPorts();
   });
+  */
 
   ipcMain.on('perform-flash', (event, arg) => {
     // const avrdude_exec = (process.platform === "win32") ? 'avrdude.exe' : 'avrdude'
@@ -144,6 +145,7 @@ module.exports = function (windowManager) {
     });
   });
 
+  /*
   function killDudes(event) {
     _.each(avrdude_ids, (proc) => {
       kill(proc, 'SIGKILL', (error) => {
@@ -158,11 +160,14 @@ module.exports = function (windowManager) {
       });
     });
   }
+  */
 
+  /*
   ipcMain.on('send-config-request', function (event, value, field) {
     flash_config[field] = value;
     console.log(flash_config);
   });
+  */
 
   ipcMain.on('download-hex', (event, filename) => {
     let hex_path = isDev
