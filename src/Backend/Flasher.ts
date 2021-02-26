@@ -9,6 +9,7 @@ const _ = require('underscore');
 const download = require('download-file');
 const fs = require('fs');
 const kill = require('tree-kill');
+const { port_list_request, perform_flash, send_config_request, download_hex, update_sensor } = require('../constants');
 
 interface FlasherConfig {
     port: any,
@@ -151,7 +152,7 @@ class Flasher {
 const flasher = new Flasher;
 
 // TODO: Has to be replaced with string constant
-ipcMain.on('port-list-request', (event: any, arg: any) => {
+ipcMain.on(port_list_request, (event: any, arg: any) => {
     SerialPort.list().then(
       (ports: any) => {
         console.log(ports);
@@ -173,11 +174,12 @@ ipcMain.on('port-list-request', (event: any, arg: any) => {
 });
 
 // TODO: Has to be replaced with string constant
-ipcMain.on('perform-flash', (event, arg) => {
+ipcMain.on(perform_flash, (event, arg) => {
     flasher.run(event);
 });
 
 // TODO: Has to be replaced with string constant
+<<<<<<< HEAD
 ipcMain.on('update-flasher-port', (event, arg) => {
   flasher.config.port = arg;
   console.log("Updated flasher config: ", flasher.config);
@@ -187,11 +189,15 @@ ipcMain.on('update-flasher-port', (event, arg) => {
 ipcMain.on('send-config-request', function (event: any, new_config: any) {
     flasher.config.baudrate = new_config.baudrate;
     flasher.config.processor = new_config.processor;
+=======
+ipcMain.on(send_config_request, function (event: any, value: string, field: any) {
+    flasher.config[field] = value;
+>>>>>>> 359f271... :sparkles: String constants - part 2
     console.log("Updated flasher config: ", flasher.config);
 });
 
 // TODO: Has to be replaced with string constant
-ipcMain.on('download-hex', (event, filename) => {
+ipcMain.on(download_hex, (event, filename) => {
     const hex_path = isDev ? path.join(__dirname, '../../') : app.getPath('userData');
     flasher.config.filepath = path.join(hex_path, 'firmware.hex');
 
@@ -224,7 +230,7 @@ ipcMain.on('download-hex', (event, filename) => {
 });
 
 // TODO: Has to be replaced with string constant
-ipcMain.on('update-sensor', (event: any, data: any) => {
+ipcMain.on(update_sensor, (event: any, data: any) => {
     flasher.selectedOnlineConfiguration.sensor = data.sensor;
 
     axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
