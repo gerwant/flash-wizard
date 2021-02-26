@@ -137,7 +137,7 @@ let avrdude_ids: any[] = []; // implemented
     axios
       .get(wizzardAssistant + '/devices')
       .then((response) => {
-        event.sender.send('dropdown-content', {
+        event.sender.send('dropdown-devices-content', {
           dropdown: 'processors',
           content: response.data['devices'],
         });
@@ -148,7 +148,7 @@ let avrdude_ids: any[] = []; // implemented
       });
   });
 
-ipcMain.on('kill_avrdude', async (event: any) => {
+ipcMain.on(kill_avrdude, async (event: any) => {
   console.log(flasher.avrdude_ids);
 
   flasher.killDudes(event);
