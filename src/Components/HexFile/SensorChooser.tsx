@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import electron from 'electron';
 import { List, Header, Dropdown, Icon } from 'semantic-ui-react';
 
+const { update_sensor, dropdown_sensors_content } = require('../../constants')
+
 interface Option {
   key: number,
   text: string,
@@ -26,7 +28,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
       setDDLabel(newLabel);
       setDDValue(data.value);
 
-      electron.ipcRenderer.send('update-sensor', data.value);
+      electron.ipcRenderer.send(update_sensor, data.value);
 
       onDone();
     }
@@ -52,7 +54,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
 
       let mounted = true;
 
-      electron.ipcRenderer.on('dropdown-sensors-content', (event, data) => {
+      electron.ipcRenderer.on(dropdown_sensors_content, (event, data) => {
 
         if (mounted){
           processSensors(data);

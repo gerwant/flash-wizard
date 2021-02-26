@@ -137,7 +137,7 @@ let avrdude_ids: any[] = []; // implemented
     axios
       .get(wizzardAssistant + '/devices')
       .then((response) => {
-        event.sender.send('dropdown-devices-content', {
+        event.sender.send('dropdown-content', {
           dropdown: 'processors',
           content: response.data['devices'],
         });
@@ -147,29 +147,29 @@ let avrdude_ids: any[] = []; // implemented
         event.sender.send('wizard-assistant-error');
       });
   });
+  ipcMain.on(kill_avrdude, async (event) => {
+    console.log(avrdude_ids);
 
-ipcMain.on(kill_avrdude, async (event: any) => {
-  console.log(flasher.avrdude_ids);
+    flasher.killDudes(event);
+  });
 
-  flasher.killDudes(event);
-});
-
-ipcMain.on('sensors-list-request', async (event: any, arg: any) => {
-  flasher.selectedOnlineConfiguration.device = arg;
-  axios
-    .get(wizzardAssistant + `/${flasher.selectedOnlineConfiguration.device}`)
-    .then((response: any) => {
-      flasher.config.baudrate = response.data['baudrate'];
-      flasher.config.processor = response.data['processor'];
-      event.sender.send('dropdown-sensors-content', {
-        dropdown: 'sensors',
-        content: response.data['sensors'],
+  ipcMain.on(sensors_list_request, async (event, arg) => {
+    flasher.selectedOnlineConfiguration.device = arg.device;
+    axios
+      .get(wizzardAssistant + `/${flasher.selectedOnlineConfiguration.device}`)
+      .then((response) => {
+        flasher.config.baudrate = response.data['baudrate'];
+        flasher.config.processor = response.data['processor'];
+        event.sender.send('dropdown-content', {
+          dropdown: 'sensors',
+          content: response.data['sensors'],
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        event.sender.send('wizard-assistant-error');
       });
     })
-    .catch((error: any) => {
-      console.log(error);
-      event.sender.send('wizard-assistant-error');
-    });
-});
+    
 
 //}

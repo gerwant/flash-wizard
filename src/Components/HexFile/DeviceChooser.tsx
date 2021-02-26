@@ -2,6 +2,8 @@ import React, {useState, useEffect, SyntheticEvent} from 'react';
 import { List, Icon, Header, Dropdown } from 'semantic-ui-react';
 import electron from 'electron';
 
+const { sensors_list_request, dropdown_devices_content, update_hex_file, devices_list_request, hex_file_content } = require('../../constants');
+
 interface Option {
   key: number,
   text: string,
@@ -22,7 +24,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
 
     setDDLabel(newLabel);
 
-    electron.ipcRenderer.send('sensors-list-request', data.value);
+    electron.ipcRenderer.send(sen, data.value);
 
     onDone();
 
@@ -35,7 +37,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
 
     setDDLabel(newLabel);
 
-    electron.ipcRenderer.send('send-config-request', JSON.parse(data.value));
+    electron.ipcRenderer.send(sensors_list_request, JSON.parse(data.value));
 
     onDone();
 
@@ -44,7 +46,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
   useEffect(() => { // That hook has to be inspected if unmounting works correctly and if ipcRenderer.on is properly used
     let mounted = true;
 
-    electron.ipcRenderer.on('hex_file_content', (event, data) => {
+    electron.ipcRenderer.on(hex_file_content, (event, data) => {
       let opts: Option[] = [];
       const printers = data.printers;
       for (let i=0; i<printers.length;i++){
@@ -59,7 +61,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
       }
     })
 
-    electron.ipcRenderer.on('dropdown-devices-content', (event, data) => {
+    electron.ipcRenderer.on(dropdown_devices_content, (event, data) => {
       const devices = data.content;
       let opts: Option[] = [];
       for (let i=0; i<devices.length;i++){
@@ -75,10 +77,10 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
     });
 
     if (hexfile){
-      electron.ipcRenderer.send('update_hex_file');
+      electron.ipcRenderer.send(update_hex_file);
       console.log("Sent request for json content.");
     } else {
-      electron.ipcRenderer.send('devices-list-request');
+      electron.ipcRenderer.send(devices_list_request);
       console.log("Sent request for json content.");
     }
 

@@ -14,6 +14,16 @@ module.exports = {
     faq_content: 'faq-content',
     faq_content_error: 'faq-content-error',
     hex_file_content: 'hex_file_content',
-    hex_content_error: 'hex_content_error'
+    hex_content_error: 'hex_content_error',
+    avrdude_done: 'avrdude-done',
+    avrdude_response: 'avrdude-response',
+    port_list_reply: 'port-list-reply',
+    update_flasher_port: 'update-flasher-port',
+    hex_download_fail: 'hex-download-fail',
+    hex_downloaded: 'hex-downloaded',
+    language_popup: 'language-popup',
+    wizard_assistant_error: 'wizard-assistant-error',
+    dropdown_devices_content: 'dropdown-devices-content',
+    dropdown_sensors_content: 'dropdown-sensors-content'
 
 }

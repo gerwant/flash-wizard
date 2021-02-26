@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import electron from 'electron';
 import { List, Header, Dropdown, Message, Icon } from 'semantic-ui-react';
 
+
+const { port_list_reply, port_list_request } = require('../../constants')
+
 interface Option {
   key: number,
   text: string,
@@ -16,7 +19,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
 
     let mounted = true;
 
-    electron.ipcRenderer.on('port-list-reply', (event, data) => {
+    electron.ipcRenderer.on(port_list_reply, (event, data) => {
       let opts: Option[] = [];
       for (let i=0; i<data.length;i++){
         opts.push({
@@ -30,7 +33,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
       }
     })
 
-    electron.ipcRenderer.send('port-list-request');
+    electron.ipcRenderer.send(port_list_request);
     console.log("Sent request for list of COM ports.");
 
     return ()=>{

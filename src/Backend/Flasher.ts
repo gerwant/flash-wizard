@@ -9,7 +9,8 @@ const _ = require('underscore');
 const download = require('download-file');
 const fs = require('fs');
 const kill = require('tree-kill');
-const { port_list_request, perform_flash, send_config_request, download_hex, update_sensor } = require('../constants');
+const { port_list_request, perform_flash, download_hex, update_sensor, avrdude_done, avrdude_response, port_list_reply,
+        update_flasher_port, send_config_request, hex_download_fail, hex_downloaded, language_popup, wizard_assistant_error } = require('../constants');
 
 interface FlasherConfig {
     port: any,
@@ -82,7 +83,7 @@ class Flasher {
                 } else {
                     let idx = _.indexOf(this.avrdude_ids, proc);
                     this.avrdude_ids.splice(idx, 1);
-                    event.sender.send('avrdude-done', 'Flashing aborted'); // TODO: Has to be replaced with string constant
+                    event.sender.send(avrdude_done, 'Flashing aborted');
                 }
             })
         })
@@ -118,9 +119,9 @@ class Flasher {
             datastring.includes('stk500_cmd') ||
             datastring.includes('out of sync')
           ) {
-            event.sender.send('avrdude-done', datastring);
+            event.sender.send(avrdude_done, datastring);
           } else {
-            event.sender.send('avrdude-response', datastring);
+            event.sender.send(avrdude_response, datastring);
           }
         });
 
@@ -134,16 +135,16 @@ class Flasher {
             datastring.includes('out of sync') ||
             datastring.includes('stk500v2_ReceiveMessage')
           ) {
-            event.sender.send('avrdude-done', datastring);
+            event.sender.send(avrdude_done, datastring);
             this.killDudes(event);
           } else {
-            event.sender.send('avrdude-response', datastring);
+            event.sender.send(avrdude_response, datastring);
           }
         });
 
         child.on('error', (err: any) => {
           console.log('ERROR DURING STARTUP', err);
-          event.sender.send('avrdude-done', null);
+          event.sender.send(avrdude_done, null);
         });
         }
 
@@ -151,7 +152,6 @@ class Flasher {
 
 const flasher = new Flasher;
 
-// TODO: Has to be replaced with string constant
 ipcMain.on(port_list_request, (event: any, arg: any) => {
     SerialPort.list().then(
       (ports: any) => {
@@ -165,7 +165,7 @@ ipcMain.on(port_list_request, (event: any, arg: any) => {
 
           return false;
         });
-        event.sender.send('port-list-reply', ports);
+        event.sender.send(port_list_reply, ports);
       },
       (err: any) => {
         console.error('Error listing ports', err);
@@ -173,19 +173,16 @@ ipcMain.on(port_list_request, (event: any, arg: any) => {
     );
 });
 
-// TODO: Has to be replaced with string constant
 ipcMain.on(perform_flash, (event, arg) => {
     flasher.run(event);
 });
 
-// TODO: Has to be replaced with string constant
-ipcMain.on('update-flasher-port', (event, arg) => {
+ipcMain.on(update_flasher_port, (event, arg) => {
   flasher.config.port = arg;
   console.log("Updated flasher config: ", flasher.config);
 })
 
-// TODO: Has to be replaced with string constant
-ipcMain.on('send-config-request', function (event: any, new_config: any) {
+ipcMain.on(send_config_request, function (event: any, new_config: any) {
     flasher.config.baudrate = new_config.baudrate;
     flasher.config.processor = new_config.processor;
     console.log("Updated flasher config: ", flasher.config);
@@ -217,25 +214,24 @@ ipcMain.on(download_hex, (event, filename) => {
 
     download(link, options, (err) => {
       if (err) {
-        event.sender.send('hex-download-fail');
+        event.sender.send(hex_download_fail);
       } else {
-        event.sender.send('hex-downloaded');
+        event.sender.send(hex_downloaded);
       }
     });
 });
 
-// TODO: Has to be replaced with string constant
 ipcMain.on(update_sensor, (event: any, data: any) => {
     flasher.selectedOnlineConfiguration.sensor = data.sensor;
 
     axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
       .then((response: any) => {
-        event.sender.send('language-popup', {
+        event.sender.send(language_popup, {
           files: response.data['devices'],
         });
       })
       .catch((error: any) => {
-        event.sender.send('wizard-assistant-error');
+        event.sender.send(wizard_assistant_error);
       });
 });
 
