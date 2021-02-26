@@ -56,6 +56,8 @@ class WindowManager {
     this.mainWindow.loadURL(`file://${__dirname}/../index.html`);
     Menu.setApplicationMenu(null);
 
+    //SignalManager();
+
     // @TODO: Use 'ready-to-show' event
     //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
     this.mainWindow.webContents.on('did-finish-load', () => {

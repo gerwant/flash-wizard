@@ -8,7 +8,7 @@ import {
   Icon,
   Dropdown,
 } from 'semantic-ui-react';
-import electron from 'electron';
+const electron = require('electron');
 import UserData from '../userData';
 import strings from '../localization';
 
@@ -22,25 +22,33 @@ import FlashTrigger from './HexFile/FlashTrigger';
 import AvrdudeOutput from './HexFile/AvrdudeOutput';
 
 const HexFile = () => {
+
+  const [currentStage, setStage] = useState(1);
+
+  useEffect(() => {
+    electron.ipcRenderer.send('update_hex_file');
+    console.log("Sent request for json content.");
+  }, [])
+
   return (
     <div>
       <Navigator />
 
       <div className="list-wrapper">
         <List horizontal>
-          <DeviceChooser />
+          <DeviceChooser enabled={currentStage>=1} hexfile={true} />
 
           <List.Item className="horizontal-line" />
 
-          <PortChooser />
+          <PortChooser enabled={currentStage>=2} />
 
           <List.Item className="horizontal-line" />
 
-          <FileChooser />
+          <FileChooser enabled={currentStage>=3}/>
 
           <List.Item className="horizontal-line" />
 
-          <FlashTrigger />
+          <FlashTrigger enabled={currentStage>=4}/>
           
         </List>
       </div>

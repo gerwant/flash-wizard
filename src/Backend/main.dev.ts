@@ -12,9 +12,11 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app } from 'electron';
+import { app, ipcMain } from 'electron';
 
 import windowManager from './WindowManager';
+
+import './backend-events';
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -44,5 +46,3 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (windowManager.mainWindow === null) windowManager.createWindow();
 });
-
-require('./backend-events');

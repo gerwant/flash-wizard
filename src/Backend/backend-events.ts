@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { BrowserWindow } from 'electron';
 
-const SerialPort = require('serialport');
-const isDev = require('electron-is-dev');
 const axios = require('axios');
 const path = require('path');
 const spawn = require('child_process').spawn;
@@ -17,8 +14,10 @@ import flasher from './Flasher';
 
 let wizzardAssistant = 'http://vm1.garage-makezone.eu:3000'; // implemented
 
-let avrdude_ids = []; // implemented
+let avrdude_ids: any[] = []; // implemented
 
+
+//export default function SignalManager() {
   /*
 
     Communication with frontend.
@@ -108,64 +107,67 @@ let avrdude_ids = []; // implemented
   */
 
 
-  ipcMain.on('update-faq', (event, data) => {
-    axios
-      .get(wizzardAssistant + `/faq`)
-      .then((response) => {
-        //console.log("FAQ response: ", response.data)
-        event.sender.send('faq-content', response.data);
-      })
-      .catch((error) => {
-        event.sender.send('faq-content-error');
-      });
-  });
+ipcMain.on('update-faq', (event: any, data: any) => {
+  axios
+    .get(wizzardAssistant + `/faq`)
+    .then((response: any) => {
+      //console.log("FAQ response: ", response.data)
+      event.sender.send('faq-content', response.data);
+    })
+    .catch((error: any) => {
+      event.sender.send('faq-content-error');
+    });
+});
 
-  ipcMain.on('update_hex_file', (event, data) => {
-    axios
-      .get(wizzardAssistant + `/hex_file`)
-      .then((response) => {
-        //console.log("FAQ response: ", response.data)
-        event.sender.send('hex_file_content', response.data);
-      })
-      .catch((error) => {
-        event.sender.send('hex_content_error');
-      });
-  });
+ipcMain.on('update_hex_file', (event: any, data: any) => {
+  console.log("Received call.");
+  axios
+    .get(wizzardAssistant + `/hex_file`)
+    .then((response: any) => {
+      //console.log("Assistant response for update_hex_file: ", response.data)
+      event.sender.send('hex_file_content', response.data);
+    })
+    .catch((error: any) => {
+      event.sender.send('hex_content_error');
+    });
+});
 
-  ipcMain.on('devices-list-request', async (event, arg) => {
-    axios
-      .get(wizzardAssistant + '/devices')
-      .then((response) => {
-        event.sender.send('dropdown-content', {
-          dropdown: 'processors',
-          content: response.data['devices'],
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        event.sender.send('wizard-assistant-error');
+ipcMain.on('devices-list-request', async (event: any, arg: any) => {
+  axios
+    .get(wizzardAssistant + '/devices')
+    .then((response: any) => {
+      event.sender.send('dropdown-content', {
+        dropdown: 'processors',
+        content: response.data['devices'],
       });
-  });
-  ipcMain.on('kill_avrdude', async (event) => {
-    console.log(avrdude_ids);
+    })
+    .catch((error: any) => {
+      console.log(error);
+      event.sender.send('wizard-assistant-error');
+    });
+});
+ipcMain.on('kill_avrdude', async (event: any) => {
+  console.log(flasher.avrdude_ids);
 
-    flasher.killDudes(event);
-  });
+  flasher.killDudes(event);
+});
 
-  ipcMain.on('sensors-list-request', async (event, arg) => {
-    flasher.selectedOnlineConfiguration.device = arg.device;
-    axios
-      .get(wizzardAssistant + `/${flasher.selectedOnlineConfiguration.device}`)
-      .then((response) => {
-        flasher.config.baudrate = response.data['baudrate'];
-        flasher.config.processor = response.data['processor'];
-        event.sender.send('dropdown-content', {
-          dropdown: 'sensors',
-          content: response.data['sensors'],
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        event.sender.send('wizard-assistant-error');
+ipcMain.on('sensors-list-request', async (event: any, arg: any) => {
+  flasher.selectedOnlineConfiguration.device = arg.device;
+  axios
+    .get(wizzardAssistant + `/${flasher.selectedOnlineConfiguration.device}`)
+    .then((response: any) => {
+      flasher.config.baudrate = response.data['baudrate'];
+      flasher.config.processor = response.data['processor'];
+      event.sender.send('dropdown-content', {
+        dropdown: 'sensors',
+        content: response.data['sensors'],
       });
-  });
+    })
+    .catch((error: any) => {
+      console.log(error);
+      event.sender.send('wizard-assistant-error');
+    });
+});
+
+//}

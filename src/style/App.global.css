@@ -80,7 +80,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .inactive-step-title{
-    color: rgb(77, 77, 77);
+    color: rgb(77, 77, 77) ;
     margin-top: 10px !important;
 }
 

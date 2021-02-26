@@ -11,7 +11,10 @@ const fs = require('fs');
 const kill = require('tree-kill');
 
 interface FlasherConfig {
-    [property: string]: any,
+    port: any,
+    filepath: string,
+    baudrate: string,
+    processor: string
 }
 
 interface ISelectedConfiguration {
@@ -176,8 +179,15 @@ ipcMain.on('perform-flash', (event, arg) => {
 });
 
 // TODO: Has to be replaced with string constant
-ipcMain.on('send-config-request', function (event: any, value: string, field: any) {
-    flasher.config[field] = value;
+ipcMain.on('update-flasher-port', (event, arg) => {
+  flasher.config.port = arg;
+  console.log("Updated flasher config: ", flasher.config);
+})
+
+// TODO: Has to be replaced with string constant
+ipcMain.on('send-config-request', function (event: any, new_config: any) {
+    flasher.config.baudrate = new_config.baudrate;
+    flasher.config.processor = new_config.processor;
     console.log("Updated flasher config: ", flasher.config);
 });
 
@@ -228,3 +238,5 @@ ipcMain.on('update-sensor', (event: any, data: any) => {
         event.sender.send('wizard-assistant-error');
       });
 });
+
+export default flasher;
