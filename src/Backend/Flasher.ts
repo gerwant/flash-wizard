@@ -92,7 +92,7 @@ class Flasher {
           '-v',
           '-C' + this.avrdude_config_path,
           '-p' + this.config.processor,
-          '-carduino',
+          `-c${this.config.processor=='atmega2560'?'wiring':'arduino'}`,
           '-P' + this.config.port,
           '-b' + this.config.baudrate,
           '-D',
@@ -164,7 +164,6 @@ ipcMain.on('port-list-request', (event: any, arg: any) => {
 
           return false;
         });
-        console.log(ports);
         event.sender.send('port-list-reply', ports);
       },
       (err: any) => {

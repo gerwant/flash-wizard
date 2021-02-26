@@ -62,3 +62,11 @@
     overflow: auto;
     background-color: grey !important;
 }
+
+.error-port-message {
+    color: rgb(158, 36, 36) !important;
+}
+
+.error-port-message > .content > .header {
+    color: red !important;
+}

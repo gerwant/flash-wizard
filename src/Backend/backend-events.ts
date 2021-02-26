@@ -120,7 +120,7 @@ ipcMain.on('update-faq', (event: any, data: any) => {
 });
 
 ipcMain.on('update_hex_file', (event: any, data: any) => {
-  console.log("Received call.");
+
   axios
     .get(wizzardAssistant + `/hex_file`)
     .then((response: any) => {
@@ -130,13 +130,14 @@ ipcMain.on('update_hex_file', (event: any, data: any) => {
     .catch((error: any) => {
       event.sender.send('hex_content_error');
     });
+
 });
 
 ipcMain.on('devices-list-request', async (event: any, arg: any) => {
   axios
     .get(wizzardAssistant + '/devices')
     .then((response: any) => {
-      event.sender.send('dropdown-content', {
+      event.sender.send('dropdown-devices-content', {
         dropdown: 'processors',
         content: response.data['devices'],
       });
@@ -146,6 +147,7 @@ ipcMain.on('devices-list-request', async (event: any, arg: any) => {
       event.sender.send('wizard-assistant-error');
     });
 });
+
 ipcMain.on('kill_avrdude', async (event: any) => {
   console.log(flasher.avrdude_ids);
 
@@ -153,7 +155,7 @@ ipcMain.on('kill_avrdude', async (event: any) => {
 });
 
 ipcMain.on('sensors-list-request', async (event: any, arg: any) => {
-  flasher.selectedOnlineConfiguration.device = arg.device;
+  flasher.selectedOnlineConfiguration.device = arg;
   axios
     .get(wizzardAssistant + `/${flasher.selectedOnlineConfiguration.device}`)
     .then((response: any) => {

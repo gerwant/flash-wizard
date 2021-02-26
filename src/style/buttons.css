@@ -12,6 +12,7 @@
 .active-btn{
     color: white !important;
     background-color: #1E8449 !important;
+    transition: background-color 1s ease;
 }
 
 .inactive-btn{

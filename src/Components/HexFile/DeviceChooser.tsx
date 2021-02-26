@@ -1,22 +1,49 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, SyntheticEvent} from 'react';
 import { List, Icon, Header, Dropdown } from 'semantic-ui-react';
 import electron from 'electron';
 
 interface Option {
   key: number,
   text: string,
-  valu: any
+  value: any
 }
 
-const DeviceChooser = ({enabled, hexfile}: {enabled: boolean, hexfile: boolean})  => {
+const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: boolean, onDone: () => void})  => {
 
   const [devices, setDevices] = useState<Option[]>([]);
+
+  const [ddLabel, setDDLabel] = useState("Devices")
+
+  const sendNoHexFileConfig = (ev, data) => {
+
+    console.log("Selected item: ", data.value);
+
+    let newLabel = (data.value.length>=15) ? data.value.substr(0,12) + '...' : data.value;
+
+    setDDLabel(newLabel);
+
+    electron.ipcRenderer.send('sensors-list-request', data.value);
+
+    onDone();
+
+  }
+
+  const sendHexFileConfig = (ev, data) => {
+    const selectedItem = JSON.parse(data.value);
+
+    let newLabel = (selectedItem.name.length>=15) ? selectedItem.name.substr(0,12) + '...' : selectedItem.name;
+
+    setDDLabel(newLabel);
+
+    electron.ipcRenderer.send('send-config-request', JSON.parse(data.value));
+
+    onDone();
+
+  }
   
   useEffect(() => { // That hook has to be inspected if unmounting works correctly and if ipcRenderer.on is properly used
     let mounted = true;
 
-    console.log(electron.ipcRenderer.eventNames());
-    
     electron.ipcRenderer.on('hex_file_content', (event, data) => {
       let opts: Option[] = [];
       const printers = data.printers;
@@ -24,14 +51,36 @@ const DeviceChooser = ({enabled, hexfile}: {enabled: boolean, hexfile: boolean})
         opts.push({
           key: i,
           text: printers[i].name,
-          valu: printers[i]
+          value: JSON.stringify(printers[i])
         })
       }
-      console.log("lol");
       if (mounted){
         setDevices(opts);
       }
     })
+
+    electron.ipcRenderer.on('dropdown-devices-content', (event, data) => {
+      const devices = data.content;
+      let opts: Option[] = [];
+      for (let i=0; i<devices.length;i++){
+          opts.push({
+            key: i,
+            text: devices[i],
+            value: devices[i]
+          })
+      }
+      if (mounted) {
+        setDevices(opts);
+      }
+    });
+
+    if (hexfile){
+      electron.ipcRenderer.send('update_hex_file');
+      console.log("Sent request for json content.");
+    } else {
+      electron.ipcRenderer.send('devices-list-request');
+      console.log("Sent request for json content.");
+    }
 
     return ()=>{
       mounted = false;
@@ -47,9 +96,10 @@ const DeviceChooser = ({enabled, hexfile}: {enabled: boolean, hexfile: boolean})
         Choose device
       </Header>
       <Dropdown
-        text="Devices"
+        text={ddLabel}
         options={devices}
         disabled={!enabled}
+        onChange={hexfile? sendHexFileConfig : sendNoHexFileConfig}
         icon={null}
         className={`icon ${enabled?'active-btn':'inactive-btn'} step-btn button`}
         floating

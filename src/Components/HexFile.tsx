@@ -25,10 +25,15 @@ const HexFile = () => {
 
   const [currentStage, setStage] = useState(1);
 
-  useEffect(() => {
-    electron.ipcRenderer.send('update_hex_file');
-    console.log("Sent request for json content.");
-  }, [])
+  const nextStep = function(): void {
+    if ((currentStage<4)&&(currentStage>=1)) {
+      setStage(currentStage+1);
+    }
+  }
+
+  /*useEffect(() => {
+    
+  }, [])*/
 
   return (
     <div>
@@ -36,11 +41,11 @@ const HexFile = () => {
 
       <div className="list-wrapper">
         <List horizontal>
-          <DeviceChooser enabled={currentStage>=1} hexfile={true} />
+          <DeviceChooser enabled={currentStage>=1} hexfile={true} onDone={nextStep} />
 
           <List.Item className="horizontal-line" />
 
-          <PortChooser enabled={currentStage>=2} />
+          <PortChooser enabled={currentStage>=2} onDone={nextStep} />
 
           <List.Item className="horizontal-line" />
 

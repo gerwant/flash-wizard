@@ -14,6 +14,15 @@ import AvrdudeOutput from './HexFile/AvrdudeOutput';
 import SensorChooser from './HexFile/SensorChooser';
 
 const NoHexFile = () => {
+
+  const [currentStage, setStage] = useState(1);
+
+  const nextStep = function(): void {
+    if ((currentStage<4)&&(currentStage>=1)) {
+      setStage(currentStage+1);
+    }
+  }
+
   return (
     <div>
       <Navigator />
@@ -21,19 +30,19 @@ const NoHexFile = () => {
       <div className="list-wrapper">
         <List horizontal>
 
-          <DeviceChooser />
+          <DeviceChooser enabled={currentStage>=1} hexfile={false} onDone={nextStep}/>
 
           <List.Item className="horizontal-line" />
 
-          <SensorChooser />
+          <SensorChooser enabled={currentStage>=2}/>
 
           <List.Item className="horizontal-line" />
 
-          <PortChooser />
+          <PortChooser enabled={currentStage>=3} onDone={nextStep}/>
 
           <List.Item className="horizontal-line" />
 
-          <FlashTrigger />
+          <FlashTrigger enabled={currentStage>=4}/>
 
         </List>
       </div>
