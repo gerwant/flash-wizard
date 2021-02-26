@@ -179,7 +179,6 @@ ipcMain.on(perform_flash, (event, arg) => {
 });
 
 // TODO: Has to be replaced with string constant
-<<<<<<< HEAD
 ipcMain.on('update-flasher-port', (event, arg) => {
   flasher.config.port = arg;
   console.log("Updated flasher config: ", flasher.config);
@@ -189,10 +188,6 @@ ipcMain.on('update-flasher-port', (event, arg) => {
 ipcMain.on('send-config-request', function (event: any, new_config: any) {
     flasher.config.baudrate = new_config.baudrate;
     flasher.config.processor = new_config.processor;
-=======
-ipcMain.on(send_config_request, function (event: any, value: string, field: any) {
-    flasher.config[field] = value;
->>>>>>> 359f271... :sparkles: String constants - part 2
     console.log("Updated flasher config: ", flasher.config);
 });
 
