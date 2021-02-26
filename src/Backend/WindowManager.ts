@@ -4,6 +4,7 @@ import {app, ipcMain, BrowserWindow, Menu} from 'electron';
 import AppUpdater from './AppUpdater';
 
 const isDev = require('electron-is-dev');
+const { reload, change_language_request } = require('../constants');
 
 class WindowManager {
 
@@ -91,13 +92,13 @@ class WindowManager {
 
 const windowManager = new WindowManager();
 
-ipcMain.on('reload', () => {
+ipcMain.on(reload, () => {
     if(windowManager.mainWindow != null){
       windowManager.mainWindow.reload();
     }
   });
 
-ipcMain.on('change-language-request', function (event, atr) {
+ipcMain.on(change_language_request, function (event, atr) {
   i18n.changeLanguage(atr);
   if (windowManager.mainWindow != null){
     windowManager.mainWindow.reload();
