@@ -25,12 +25,6 @@ const HexFile = () => {
 
   const [currentStage, setStage] = useState(1);
 
-  const nextStep = function(): void {
-    if ((currentStage<4)&&(currentStage>=1)) {
-      setStage(currentStage+1);
-    }
-  }
-
   /*useEffect(() => {
     
   }, [])*/
@@ -41,11 +35,11 @@ const HexFile = () => {
 
       <div className="list-wrapper">
         <List horizontal>
-          <DeviceChooser enabled={currentStage>=1} hexfile={true} onDone={nextStep} />
+          <DeviceChooser enabled={currentStage>=1} hexfile={true} onDone={() => {setStage(2)}} />
 
           <List.Item className="horizontal-line" />
 
-          <PortChooser enabled={currentStage>=2} onDone={nextStep} />
+          <PortChooser enabled={currentStage>=2} onDone={() => {setStage(3)}} />
 
           <List.Item className="horizontal-line" />
 

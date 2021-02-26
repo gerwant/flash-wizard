@@ -17,12 +17,6 @@ const NoHexFile = () => {
 
   const [currentStage, setStage] = useState(1);
 
-  const nextStep = function(): void {
-    if ((currentStage<4)&&(currentStage>=1)) {
-      setStage(currentStage+1);
-    }
-  }
-
   return (
     <div>
       <Navigator />
@@ -30,15 +24,15 @@ const NoHexFile = () => {
       <div className="list-wrapper">
         <List horizontal>
 
-          <DeviceChooser enabled={currentStage>=1} hexfile={false} onDone={nextStep}/>
+          <DeviceChooser enabled={currentStage>=1} hexfile={false} onDone={() => {setStage(2)}}/>
 
           <List.Item className="horizontal-line" />
 
-          <SensorChooser enabled={currentStage>=2}/>
+          <SensorChooser enabled={currentStage>=2} onDone={() => {setStage(3)}}/>
 
           <List.Item className="horizontal-line" />
 
-          <PortChooser enabled={currentStage>=3} onDone={nextStep}/>
+          <PortChooser enabled={currentStage>=3} onDone={() => {setStage(4)}}/>
 
           <List.Item className="horizontal-line" />
 
