@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import electron from 'electron';
 import { List, Header, Dropdown, Icon } from 'semantic-ui-react';
+import strings from '../../localization'
 
 const { update_sensor, dropdown_sensors_content } = require('../../constants')
 
@@ -58,7 +59,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
 
         if (mounted){
           processSensors(data);
-        }  
+        }
 
       })
 
@@ -73,7 +74,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
     <List.Item className="step step2">
       <Icon disabled={!enabled} inverted name="syringe" size="big" className="step-icon syringe-icon" />
       <Header disabled={!enabled} as="h4" className="active-step-title noselect center">
-        Choose ABL 
+        Choose ABL
       </Header>
       <Dropdown
         text={ddLabel}
@@ -86,7 +87,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
         floating
         scrolling
       >
-        
+
       </Dropdown>
     </List.Item>
     );

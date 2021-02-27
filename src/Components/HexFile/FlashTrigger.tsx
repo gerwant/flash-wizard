@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { List, Header, Button, Icon, Loader } from 'semantic-ui-react';
-
+import strings from '../../localization'
 import electron from 'electron';
 import { perform_flash, avrdude_done, kill_avrdude } from '../../constants';
 
@@ -27,7 +27,7 @@ const FlashTrigger = ({enabled, onDone}: {enabled: boolean, onDone: () => void})
     }, [])
 
     const startFlashing = () => {
-        electron.ipcRenderer.send(perform_flash); 
+        electron.ipcRenderer.send(perform_flash);
         setFlashing(true);
         onDone();
     }
@@ -45,27 +45,27 @@ const FlashTrigger = ({enabled, onDone}: {enabled: boolean, onDone: () => void})
             <Loader active inline inverted size='small' />
             }
             <Header disabled={!enabled} as="h4" className="active-step-title noselect center">
-              Flash!
+              {strings["Flash!"]}
             </Header>
             {!isFlashing?
-            <Button 
+            <Button
                 className={`${enabled?'':'in'}active-btn step-btn icon button center`}
                 disabled={!enabled}
                 onClick={() => {startFlashing()}}
                 icon={null}
             >
-                Flash!
-            </Button> 
+                {strings["Flash!"]}
+            </Button>
             :
-            <Button 
+            <Button
                 className={`step-btn icon button center kill-avr-btn`}
                 onClick={() => {stopFlashing()}}
                 icon={null}
             >
-                Abort
-            </Button> 
+                {strings["Abort"]}
+            </Button>
             }
-        </List.Item>    
+        </List.Item>
     )
 
 }

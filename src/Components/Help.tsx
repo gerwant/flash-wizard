@@ -23,7 +23,6 @@ const Help = () => {
 
   const faqError = (event, data) => {
     setFaq([]);
-    (true);
   }
 
   const getFaq = () => {

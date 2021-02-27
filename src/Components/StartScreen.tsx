@@ -74,14 +74,14 @@ const StartScreen = () => {
           </List>
         </Segment>
         <Segment className="welcome-segment">
-          <Header>{strings.mainMenuHeader}</Header>
+          <Header>{strings["Do you have the .hex file?"]}</Header>
           <Link draggable="false" to="/hex" style={{ textDecoration: 'none', outline: 'none' }}>
-            <Button className="hex-trigger noselect">{strings.hexBtn}</Button>
+            <Button className="hex-trigger noselect">{strings["I have the .hex file"]}</Button>
           </Link>
           <br />
           <Link draggable="false" to="/nohex" style={{ textDecoration: 'none', outline: 'none' }}>
             <Button className="no-hex-trigger active-btn noselect">
-              {strings.nohexBtn}
+              {strings["I don't have the .hex file"]}
             </Button>
           </Link>
         </Segment>

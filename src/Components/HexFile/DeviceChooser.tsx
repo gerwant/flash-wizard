@@ -1,6 +1,8 @@
 import React, {useState, useEffect, SyntheticEvent} from 'react';
 import { List, Icon, Header, Dropdown } from 'semantic-ui-react';
 import electron from 'electron';
+import strings from '../../localization';
+
 
 const { sensors_list_request, send_config_request, dropdown_devices_content, update_hex_file, devices_list_request, hex_file_content, port_list_request } = require('../../constants');
 
@@ -14,7 +16,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
 
   const [devices, setDevices] = useState<Option[]>([]);
 
-  const [ddLabel, setDDLabel] = useState("Devices")
+  const [ddLabel, setDDLabel] = useState(strings["Devices"])
 
   const sendNoHexFileConfig = (ev, data) => {
 
@@ -44,7 +46,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
     onDone();
 
   }
-  
+
   useEffect(() => { // That hook has to be inspected if unmounting works correctly and if ipcRenderer.on is properly used
     let mounted = true;
 
@@ -97,7 +99,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
     <List.Item className="step step1">
       <Icon disabled={!enabled} inverted name="microchip" size="big" className="step-icon" />
       <Header disabled={!enabled} as="h4" className={`active-step-title noselect center`}>
-        Choose device
+        {strings["Choose device"]}
       </Header>
       <Dropdown
         text={ddLabel}

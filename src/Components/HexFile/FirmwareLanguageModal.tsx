@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import electron from 'electron';
 import { List, Header, Button, Icon, Modal } from 'semantic-ui-react';
 import {language_popup, download_hex, hex_downloaded} from '../../constants';
-
+import strings from '../../localization'
 import cn from '../../../assets/flags/china.svg'
 import { language } from 'custom-electron-titlebar/lib/common/platform';
 
@@ -22,7 +22,7 @@ const FirmwareLanguageModal = ({onDone}: {onDone: () => void}) => {
             setAvailableLanguages(data);
             setModalVisibility(true);
         }
-      })         
+      })
 
       electron.ipcRenderer.on(hex_downloaded, (ev, data) => {
         if (mounted){
@@ -50,7 +50,7 @@ const FirmwareLanguageModal = ({onDone}: {onDone: () => void}) => {
   const submitFWlanguage = (code: string) => {
       // icp send
       electron.ipcRenderer.send(download_hex, availableLanguages[code]);
-      
+
   }
 
   function flag_item(svg_name: string, code: string, enabled: boolean) {
@@ -77,7 +77,7 @@ const FirmwareLanguageModal = ({onDone}: {onDone: () => void}) => {
           open={languageModalVisible}
           className='language-modal'
       >
-      <Modal.Header className='modal-header'>Choose the language</Modal.Header>
+      <Modal.Header className='modal-header'>{strings["Choose the language"]}</Modal.Header>
       <div className='segment'>
       <List horizontal className="flag-list">
           {flag_item('united-kingdom', 'en', isAvailable('en'))}
