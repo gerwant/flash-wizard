@@ -1,9 +1,10 @@
 import React from 'react';
 import { List, Header, Button, Icon } from 'semantic-ui-react';
 
-const ipc = require('electron').ipcRenderer;
+import electron from 'electron';
+import { perform_flash } from '../../constants';
 
-const FlashTrigger = ({enabled}: {enabled: boolean}) => {
+const FlashTrigger = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) => {
 
     return (
         <List.Item className="step step4">
@@ -14,7 +15,7 @@ const FlashTrigger = ({enabled}: {enabled: boolean}) => {
             <Button 
                 className={`${enabled?'':'in'}active-btn step-btn icon button center`}
                 disabled={!enabled}
-                onClick={() => {ipc.send('kek')}}
+                onClick={() => {electron.ipcRenderer.send(perform_flash); onDone();}}
                 icon={null}
             >
                 Flash!

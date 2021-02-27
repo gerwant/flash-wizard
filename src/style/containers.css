@@ -45,6 +45,7 @@
 
 .avrdude_output_wrapper {
     height: 120px !important;
+    caret-color: red;
 }
 
 .avrdude_output_wrapper > .ui.form {
@@ -60,7 +61,14 @@
     margin-left: auto !important;
     white-space: nowrap;
     overflow: auto;
-    background-color: grey !important;
+    color: white !important;
+    text-shadow: 1px 1px rgb(56, 56, 56);
+    background-color: rgb(107, 107, 107) !important;
+}
+
+.avrdude_output::selection {
+    text-shadow: 0px 0px !important;
+    background-color: rgb(255, 255, 255)
 }
 
 .error-port-message {

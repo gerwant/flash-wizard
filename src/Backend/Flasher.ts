@@ -90,63 +90,66 @@ class Flasher {
     }
 
     run(event: any): void {
-        const avrdude_args = [
-          '-v',
-          '-C' + this.avrdude_config_path,
-          '-p' + this.config.processor,
-          `-c${this.config.processor=='atmega2560'?'wiring':'arduino'}`,
-          '-P' + this.config.port,
-          '-b' + this.config.baudrate,
-          '-D',
-          '-Uflash:w:' + this.config.filepath + ':i',
-        ];
+      const dudepreset = this.config.processor=='atmega2560'?'wiring':'arduino';
+      const avrdude_args = [
+        '-v',
+        '-C' + this.avrdude_config_path,
+        '-p' + this.config.processor,
+        `-c${dudepreset}`,
+        '-P' + this.config.port,
+        '-b' + this.config.baudrate,
+        '-D',
+        '-Uflash:w:' + this.config.filepath + ':i',
+      ];
 
-        let child = null;
-        if (process.platform === 'win32') {
-          child = spawn('cmd.exe', ['/c', this.avrdude_path].concat(avrdude_args));
+      console.log(`Used avrdude preset: ${dudepreset}`);
+
+      let child = null;
+      if (process.platform === 'win32') {
+        child = spawn('cmd.exe', ['/c', this.avrdude_path].concat(avrdude_args));
+      } else {
+        child = spawn(this.avrdude_path, avrdude_args);
+      }
+
+      this.avrdude_ids.push(child.pid);
+
+      child.stdout.on('data', (data) => {
+        let datastring = data.toString();
+        console.log('stdout: ', datastring);
+        if (
+          datastring.includes('avrdude done') ||
+          datastring.includes('avrdude.exe done') ||
+          datastring.includes('stk500_cmd') ||
+          datastring.includes('out of sync')
+        ) {
+          event.sender.send(avrdude_done, datastring);
         } else {
-          child = spawn(this.avrdude_path, avrdude_args);
+          event.sender.send(avrdude_response, datastring);
         }
+      });
 
-        this.avrdude_ids.push(child.pid);
-
-        child.stdout.on('data', (data) => {
-          let datastring = data.toString();
-          console.log('stdout: ', datastring);
-          if (
-            datastring.includes('avrdude done') ||
-            datastring.includes('avrdude.exe done') ||
-            datastring.includes('stk500_cmd') ||
-            datastring.includes('out of sync')
-          ) {
-            event.sender.send(avrdude_done, datastring);
-          } else {
-            event.sender.send(avrdude_response, datastring);
-          }
-        });
-
-        child.stderr.on('data', (data: any) => {
-          let datastring = data.toString();
-          console.log('stderr: ', datastring);
-          if (
-            datastring.includes('avrdude done') ||
-            datastring.includes('avrdude.exe done') ||
-            datastring.includes('stk500_cmd') ||
-            datastring.includes('out of sync') ||
-            datastring.includes('stk500v2_ReceiveMessage')
-          ) {
-            event.sender.send(avrdude_done, datastring);
-            this.killDudes(event);
-          } else {
-            event.sender.send(avrdude_response, datastring);
-          }
-        });
-
-        child.on('error', (err: any) => {
-          console.log('ERROR DURING STARTUP', err);
-          event.sender.send(avrdude_done, null);
-        });
+      child.stderr.on('data', (data: any) => {
+        let datastring = data.toString();
+        console.log('stderr: ', datastring);
+        if (
+          datastring.includes('avrdude done') ||
+          datastring.includes('avrdude.exe done') ||
+          datastring.includes('stk500_cmd') ||
+          datastring.includes('out of sync') ||
+          datastring.includes('stk500v2_ReceiveMessage')
+        ) {
+          event.sender.send(avrdude_done, datastring);
+          this.killDudes(event);
+        } else {
+          event.sender.send(avrdude_response, datastring);
         }
+      });
+
+      child.on('error', (err: any) => {
+        console.log('ERROR DURING STARTUP', err);
+        event.sender.send(avrdude_done, null);
+      });
+      }
 
 }
 
@@ -221,14 +224,29 @@ ipcMain.on(download_hex, (event, filename) => {
     });
 });
 
-ipcMain.on(update_sensor, (event: any, data: any) => {
-    flasher.selectedOnlineConfiguration.sensor = data.sensor;
+interface IStringDict {
+  [id: string]: string;
+}
+
+ipcMain.on(update_sensor, (event: any, sensor: any) => {
+
+    flasher.selectedOnlineConfiguration.sensor = sensor;
 
     axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
       .then((response: any) => {
-        event.sender.send(language_popup, {
-          files: response.data['devices'],
-        });
+
+        let langs: IStringDict = { pl: '', en: '', de: '', es: '', fr: '', it: '', pt: '', ru: '', cn: '' } 
+
+        response.data['devices'].forEach((e: string) => {
+            if ((e.charAt(e.length-7)!='_')||(e.slice(-3,e.length+1)!='hex')){
+              return;
+            }
+
+            langs[e.slice(-6,-4).toLowerCase()] = e;
+          }
+        )
+       
+        event.sender.send(language_popup, langs); // {files: response.data['devices']}
       })
       .catch((error: any) => {
         event.sender.send(wizard_assistant_error);

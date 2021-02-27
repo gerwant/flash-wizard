@@ -2,7 +2,7 @@ import React, {useState, useEffect, SyntheticEvent} from 'react';
 import { List, Icon, Header, Dropdown } from 'semantic-ui-react';
 import electron from 'electron';
 
-const { sensors_list_request, dropdown_devices_content, update_hex_file, devices_list_request, hex_file_content } = require('../../constants');
+const { sensors_list_request, send_config_request, dropdown_devices_content, update_hex_file, devices_list_request, hex_file_content } = require('../../constants');
 
 interface Option {
   key: number,
@@ -24,7 +24,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
 
     setDDLabel(newLabel);
 
-    electron.ipcRenderer.send(sen, data.value);
+    electron.ipcRenderer.send(sensors_list_request, data.value);
 
     onDone();
 
@@ -37,7 +37,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
 
     setDDLabel(newLabel);
 
-    electron.ipcRenderer.send(sensors_list_request, JSON.parse(data.value));
+    electron.ipcRenderer.send(send_config_request, JSON.parse(data.value));
 
     onDone();
 

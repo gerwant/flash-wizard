@@ -12,6 +12,7 @@ import PortChooser from './HexFile/PortChooser';
 import FlashTrigger from './HexFile/FlashTrigger';
 import AvrdudeOutput from './HexFile/AvrdudeOutput';
 import SensorChooser from './HexFile/SensorChooser';
+import FirmwareLanguageModal from './HexFile/FirmwareLanguageModal';
 
 const NoHexFile = () => {
 
@@ -29,19 +30,20 @@ const NoHexFile = () => {
           <List.Item className="horizontal-line" />
 
           <SensorChooser enabled={currentStage>=2} onDone={() => {setStage(3)}}/>
+          <FirmwareLanguageModal onDone={()=>{setStage(4)}}/>
 
           <List.Item className="horizontal-line" />
 
-          <PortChooser enabled={currentStage>=3} onDone={() => {setStage(4)}}/>
+          <PortChooser enabled={currentStage>=4} onDone={() => {setStage(5)}}/>
 
           <List.Item className="horizontal-line" />
 
-          <FlashTrigger enabled={currentStage>=4}/>
+          <FlashTrigger enabled={currentStage>=5} onDone={() => {setStage(6)}}/>
 
         </List>
       </div>
 
-      <AvrdudeOutput/>
+      <AvrdudeOutput visible={currentStage<=6} />
 
       <Footer />
     </div>

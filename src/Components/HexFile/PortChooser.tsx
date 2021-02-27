@@ -13,6 +13,7 @@ interface Option {
 
 const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) => {
 
+  const [selectedPort, setSelected] = useState('Port')
   const [ports, setPorts] = useState<Option[]>([]);
 
   useEffect(() => {
@@ -51,14 +52,16 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         Choose port
       </Header>
       <Dropdown
-        text="Port"
+        text={selectedPort}
         disabled={!enabled}
         icon={null}
         onChange={onDone}
+        options={ports}
         className={`icon ${enabled?'':'in'}active-btn step-btn button`}
         floating
         scrolling
       >
+          { ports.length == 0 ?
         <Dropdown.Menu>
           <Message
             error
@@ -67,6 +70,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
             content="No ports found."
           />
         </Dropdown.Menu>
+          : null }
       </Dropdown>
     </List.Item>
   );
