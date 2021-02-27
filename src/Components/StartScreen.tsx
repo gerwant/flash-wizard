@@ -5,9 +5,8 @@ import strings from '../localization';
 import { Link, Router } from 'react-router-dom';
 
 const StartScreen = () => {
-  const [lang, setLang] = useState('en');
-
   strings.setLanguage(UserData.get('language'));
+  const [lang, setLang] = useState(UserData.get('language'));
 
   function setLanguage(code: string) {
     strings.setLanguage(code);
