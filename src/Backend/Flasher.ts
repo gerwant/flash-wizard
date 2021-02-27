@@ -66,8 +66,8 @@ class Flasher {
 
         // Avrdude executable and config path selector
         if (isDev) {
-            this.avrdude_path = path.join(__dirname, '../bin/') + this.avrdude_exec;
-            this.avrdude_config_path = path.join(__dirname, '../bin/') + 'avrdude.conf';
+            this.avrdude_path = path.join(__dirname, '../../bin/') + this.avrdude_exec;
+            this.avrdude_config_path = path.join(__dirname, '../../bin/') + 'avrdude.conf';
         } else {
             this.avrdude_path = path.join(process.resourcesPath, 'bin/') + this.avrdude_exec;
             this.avrdude_config_path =
@@ -79,11 +79,12 @@ class Flasher {
         _.each(this.avrdude_ids, (proc: number | any) => {
             kill(proc, 'SIGKILL', (error: any) => {                    
                 if (error){
-                    console.log("Well, not killed.");
+                  console.log("Well, not killed.");
+                  console.log(error);
                 } else {
                     let idx = _.indexOf(this.avrdude_ids, proc);
                     this.avrdude_ids.splice(idx, 1);
-                    event.sender.send(avrdude_done, 'Flashing aborted');
+                    event.sender.send(avrdude_done, '\nFlashing aborted');
                 }
             })
         })
@@ -99,10 +100,12 @@ class Flasher {
         '-P' + this.config.port,
         '-b' + this.config.baudrate,
         '-D',
-        '-Uflash:w:' + this.config.filepath + ':i',
+        '-Uflash:w:' + this.config.filepath + ':i', // '-Uflash:w:' + this.config.filepath + ':i',
       ];
 
       console.log(`Used avrdude preset: ${dudepreset}`);
+      console.log(`Path to file: ${this.config.filepath}`);
+      console.log(`Path to avrdude: ${this.avrdude_path}`);
 
       let child = null;
       if (process.platform === 'win32') {
@@ -158,7 +161,6 @@ const flasher = new Flasher;
 ipcMain.on(port_list_request, (event: any, arg: any) => {
     SerialPort.list().then(
       (ports: any) => {
-        console.log(ports);
         
         ports = _.filter(ports, (element: any) => {
           // This solution seems to be good as long as all motherboards will have signed USB drivers

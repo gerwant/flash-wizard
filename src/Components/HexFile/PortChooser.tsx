@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import electron from 'electron';
 import { List, Header, Dropdown, Message, Icon } from 'semantic-ui-react';
+import { update_flasher_port } from '../../constants';
 
 
 const { port_list_reply, port_list_request } = require('../../constants')
@@ -14,7 +15,16 @@ interface Option {
 const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) => {
 
   const [selectedPort, setSelected] = useState('Port')
+  const [ddValue, setDDValue] = useState('');
   const [ports, setPorts] = useState<Option[]>([]);
+
+  const updatePort = (ev, data) => {
+
+    electron.ipcRenderer.send(update_flasher_port, data.value);
+    setDDValue(data.value);
+    onDone();
+
+  }
 
   useEffect(() => {
 
@@ -30,6 +40,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         })
       }
       if (mounted){
+        setDDValue('Port');
         setPorts(opts);
       }
     })
@@ -52,11 +63,12 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         Choose port
       </Header>
       <Dropdown
-        text={selectedPort}
+        text={ddValue}
         disabled={!enabled}
         icon={null}
-        onChange={onDone}
-        options={ports.length == 0 ? [] : ports}
+        onChange={updatePort}
+        options={ports}
+        value={ddValue}
         className={`icon ${enabled?'':'in'}active-btn step-btn button`}
         floating
         scrolling
