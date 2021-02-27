@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
-
+import Help from './Help'
 import electron from 'electron';
 import logo from '../../assets/czarodziej logo.png';
 
 const Navigator = () => {
   return (
     <div>
+      <Help/>
       <div>
         <Link draggable="false" to="/">
           <Icon
@@ -17,12 +18,6 @@ const Navigator = () => {
             className="go-back"
           />
         </Link>
-        <Icon
-          inverted
-          size="big"
-          name="help circle"
-          className="help-trigger pointer"
-        />
         <Icon
           inverted
           size="big"

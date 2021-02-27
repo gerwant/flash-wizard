@@ -56,7 +56,7 @@ const StartScreen = () => {
           src="../assets/garage.png"
           alt="Logo 2."
         />
-        <Segment className="flags-container">
+        <Segment className="flags-container welcome-segment">
           <List horizontal className="flag-list" style={{ marginTop: '10px' }}>
             {flag_item('united-kingdom', 'en')}
             {flag_item('poland', 'pl')}
@@ -73,7 +73,7 @@ const StartScreen = () => {
             {flag_item('portugal', 'pt')}
           </List>
         </Segment>
-        <Segment>
+        <Segment className="welcome-segment">
           <Header>{strings.mainMenuHeader}</Header>
           <Link draggable="false" to="/hex" style={{ textDecoration: 'none', outline: 'none' }}>
             <Button className="hex-trigger noselect">{strings.hexBtn}</Button>

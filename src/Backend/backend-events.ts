@@ -11,7 +11,7 @@ import flasher from './Flasher';
  /*
 
    Communication with frontend.
-   Events defined to perform actions 
+   Events defined to perform actions
    basing on frontend signals.
 
  */
