@@ -2,19 +2,26 @@ import React, {useState, useEffect} from 'react';
 import { List, Header, Button, Form, TextArea } from 'semantic-ui-react';
 
 import electron from 'electron';
+import { avrdude_response } from '../../constants';
 
 const AvrdudeOutput = ({visible}: {visible: boolean}) => {
 
     const [output, setOutput] = useState('Works');
 
+    const addContent = (data: string) => {
+
+        setOutput(output + data);
+
+    }
+
     useEffect(() => {
 
       let mounted = true;
 
-      electron.ipcRenderer.on(dropdown_sensors_content, (event, data) => {
+      electron.ipcRenderer.on(avrdude_response, (event, data) => {
 
         if (mounted){
-          processSensors(data);
+          addContent(data);
         }  
 
       })
@@ -22,7 +29,7 @@ const AvrdudeOutput = ({visible}: {visible: boolean}) => {
       return ()=>{
         mounted = false;
         console.log("Unmounting", mounted)
-        electron.ipcRenderer.removeListener('dropdown-sensors-content', () => {})
+        electron.ipcRenderer.removeListener(avrdude_response, () => {})
       }
     }, [])
 

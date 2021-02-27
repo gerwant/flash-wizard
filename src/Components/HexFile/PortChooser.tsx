@@ -56,12 +56,12 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         disabled={!enabled}
         icon={null}
         onChange={onDone}
-        options={ports}
+        options={ports.length == 0 ? [] : ports}
         className={`icon ${enabled?'':'in'}active-btn step-btn button`}
         floating
         scrolling
       >
-          { ports.length == 0 ?
+        {/*   ports.length == 0 ?
         <Dropdown.Menu>
           <Message
             error
@@ -70,7 +70,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
             content="No ports found."
           />
         </Dropdown.Menu>
-          : null }
+        : null */}
       </Dropdown>
     </List.Item>
   );
