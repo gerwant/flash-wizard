@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import Help from './Help'
+import Settings from './Settings'
 import electron from 'electron';
 import logo from '../../assets/czarodziej logo.png';
 
@@ -9,6 +10,7 @@ const Navigator = () => {
   return (
     <div>
       <Help/>
+      <Settings/>
       <div>
         <Link draggable="false" to="/">
           <Icon
@@ -18,12 +20,6 @@ const Navigator = () => {
             className="go-back"
           />
         </Link>
-        <Icon
-          inverted
-          size="big"
-          name="setting"
-          className="settings-trigger pointer"
-        />
       </div>
       <div className="logo-wrapper">
         <img
