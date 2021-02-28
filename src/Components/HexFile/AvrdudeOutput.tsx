@@ -15,12 +15,12 @@ const AvrdudeOutput = ({visible}: {visible: boolean}) => {
     useEffect(() => {
 
       let mounted = true;
-
+      document.getElementsByClassName("avrdude_output")[0].scrollTop = document.getElementsByClassName("avrdude_output")[0].scrollHeight;
       electron.ipcRenderer.on(avrdude_response, (event, data) => {
 
         if (mounted){
           addContent(data);
-        }  
+        }
 
       })
 
@@ -43,7 +43,7 @@ const AvrdudeOutput = ({visible}: {visible: boolean}) => {
             <Form>
                 <TextArea spellCheck="false" value={output} className="avrdude_output noselect" />
             </Form>
-            
+
         </div>
     )
 }
