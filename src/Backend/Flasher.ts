@@ -189,6 +189,10 @@ ipcMain.on(update_flasher_port, (event, arg) => {
   console.log("Updated flasher config: ", flasher.config);
 })
 
+ipcMain.on('update-filepath', (event, arg: string) => {
+  flasher.config.filepath = arg;
+})
+
 ipcMain.on(send_config_request, function (event: any, new_config: any) {
     flasher.config.baudrate = new_config.baudrate;
     flasher.config.processor = new_config.processor;

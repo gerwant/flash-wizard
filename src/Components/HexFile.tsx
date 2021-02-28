@@ -43,16 +43,16 @@ const HexFile = () => {
 
           <List.Item className="horizontal-line" />
 
-          <FileChooser enabled={currentStage>=3}/>
+          <FileChooser enabled={currentStage>=3} onDone={() => {setStage(4)}} />
 
           <List.Item className="horizontal-line" />
 
-          <FlashTrigger enabled={currentStage>=4}/>
+          <FlashTrigger enabled={currentStage>=4} onDone={() => {setStage(5)}} />
           
         </List>
       </div>
 
-      <AvrdudeOutput/>
+      <AvrdudeOutput visible={currentStage>=5}/>
 
       <Footer />
     </div>

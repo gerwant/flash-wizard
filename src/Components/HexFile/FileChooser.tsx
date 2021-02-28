@@ -1,13 +1,31 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { List, Header, Icon, Button } from 'semantic-ui-react';
 import strings from '../../localization';
 
-const PortChooser = ({enabled}: {enabled: boolean}) => {
+import electron from 'electron';
+
+const FileChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) => {
+
+  const [ddLabel, setddLabel] = useState('File');
+
   const fileChooser = useRef(null);
+
+  const shorten = (string: string) => {
+    return (string.length>=13) ? string.substr(0,10) + '...' : string
+  }
 
   const onButtonClick = () => {
     if (fileChooser!=null){
       fileChooser.current.click();
+    }
+  }
+
+  const handleFileChange = (e) => {
+    if(e.target.files.length>0){
+      console.log(e.target.files[0]);
+      electron.ipcRenderer.send('update-filepath', e.target.files[0].path);
+      setddLabel(shorten(e.target.files[0].name))
+      onDone();
     }
   }
 
@@ -20,7 +38,7 @@ const PortChooser = ({enabled}: {enabled: boolean}) => {
       <Button
         className={`${enabled?'':'in'}active-btn step-btn icon button center`}
         disabled={!enabled}
-        content={strings["File"]}
+        content={ddLabel}
         labelPosition="left"
         icon={null}
         onClick={onButtonClick}
@@ -29,11 +47,12 @@ const PortChooser = ({enabled}: {enabled: boolean}) => {
         ref={fileChooser}
         type="file"
         hidden
-        onChange={()=>{console.log("siema.")}}
+        accept='.hex, .bin'
+        onChange={handleFileChange}
       />
 
     </List.Item>
   );
 };
 
-export default PortChooser;
+export default FileChooser;

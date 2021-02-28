@@ -59,7 +59,12 @@ const Help = () => {
     if(!faqUpdated){
       electron.ipcRenderer.send(update_faq)
     }
-  })
+
+    return () => {
+      electron.ipcRenderer.removeListener(faq_content, () => {});
+      electron.ipcRenderer.removeListener(faq_content_error, () => {})
+    }
+  }, [])
   return (
     <div>
       <Icon
