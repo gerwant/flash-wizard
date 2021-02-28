@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import electron from 'electron';
-import { List, Header, Button, Icon, Modal } from 'semantic-ui-react';
+import { List, Header, Button, Icon, Modal, Segment } from 'semantic-ui-react';
 import {language_popup, download_hex, hex_downloaded} from '../../constants';
 import strings from '../../localization'
 import cn from '../../../assets/flags/china.svg'
@@ -76,25 +76,28 @@ const FirmwareLanguageModal = ({onDone}: {onDone: () => void}) => {
           onClose={()=>setModalVisibility(false)}
           open={languageModalVisible}
           className='language-modal'
+          style={{marginTop: "5%"}}
+          closeOnEscape= {false}
+          closeOnDimmerClick= {false}
       >
-      <Modal.Header className='modal-header'>{strings["Choose the language"]}</Modal.Header>
-      <div className='segment'>
-      <List horizontal className="flag-list">
-          {flag_item('united-kingdom', 'en', isAvailable('en'))}
-          {flag_item('poland', 'pl', isAvailable('pl'))}
-          {flag_item('germany', 'de', isAvailable('de'))}
-      </List>
-      <List horizontal className="flag-list">
-          {flag_item('spain', 'es', isAvailable('es'))}
-          {flag_item('france', 'fr', isAvailable('fr'))}
-          {flag_item('russia', 'ru', isAvailable('ru'))}
+      <Modal.Header style={{border: "none"}} className='modal-header'>{strings["Choose the firmware language"]}</Modal.Header>
+        <Segment style={{width: "400px"}}>
+        <List horizontal className="flag-list">
+            {flag_item('united-kingdom', 'en', isAvailable('en'))}
+            {flag_item('poland', 'pl', isAvailable('pl'))}
+            {flag_item('germany', 'de', isAvailable('de'))}
         </List>
         <List horizontal className="flag-list">
-          {flag_item('italy', 'it', isAvailable('it'))}
-          {flag_item('china', 'cn', isAvailable('cn'))}
-          {flag_item('portugal', 'pt', isAvailable('pt'))}
-        </List>
-      </div>
+            {flag_item('spain', 'es', isAvailable('es'))}
+            {flag_item('france', 'fr', isAvailable('fr'))}
+            {flag_item('russia', 'ru', isAvailable('ru'))}
+          </List>
+          <List horizontal className="flag-list">
+            {flag_item('italy', 'it', isAvailable('it'))}
+            {flag_item('china', 'cn', isAvailable('cn'))}
+            {flag_item('portugal', 'pt', isAvailable('pt'))}
+          </List>
+        </Segment>
       </Modal>
   )
 }

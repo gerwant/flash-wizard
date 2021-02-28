@@ -1,6 +1,6 @@
 *.hex
 *.bin
-
+firmware.hex
 # Logs
 logs
 *.log
