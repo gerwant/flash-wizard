@@ -63,7 +63,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         {strings["Choose port"]}
       </Header>
       <Dropdown
-        text={ddValue}
+        text={ddValue?ddValue:strings['Port']}
         disabled={!enabled}
         icon={null}
         onChange={updatePort}

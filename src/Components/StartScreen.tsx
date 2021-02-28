@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, List, Button, Header } from 'semantic-ui-react';
+import { Segment, List, Button, Header} from 'semantic-ui-react';
 import UserData from '../userData';
 import strings from '../localization';
 import { Link, Router } from 'react-router-dom';

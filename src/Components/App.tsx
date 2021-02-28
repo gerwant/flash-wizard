@@ -7,7 +7,7 @@ import {
   HashRouter,
   Redirect,
 } from 'react-router-dom';
-
+import {Icon} from 'semantic-ui-react'
 import StartScreen from './StartScreen';
 import HexFile from './HexFile';
 import NoHexFile from './NoHexFile';
@@ -22,6 +22,16 @@ export default function App() {
           <Route exact path="/nohex" component={NoHexFile} />
         </Switch>
       </HashRouter>
+      <div style={{display: "fixed", visibility: "hidden"}}>
+        <Icon inverted name="usb"/>
+        <Icon inverted name="bolt"/>
+        <Icon inverted name="microchip"/>
+        <Icon inverted name="syringe"/>
+        <Icon inverted name="arrow circle left"/>
+        <Icon inverted name="help circle"/>
+        <Icon inverted name="setting"/>
+        <Icon inverted name="file"/>
+      </div>
     </div>
   );
 }
