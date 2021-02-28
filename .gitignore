@@ -1,4 +1,5 @@
-.hex
+*.hex
+*.bin
 
 # Logs
 logs

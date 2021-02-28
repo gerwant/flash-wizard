@@ -100,7 +100,7 @@ class Flasher {
         '-P' + this.config.port,
         '-b' + this.config.baudrate,
         '-D',
-        '-Uflash:w:' + this.config.filepath + ':i', // '-Uflash:w:' + this.config.filepath + ':i',
+        '-Uflash:w:' + this.config.filepath + ':i', //'-Uflash:r:flash.bin:r',   
       ];
 
       console.log(`Used avrdude preset: ${dudepreset}`);
@@ -116,7 +116,9 @@ class Flasher {
 
       this.avrdude_ids.push(child.pid);
 
-      child.stdout.on('data', (data) => {
+      console.log(this.avrdude_ids);
+
+      child.stdout.on('data', (data: any) => {
         let datastring = data.toString();
         console.log('stdout: ', datastring);
         if (

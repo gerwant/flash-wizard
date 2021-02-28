@@ -31,7 +31,7 @@ const Help = () => {
       for(let e = 0; e<faq.length; e++){
         console.log(faq[e])
         faqContent.push(
-                <div>
+                <div key={e}>
                   <Accordion.Title
                       active={activeIndex === e}
                       index={e}

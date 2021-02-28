@@ -43,7 +43,7 @@ const NoHexFile = () => {
         </List>
       </div>
 
-      <AvrdudeOutput visible={currentStage<=6} />
+      <AvrdudeOutput visible={currentStage>=6} />
 
       <Footer />
     </div>
