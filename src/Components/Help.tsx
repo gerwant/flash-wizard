@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Modal, Button, Icon, TransitionablePortal, Accordion, Segment} from 'semantic-ui-react'
 import electron from 'electron';
 import strings from '../localization'
@@ -14,7 +14,6 @@ const Help = () => {
 
     setActiveIndex(newIndex)
   }
-
 
   const updateFaq = (event, data) => {
     setFaq(data.faq);
@@ -53,18 +52,33 @@ const Help = () => {
     }
 
 
-  React.useEffect(()=>{
-    electron.ipcRenderer.on(faq_content, updateFaq)
-    electron.ipcRenderer.on(faq_content_error, faqError)
+  useEffect(()=>{
+
+    let mounted = true;
+
+    electron.ipcRenderer.on(faq_content, (ev, data) => {
+      if (mounted) {
+      updateFaq(ev, data);
+      }
+    })
+
+    electron.ipcRenderer.on(faq_content_error, (ev, data) => {
+      if (mounted) {
+        faqError(ev, data);
+      }
+    })
+
     if(!faqUpdated){
       electron.ipcRenderer.send(update_faq)
     }
 
     return () => {
+      mounted = false;
       electron.ipcRenderer.removeListener(faq_content, () => {});
       electron.ipcRenderer.removeListener(faq_content_error, () => {})
     }
   }, [])
+
   return (
     <div>
       <Icon
