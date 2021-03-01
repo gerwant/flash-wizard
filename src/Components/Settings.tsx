@@ -2,8 +2,8 @@ import React from 'react';
 import {Modal, Button, Icon, TransitionablePortal,  Grid, Menu, Segment} from 'semantic-ui-react'
 import electron from 'electron';
 import strings from '../localization'
-
 import {update_faq, faq_content_error, faq_content} from '../constants'
+import About from './Settings/About'
 const Help = () => {
   const [open, setOpen] = React.useState(false)
   const [activeItem, setActiveItem] = React.useState("Settings")
@@ -28,7 +28,7 @@ const Help = () => {
           onClose={() => setOpen(false)}
           onOpen={() => setOpen(true)}
           open={open}
-          style={{background: "#3C404B", height: "85%", marginTop: "5%", overflowY: "scroll"}}
+          style={{background: "#3C404B", height: "85%", marginTop: "5%"}}
           >
             <Icon
               inverted
@@ -38,10 +38,9 @@ const Help = () => {
               style={{color: "white"}}
               onClick={()=>setOpen(false)}
             />
-            <h1 className="faqheader noselect">{activeItem}</h1>
-            <Grid>
-              <Grid.Column width={4}>
-                <Menu inverted fluid vertical tabular>
+            <Grid verticalAlign='middle' style={{height: "100%", marginTop: "5px"}}>
+              <Grid.Column width={4} style={{paddingRight: "0", paddingLeft: "50px !important"}}>
+                <Menu inverted fluid vertical style={{margitLeft: "50px !important"}}>
                   <Menu.Item
                     name='Settings'
                     active={activeItem === 'Settings'}
@@ -55,10 +54,14 @@ const Help = () => {
                 </Menu>
               </Grid.Column>
 
-              <Grid.Column stretched width={12}>
-                <Segment>
-                  This is an stretched grid column. This segment will always match the
-                  tab height
+              <Grid.Column stretched width={12} style={{paddingLeft: "0"}}>
+                <Segment style={{width: "500px", height: "320px", overflowY: "scroll"}}>
+                {
+                {
+                  About: <About/>
+                }[activeItem]
+                }
+
                 </Segment>
               </Grid.Column>
             </Grid>

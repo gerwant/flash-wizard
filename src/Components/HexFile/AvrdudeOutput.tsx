@@ -10,12 +10,13 @@ const AvrdudeOutput = ({visible}: {visible: boolean}) => {
 
     const addContent = (data: string) => {
         setOutput(output + data );
+        document.getElementsByClassName("avrdude_output")[0].scrollTop = document.getElementsByClassName("avrdude_output")[0].scrollHeight;
     }
 
     useEffect(() => {
 
       let mounted = true;
-      document.getElementsByClassName("avrdude_output")[0].scrollTop = document.getElementsByClassName("avrdude_output")[0].scrollHeight;
+
       electron.ipcRenderer.on(avrdude_response, (event, data) => {
 
         if (mounted){

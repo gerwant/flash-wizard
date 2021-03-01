@@ -89,3 +89,14 @@
 .modal-flag{
     filter: grayscale(100%);
 }
+
+.menu > .item{
+  background-color: #3C404B !important;
+}
+.menu > .item:hover{
+  background-color: #2e313a !important;
+}
+.menu > .item.active{
+  background-color: #272A31 !important;
+}
+
