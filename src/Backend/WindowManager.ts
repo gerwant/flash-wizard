@@ -71,6 +71,7 @@ class WindowManager {
         this.mainWindow.show();
         this.mainWindow.focus();
       }
+      new AppUpdater(this.mainWindow);
     });
 
     this.mainWindow.on('closed', () => {
@@ -85,7 +86,6 @@ class WindowManager {
 
     // Remove this if your app does not use auto updates
     // eslint-disable-next-line
-    new AppUpdater();
   };
 
 }
@@ -98,11 +98,6 @@ ipcMain.on(reload, () => {
     }
   });
 
-ipcMain.on(change_language_request, function (event, atr) {
-  i18n.changeLanguage(atr);
-  if (windowManager.mainWindow != null){
-    windowManager.mainWindow.reload();
-  }
-});
+
 
 export default windowManager

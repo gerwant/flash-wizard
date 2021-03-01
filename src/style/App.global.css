@@ -161,3 +161,10 @@ body::-webkit-scrollbar-thumb {
   padding-top: 20px;
   font-size: 40px;
 }
+
+.downloadheader{
+  text-align: center;
+  color: white;
+  padding-top: 20px;
+  font-size: 30px;
+}

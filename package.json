@@ -1,7 +1,7 @@
 {
   "name": "flash-wizard",
   "productName": "Flash Wizard",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "description": "Flash .hex file to your 3D printer!",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",

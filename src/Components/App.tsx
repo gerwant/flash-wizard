@@ -11,7 +11,7 @@ import {Icon} from 'semantic-ui-react'
 import StartScreen from './StartScreen';
 import HexFile from './HexFile';
 import NoHexFile from './NoHexFile';
-
+import UpdateModal from './UpdateModal'
 export default function App() {
   return (
     <div>
@@ -22,6 +22,7 @@ export default function App() {
           <Route exact path="/nohex" component={NoHexFile} />
         </Switch>
       </HashRouter>
+      <UpdateModal/>
       <div style={{display: "fixed", visibility: "hidden"}}>
         <Icon inverted name="usb"/>
         <Icon inverted name="bolt"/>
