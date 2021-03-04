@@ -13,6 +13,7 @@ import FlashTrigger from './HexFile/FlashTrigger';
 import AvrdudeOutput from './HexFile/AvrdudeOutput';
 import SensorChooser from './HexFile/SensorChooser';
 import FirmwareLanguageModal from './HexFile/FirmwareLanguageModal';
+import EEPROMModal from './EEPROMModal';
 
 const NoHexFile = () => {
 
@@ -21,7 +22,7 @@ const NoHexFile = () => {
   return (
     <div>
       <Navigator />
-
+      <EEPROMModal/>
       <div className="list-wrapper">
         <List horizontal>
 

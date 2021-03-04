@@ -20,19 +20,20 @@ import FileChooser from './HexFile/FileChooser';
 import FlashTrigger from './HexFile/FlashTrigger';
 
 import AvrdudeOutput from './HexFile/AvrdudeOutput';
+import EEPROMModal from './EEPROMModal';
 
 const HexFile = () => {
 
   const [currentStage, setStage] = useState(1);
 
   /*useEffect(() => {
-    
+
   }, [])*/
 
   return (
     <div>
       <Navigator />
-
+      <EEPROMModal/>
       <div className="list-wrapper">
         <List horizontal>
           <DeviceChooser enabled={currentStage>=1} hexfile={true} onDone={() => {setStage(2)}} />
@@ -48,7 +49,7 @@ const HexFile = () => {
           <List.Item className="horizontal-line" />
 
           <FlashTrigger enabled={currentStage>=4} onDone={() => {setStage(5)}} />
-          
+
         </List>
       </div>
 
