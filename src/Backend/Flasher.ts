@@ -39,7 +39,7 @@ class Flasher {
         processor: ''
     };
     selectedOnlineConfiguration: ISelectedConfiguration;
-    
+
     constructor() {
 
         // Default config
@@ -72,12 +72,12 @@ class Flasher {
             this.avrdude_path = path.join(process.resourcesPath, 'bin/') + this.avrdude_exec;
             this.avrdude_config_path =
               path.join(process.resourcesPath, 'bin/') + 'avrdude.conf'; //process.resourcesPath
-        }                   
+        }
     }
 
     killDudes(event: any): void {
         _.each(this.avrdude_ids, (proc: number | any) => {
-            kill(proc, 'SIGKILL', (error: any) => {                    
+            kill(proc, 'SIGKILL', (error: any) => {
                 if (error){
                   console.log("Well, not killed.");
                   console.log(error);
@@ -100,7 +100,7 @@ class Flasher {
         '-P' + this.config.port,
         '-b' + this.config.baudrate,
         '-D',
-        '-Uflash:w:' + this.config.filepath + ':i', //'-Uflash:r:flash.bin:r',   
+        '-Uflash:w:' + this.config.filepath + ':i', //'-Uflash:r:flash.bin:r',
       ];
 
       console.log(`Used avrdude preset: ${dudepreset}`);
@@ -163,12 +163,12 @@ const flasher = new Flasher;
 ipcMain.on(port_list_request, (event: any, arg: any) => {
     SerialPort.list().then(
       (ports: any) => {
-        
+
         ports = _.filter(ports, (element: any) => {
           // This solution seems to be good as long as all motherboards will have signed USB drivers
-          if (element.vendorId || element.productId) {
-            return true;
-          }
+          // if (element.vendorId || element.productId) {
+          //   return true;
+          // }
 
           return false;
         });
@@ -243,7 +243,7 @@ ipcMain.on(update_sensor, (event: any, sensor: any) => {
     axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
       .then((response: any) => {
 
-        let langs: IStringDict = { pl: '', en: '', de: '', es: '', fr: '', it: '', pt: '', ru: '', cn: '' } 
+        let langs: IStringDict = { pl: '', en: '', de: '', es: '', fr: '', it: '', pt: '', ru: '', cn: '' }
 
         response.data['devices'].forEach((e: string) => {
             if ((e.charAt(e.length-7)!='_')||(e.slice(-3,e.length+1)!='hex')){
@@ -253,7 +253,7 @@ ipcMain.on(update_sensor, (event: any, sensor: any) => {
             langs[e.slice(-6,-4).toLowerCase()] = e;
           }
         )
-       
+
         event.sender.send(language_popup, langs); // {files: response.data['devices']}
       })
       .catch((error: any) => {

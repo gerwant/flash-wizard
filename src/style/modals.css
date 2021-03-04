@@ -90,13 +90,13 @@
     filter: grayscale(100%);
 }
 
-.menu > .item{
+
+.settings-menu-item{
   background-color: #3C404B !important;
 }
-.menu > .item:hover{
+.settings-menu-item:hover{
   background-color: #2e313a !important;
 }
-.menu > .item.active{
+.settings-menu-item.active{
   background-color: #272A31 !important;
 }
-

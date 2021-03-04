@@ -9,7 +9,8 @@ const { port_list_reply, port_list_request } = require('../../constants')
 interface Option {
   key: number,
   text: string,
-  value: any
+  value: any,
+  disabled: boolean
 }
 
 const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) => {
@@ -36,7 +37,17 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         opts.push({
           key: i,
           text: data[i].path,
-          value: data[i].path
+          value: data[i].path,
+          disabled: false
+        })
+      }
+
+      if(!data.length){
+        opts.push({
+          key: 0,
+          text: strings["No ports"],
+          value: "",
+          disabled: true
         })
       }
       if (mounted){

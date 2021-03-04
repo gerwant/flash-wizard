@@ -43,11 +43,13 @@ const Help = () => {
               <Grid.Column width={4} style={{paddingRight: "0", paddingLeft: "50px !important"}}>
                 <Menu inverted fluid vertical style={{margitLeft: "50px !important"}}>
                   <Menu.Item
+                    className="settings-menu-item"
                     name='Settings'
                     active={activeItem === 'Settings'}
                     onClick={() => handleClick('Settings')}
                   />
                   <Menu.Item
+                    className="settings-menu-item"
                     name='About'
                     active={activeItem === 'About'}
                     onClick={() => handleClick('About')}
