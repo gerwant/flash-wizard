@@ -4,6 +4,7 @@ import electron from 'electron';
 import strings from '../localization'
 import {update_faq, faq_content_error, faq_content} from '../constants'
 import About from './Settings/About'
+import Settings from './Settings/Settings'
 const Help = () => {
   const [open, setOpen] = React.useState(false)
   const [activeItem, setActiveItem] = React.useState("Settings")
@@ -55,10 +56,11 @@ const Help = () => {
               </Grid.Column>
 
               <Grid.Column stretched width={12} style={{paddingLeft: "0"}}>
-                <Segment style={{width: "500px", height: "320px", overflowY: "scroll"}}>
+                <Segment style={{width: "500px", height: "320px"}}>
                 {
                 {
-                  About: <About/>
+                  About: <About/>,
+                  Settings: <Settings/>
                 }[activeItem]
                 }
 
