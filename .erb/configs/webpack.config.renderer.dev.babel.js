@@ -69,7 +69,7 @@ export default merge(baseConfig, {
         ],
       },
       {
-        test: /\.global\.css$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'style-loader',
