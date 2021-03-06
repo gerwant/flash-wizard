@@ -54,7 +54,7 @@ class WindowManager {
       },
     });
 
-    this.mainWindow.loadURL(`file://${__dirname}/../index.html`);
+    this.mainWindow.loadURL(`file://${__dirname}/${app.isPackaged?'':'../'}index.html`);
     Menu.setApplicationMenu(null);
 
     //SignalManager();

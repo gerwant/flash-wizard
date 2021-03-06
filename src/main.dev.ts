@@ -14,9 +14,9 @@ import 'regenerator-runtime/runtime';
 import path from 'path';
 import { app, ipcMain } from 'electron';
 
-import windowManager from './WindowManager';
+import windowManager from './Backend/WindowManager';
 
-import './backend-events';
+import './Backend/backend-events';
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');

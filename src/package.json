@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
-  "version": "2.0.1",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "flash-wizard",
+  "productName": "Flash Wizard",
+  "version": "0.0.1",
+  "description": "Flash .hex file to your 3D printer!",
   "main": "./main.prod.js",
   "author": {
     "name": "Electron React Boilerplate Maintainers",
@@ -14,5 +14,7 @@
     "postinstall": "yarn electron-rebuild"
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "serialport": "^9.0.4"
+  }
 }

@@ -25,10 +25,10 @@ export default merge(baseConfig, {
 
   target: 'electron-main',
 
-  entry: './src/Backend/main.dev.ts',
+  entry: './src/main.dev.ts',
 
   output: {
-    path: path.join(__dirname, '../../../'),
+    path: path.join(__dirname, '../../'),
     filename: './src/main.prod.js',
   },
 
@@ -58,7 +58,7 @@ export default merge(baseConfig, {
      */
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
-      DEBUG_PROD: false,
+      DEBUG_PROD: true,
       START_MINIMIZED: false,
     }),
   ],
