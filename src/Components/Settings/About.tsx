@@ -17,13 +17,13 @@ const openLink = (link: string) => {
 export default function About() {
   return (
     <div>
-      <div className="center"><img src={czarodziej} width="250px"></img></div>
+      <div className="center"><img draggable={false} src={czarodziej} width="250px"></img></div>
         <div style={{backgroundColor: "#3C404B !important", border: "0px !important"}}>
             <h3 className="version-h3"></h3>
-            <h3>Created by Garage Makezone</h3>
-            <p>Beautiful Wizard was created by Davide Tedeschi. Thank you very much!</p>
+            <h3 className="noselect">Created by Garage Makezone</h3>
+            <p className="noselect">Beautiful Wizard was created by Davide Tedeschi. Thank you very much!</p>
             <i onClick={()=>openLink("davide-fb")} className="pointer large facebook icon" style={{display: "inline"}}></i><i onClick={()=>openLink("davide-thingiverse")} className="pointer large globe icon"></i>
-            <h3> <i className="code icon"> </i> with <i className="heart icon" style={{color: "#FF0000"}}></i></h3>
+            <h3 className="noselect"> <i className="code icon"> </i> with <i className="heart icon" style={{color: "#FF0000"}}></i></h3>
             <i onClick={()=>openLink("github")} className="large pointer icon github"></i>
             <i onClick={()=>openLink("fb")} className="large pointer icon facebook"></i>
             <i onClick={()=>openLink("yt")} className="large pointer icon youtube"></i>

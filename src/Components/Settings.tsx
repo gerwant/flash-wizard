@@ -40,24 +40,28 @@ const Help = () => {
               onClick={()=>setOpen(false)}
             />
             <Grid verticalAlign='middle' style={{height: "100%", marginTop: "5px"}}>
-              <Grid.Column width={4} style={{paddingRight: "0", paddingLeft: "50px !important"}}>
-                <Menu inverted fluid vertical style={{margitLeft: "50px !important"}}>
-                  <Menu.Item
-                    className="settings-menu-item"
-                    name='Settings'
-                    active={activeItem === 'Settings'}
-                    onClick={() => handleClick('Settings')}
-                  />
-                  <Menu.Item
-                    className="settings-menu-item"
-                    name='About'
-                    active={activeItem === 'About'}
-                    onClick={() => handleClick('About')}
-                  />
-                </Menu>
+              <Grid.Column width={1}/>
+              <Grid.Column width={3} style={{paddingRight: "0", paddingLeft: "50px !important"}}>
+                    <Grid centered>
+
+                    </Grid>
+                    <Menu inverted vertical style={{margitLeft: "50px !important"}}>
+                      <Menu.Item
+                        className="settings-menu-item"
+                        name='Settings'
+                        active={activeItem === 'Settings'}
+                        onClick={() => handleClick('Settings')}
+                      />
+                      <Menu.Item
+                        className="settings-menu-item"
+                        name='About'
+                        active={activeItem === 'About'}
+                        onClick={() => handleClick('About')}
+                      />
+                    </Menu>
               </Grid.Column>
 
-              <Grid.Column stretched width={12} style={{paddingLeft: "0"}}>
+              <Grid.Column stretched width={10} style={{paddingLeft: "0"}}>
                 <Segment style={{width: "500px", height: "320px"}}>
                 {
                 {

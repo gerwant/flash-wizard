@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="subtext-wrapper">
       <div
-        className="eras-font main-website-redir"
+        className="eras-font main-website-redir noselect"
         onClick={() =>
           electron.shell.openExternal('https://garage-makezone.eu')
         }
@@ -13,7 +13,7 @@ const Footer = () => {
         BY GMZ
       </div>
       <div
-        className="eras-font translate shop-website-redir"
+        className="eras-font translate shop-website-redir noselect"
         onClick={() =>
           electron.shell.openExternal('https://shop.garage-makezone.eu')
         }
@@ -22,7 +22,7 @@ const Footer = () => {
         VISIT OUR SHOP AT:
       </div>
       <div
-        className="eras-font shop-website-redir"
+        className="eras-font shop-website-redir noselect"
         onClick={() =>
           electron.shell.openExternal('https://shop.garage-makezone.eu')
         }

@@ -31,6 +31,7 @@ const Navigator = () => {
           width="auto"
           height="150px"
           alt="Website link."
+          draggable={false}
         />
       </div>
     </div>
