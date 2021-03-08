@@ -34,16 +34,16 @@ const UpdateModal = () => {
               style={{color: "white"}}
               onClick={()=>setOpen(false)}
             />
-            <h2 className="downloadheader noselect">Do you want to download and install an update?</h2>
+            <h2 className="downloadheader noselect">A new update has just arrived!</h2>
             <div className="ui segment container" >
 
-                <h4 className="content-update noselect">In general, updates are important. It comes with better security, better overall performance and more features! We wouldn't bother you, if it wasn't anything important.</h4>
+                <h4 className="content-update noselect">In general, updates are important. It comes with better security, better overall performance and more features! We wouldn't bother you, if it wasn't anything important. You have to have the newest version of Flash Wizard to use it.</h4>
 
                 <div className="footer" style={{marginLeft: "auto !important", marginRight: "auto !important"}}>
 
-                    <div onClick={()=>electron.ipcRenderer.send("download-update")} className="ui button active-btn download-update">Download now</div>
+                    <div onClick={()=>electron.ipcRenderer.send("download-update")} className="ui button active-btn download-update">Update</div>
 
-                    <div onClick={()=>setOpen(false)} className="ui button active-btn close-update-win" >Remind me later</div>
+                    {/*<div onClick={()=>setOpen(false)} className="ui button active-btn close-update-win" >Remind me later</div>*/}
 
                 </div>
             </div>

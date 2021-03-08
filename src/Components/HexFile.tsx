@@ -1,16 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
-import {
-  Segment,
-  List,
-  Button,
-  Header,
-  Icon,
-  Dropdown,
-} from 'semantic-ui-react';
-const electron = require('electron');
-import UserData from '../userData';
-import strings from '../localization';
+import { List } from 'semantic-ui-react';
 
 import Footer from './Footer';
 import Navigator from './Navigator';
@@ -25,10 +15,6 @@ import EEPROMModal from './EEPROMModal';
 const HexFile = () => {
 
   const [currentStage, setStage] = useState(1);
-
-  /*useEffect(() => {
-
-  }, [])*/
 
   return (
     <div>

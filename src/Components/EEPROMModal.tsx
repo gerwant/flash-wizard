@@ -22,7 +22,7 @@ export default function EEPROMModal() {
           closeOnEscape={!loader}
           style={{background: "#3C404B", width: "80%", marginTop: "5%"}}
           >
-        <div style={{fontWeight: "400", fontSize: "20px", color: "white", padding: "50px 50px"}}>
+        <div style={{fontWeight: 400, fontSize: "20px", color: "white", padding: "50px 50px"}}>
           {strings["EEPROM modal content"]}
         </div>
         <Dimmer active={loader}>
