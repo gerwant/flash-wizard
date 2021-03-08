@@ -9,6 +9,7 @@ const Footer = () => {
         onClick={() =>
           electron.shell.openExternal('https://garage-makezone.eu')
         }
+        style={{color: '#c8c8c8'}}
       >
         BY GMZ
       </div>
@@ -17,7 +18,7 @@ const Footer = () => {
         onClick={() =>
           electron.shell.openExternal('https://shop.garage-makezone.eu')
         }
-        style={{ marginLeft: '50px', paddingRight: '5px' }}
+        style={{ marginLeft: '50px', paddingRight: '5px', color: '#c8c8c8' }}
       >
         VISIT OUR SHOP AT:
       </div>
@@ -26,6 +27,7 @@ const Footer = () => {
         onClick={() =>
           electron.shell.openExternal('https://shop.garage-makezone.eu')
         }
+        style={{color: '#c8c8c8'}}
       >
         SHOP.GARAGE-MAKEZONE.EU
       </div>
