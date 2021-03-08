@@ -42,7 +42,7 @@ const PortChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}) 
         })
       }
 
-      if(!data.length){
+      if(data.length<1){
         opts.push({
           key: 0,
           text: strings["No ports"],

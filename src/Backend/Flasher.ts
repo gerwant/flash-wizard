@@ -166,9 +166,9 @@ ipcMain.on(port_list_request, (event: any, arg: any) => {
 
         ports = _.filter(ports, (element: any) => {
           // This solution seems to be good as long as all motherboards will have signed USB drivers
-          // if (element.vendorId || element.productId) {
-          //   return true;
-          // }
+          if (element.vendorId || element.productId) {
+            return true;
+          }
 
           return false;
         });
