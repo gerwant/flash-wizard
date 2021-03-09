@@ -7,7 +7,7 @@ import About from './Settings/About'
 import Settings from './Settings/Settings'
 const Help = () => {
   const [open, setOpen] = React.useState(false)
-  const [activeItem, setActiveItem] = React.useState("Settings")
+  const [activeItem, setActiveItem] = React.useState("Extras")
 
   const handleClick = (index) => {
     setActiveItem(index)
@@ -48,13 +48,13 @@ const Help = () => {
                     <Menu inverted vertical style={{margitLeft: "50px !important"}}>
                       <Menu.Item
                         className="settings-menu-item"
-                        name='Settings'
-                        active={activeItem === 'Settings'}
-                        onClick={() => handleClick('Settings')}
+                        name={strings["Extras"]}
+                        active={activeItem === 'Extras'}
+                        onClick={() => handleClick('Extras')}
                       />
                       <Menu.Item
                         className="settings-menu-item"
-                        name='About'
+                        name={strings["About us"]}
                         active={activeItem === 'About'}
                         onClick={() => handleClick('About')}
                       />
@@ -66,7 +66,7 @@ const Help = () => {
                 {
                 {
                   About: <About/>,
-                  Settings: <Settings/>
+                  Extras: <Settings/>
                 }[activeItem]
                 }
 
