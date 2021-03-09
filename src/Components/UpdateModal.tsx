@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+const isDev = require('electron-is-dev');
 import {Modal, Button, Icon, TransitionablePortal, Accordion, Segment} from 'semantic-ui-react'
 import electron from 'electron';
 const UpdateModal = () => {
@@ -43,7 +44,7 @@ const UpdateModal = () => {
 
                     <div onClick={()=>electron.ipcRenderer.send("download-update")} className="ui button active-btn download-update">Update</div>
 
-                    {/*<div onClick={()=>setOpen(false)} className="ui button active-btn close-update-win" >Remind me later</div>*/}
+                    <div onClick={()=>setOpen(false)} style={{display: `${isDev?"": "none"}`}} className="ui button active-btn close-update-win" >Remind me later</div>
 
                 </div>
             </div>

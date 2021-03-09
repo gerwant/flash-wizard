@@ -7,7 +7,7 @@ export default class AppUpdater {
         log.transports.file.level = 'info';
         autoUpdater.logger = log;
         autoUpdater.autoDownload = false;
-        autoUpdater.allowDowngrade = true; //it has to be deleted later
+        autoUpdater.allowDowngrade = false;
         autoUpdater.setFeedURL({
           provider: "github",
           host: "github.com",
