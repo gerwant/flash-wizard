@@ -26,7 +26,6 @@ export default function About() {
             <p className="noselect">{strings[about_2]}</p>
             <i onClick={()=>openLink("davide-fb")} className="pointer large facebook icon" style={{display: "inline"}}></i><i onClick={()=>openLink("davide-thingiverse")} className="pointer large globe icon"></i>
             <h3 className="noselect"> <i className="code icon"> </i> with <i className="heart icon" style={{color: "#FF0000"}}></i></h3>
-            <i onClick={()=>openLink("github")} className="large pointer icon github"></i>
             <i onClick={()=>openLink("fb")} className="large pointer icon facebook"></i>
             <i onClick={()=>openLink("yt")} className="large pointer icon youtube"></i>
         </div>

@@ -74,7 +74,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
     <List.Item className="step step2">
       <Icon disabled={!enabled} inverted name="syringe" size="big" className="step-icon syringe-icon" />
       <Header disabled={!enabled} as="h4" className="active-step-title noselect center">
-        Choose ABL
+        {strings["ABL sensor"]}
       </Header>
       <Dropdown
         text={ddLabel}
