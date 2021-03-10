@@ -39,6 +39,7 @@ const Help = () => {
               style={{color: "white"}}
               onClick={()=>setOpen(false)}
             />
+            <div style={{position: "fixed", left: "10px", bottom: "10px", color: "white"}}>{`v.${electron.remote.app.getVersion()}`}</div>
             <Grid verticalAlign='middle' style={{height: "100%", marginTop: "5px"}}>
               <Grid.Column width={1}/>
               <Grid.Column width={3} style={{paddingRight: "0", paddingLeft: "50px !important"}}>
