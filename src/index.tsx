@@ -6,11 +6,12 @@ import App from './Components/App';
 import '../assets/semantic-ui-css/semantic.min.css'
 import './style/App.global.css';
 import './style/modals.css';
+import {version} from './package.json'
 
 const titlebar = new Titlebar({
   backgroundColor: Color.fromHex('#272A31'),
 });
-
 titlebar.setHorizontalAlignment('left');
+titlebar.updateTitle(`Flash Wizard ${version}`);
 
 render(<App />, document.getElementById('root'));

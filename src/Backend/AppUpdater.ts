@@ -11,7 +11,7 @@ export default class AppUpdater {
         autoUpdater.setFeedURL({
           provider: "github",
           host: "github.com",
-          repo: "flash-wizard",
+          repo: "flash-wizard-releases",
           owner: "gerwant",
       });
       // function sendStatusToWindow(message: string) {
@@ -50,7 +50,11 @@ export default class AppUpdater {
       });
 
 
-      autoUpdater.checkForUpdates();
+      try {
+          autoUpdater.checkForUpdates();
+      } catch (error) {
+          console.log(error);
+      }
     }
 }
 
