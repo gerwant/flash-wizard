@@ -28,6 +28,7 @@ class Flasher {
 
     avrdude_ids: number[] = [];
     assistantUrl: string = 'http://vm1.garage-makezone.eu:3000';
+    serverlessAssistantUrl: string = 'https://api.garage-makezone.eu/dev'
     child: any = null;
     avrdude_exec: string;
     avrdude_path: string;

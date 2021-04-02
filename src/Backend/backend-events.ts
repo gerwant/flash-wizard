@@ -17,7 +17,7 @@ import flasher from './Flasher';
  */
 
 ipcMain.on(update_faq, (event, data) => {
-  axios.get(flasher.assistantUrl+ `/faq`)
+  axios.get(flasher.serverlessAssistantUrl + `/faq/wizard`)
     .then((response) => {
       //console.log("FAQ response: ", response.data)
       event.sender.send(faq_content, response.data);
@@ -28,7 +28,7 @@ ipcMain.on(update_faq, (event, data) => {
 });
 
 ipcMain.on(update_hex_file, (event, data) => {
-  axios.get(flasher.assistantUrl+ `/hex_file`)
+  axios.get(flasher.serverlessAssistantUrl+ `/hexfileprinters`)
     .then((response) => {
       //console.log("FAQ response: ", response.data)
       event.sender.send(hex_file_content, response.data);

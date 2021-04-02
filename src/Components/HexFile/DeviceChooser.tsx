@@ -52,7 +52,7 @@ const DeviceChooser = ({enabled, hexfile, onDone}: {enabled: boolean, hexfile: b
 
     electron.ipcRenderer.on(hex_file_content, (event, data) => {
       let opts: Option[] = [];
-      const printers = data.printers;
+      const printers = data;
       for (let i=0; i<printers.length;i++){
         opts.push({
           key: i,

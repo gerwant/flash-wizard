@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Modal, Button, Icon, TransitionablePortal, Accordion, Segment} from 'semantic-ui-react'
 import electron from 'electron';
+import UserData from '../userData'
 import strings from '../localization'
 import {update_faq, faq_content_error, faq_content} from '../constants'
 const Help = () => {
@@ -8,7 +9,7 @@ const Help = () => {
   const [faq, setFaq] = React.useState([])
   const [faqUpdated, setFaqUpdate] = React.useState(false)
   const [activeIndex, setActiveIndex] = React.useState(-1)
-
+  const [language, setLanguage] = React.useState(UserData.get('language'))
   const handleClick = (index) => {
     const newIndex = activeIndex === index ? -1 : index
 
@@ -16,7 +17,9 @@ const Help = () => {
   }
 
   const updateFaq = (event, data) => {
-    setFaq(data.faq);
+    let content = data.filter(e => {return e.code == language})
+    if(!content[0]) content = data.filter(e => {return e.code == 'engit'})
+    setFaq(content[0].faq);
     setFaqUpdate(true);
   }
 
