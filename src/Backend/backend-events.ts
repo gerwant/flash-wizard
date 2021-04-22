@@ -26,7 +26,6 @@ ipcMain.on(update_faq, (event, data) => {
       event.sender.send(faq_content_error);
     });
 });
-
 ipcMain.on(update_hex_file, (event, data) => {
   axios.get(flasher.serverlessAssistantUrl+ `/hexfileprinters`)
     .then((response) => {
@@ -39,11 +38,13 @@ ipcMain.on(update_hex_file, (event, data) => {
 });
 
 ipcMain.on(devices_list_request, async (event, arg) => {
-  axios.get(flasher.assistantUrl+ '/devices')
+  axios.get(flasher.serverlessAssistantUrl+ '/nohexfileprinters')
     .then((response) => {
+      flasher.devicesTable = response.data
+      const devices = response.data.map(e=>e.name)
       event.sender.send('dropdown-devices-content', {
         dropdown: 'processors',
-        content: response.data['devices'],
+        content: devices,
       });
     })
     .catch((error) => {
@@ -58,13 +59,18 @@ ipcMain.on(kill_avrdude, async (event) => {
 ipcMain.on(sensors_list_request, async (event, arg) => {
   flasher.selectedOnlineConfiguration.device = arg;
   axios
-    .get(flasher.assistantUrl + `/${flasher.selectedOnlineConfiguration.device}`)
+    .get(flasher.serverlessAssistantUrl + `/getfirmwarestable`)
     .then((response) => {
-      flasher.config.baudrate = response.data['baudrate'];
-      flasher.config.processor = response.data['processor'];
+      flasher.sensorsTable = response.data
+      // flasher.config.baudrate = response.data['baudrate'];
+      // flasher.config.processor = response.data['processor'];
+      const selected = flasher.devicesTable.filter(e=>{if(e.name == arg)return true})[0]
+      console.log(selected.features)
+      flasher.config.baudrate = selected.baudrate;
+      flasher.config.processor = selected.avrdude_preset;//TODO nwm czy to jest git
       event.sender.send('dropdown-sensors-content', {
         dropdown: 'sensors',
-        content: response.data['sensors'],
+        content: selected.features,
       });
     })
     .catch((error) => {

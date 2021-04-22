@@ -33,6 +33,8 @@ class Flasher {
     avrdude_exec: string;
     avrdude_path: string;
     avrdude_config_path: string;
+    devicesTable: Array<any> = [];
+    sensorsTable: Array<any> = [];
     config: FlasherConfig = {
         port: '',
         filepath: '',
@@ -92,7 +94,8 @@ class Flasher {
     }
 
     run(event: any): void {
-      const dudepreset = this.config.processor=='atmega2560'?'wiring':'arduino';
+      //const dudepreset = this.config.processor=='atmega2560'?'wiring':'arduino';
+      const dudepreset = this.config.processor//chyba tak to powinno wyglądać lol
       const avrdude_args = [
         '-v',
         '-C' + this.avrdude_config_path,
@@ -206,6 +209,29 @@ ipcMain.on(download_hex, (event, filename) => {
     flasher.config.filepath = path.join(hex_path, 'firmware.hex');
 
     let link = `http://gmz.webd.pro/firmwares/no_hex_file/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}/${filename}`;
+    axios.get( "https://ld3lyqt5jj.execute-api.eu-central-1.amazonaws.com" + `/getfile/${filename}`)
+    .then((response) => {
+      console.log(response.data)
+      link  = response.data.url
+      let options = {
+        directory: hex_path,
+        filename: 'firmware.hex',
+      };
+
+      download(link, options, (err) => {
+        if (err) {
+          console.log(err)
+          event.sender.send(hex_download_fail);
+        } else {
+          event.sender.send(hex_downloaded);
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      event.sender.send(hex_download_fail);
+    });
+
 
     fs.unlink(path.join(hex_path, 'firmware.hex'), function (err) {
       if (err && (err.code == 'ENOENT')) {
@@ -218,19 +244,6 @@ ipcMain.on(download_hex, (event, filename) => {
         console.info(`firmware.hex deleted.`);
       }
     });
-
-    let options = {
-      directory: hex_path,
-      filename: 'firmware.hex',
-    };
-
-    download(link, options, (err) => {
-      if (err) {
-        event.sender.send(hex_download_fail);
-      } else {
-        event.sender.send(hex_downloaded);
-      }
-    });
 });
 
 interface IStringDict {
@@ -240,26 +253,30 @@ interface IStringDict {
 ipcMain.on(update_sensor, (event: any, sensor: any) => {
 
     flasher.selectedOnlineConfiguration.sensor = sensor;
+    let langs: IStringDict = { pl: '', en: '', de: '', es: '', fr: '', it: '', pt: '', ru: '', cn: '' }
 
-    axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
-      .then((response: any) => {
+    const selected_sensor = flasher.sensorsTable.filter(e=>{if(e.printer == flasher.selectedOnlineConfiguration.device && e.feature == flasher.selectedOnlineConfiguration.sensor)return true})[0]
 
-        let langs: IStringDict = { pl: '', en: '', de: '', es: '', fr: '', it: '', pt: '', ru: '', cn: '' }
+    event.sender.send(language_popup, selected_sensor.firmwares)
 
-        response.data['devices'].forEach((e: string) => {
-            if ((e.charAt(e.length-7)!='_')||(e.slice(-3,e.length+1)!='hex')){
-              return;
-            }
+    // axios.get( flasher.assistantUrl + `/dev/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}` )
+    //   .then((response: any) => {
 
-            langs[e.slice(-6,-4).toLowerCase()] = e;
-          }
-        )
 
-        event.sender.send(language_popup, langs); // {files: response.data['devices']}
-      })
-      .catch((error: any) => {
-        event.sender.send(wizard_assistant_error);
-      });
+    //     response.data['devices'].forEach((e: string) => {
+    //         if ((e.charAt(e.length-7)!='_')||(e.slice(-3,e.length+1)!='hex')){
+    //           return;
+    //         }
+
+    //         langs[e.slice(-6,-4).toLowerCase()] = e;
+    //       }
+    //     )
+
+    //     event.sender.send(language_popup, langs); // {files: response.data['devices']}
+    //   })
+    //   .catch((error: any) => {
+    //     event.sender.send(wizard_assistant_error);
+    //   });
 });
 
 export default flasher;

@@ -43,8 +43,8 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
       for (let i=0; i<sens.length;i++){
         opts.push({
           key: i,
-          text: sens[i],
-          value: sens[i]
+          text: sens[i].feature,
+          value: sens[i].feature
         })
       }
       console.log("Setting sensors, current label: ", ddLabel);
@@ -74,7 +74,7 @@ const SensorChooser = ({enabled, onDone}: {enabled: boolean, onDone: () => void}
 
     return (
     <List.Item className="step step2">
-      
+
       <svg id="Capa_1" className="syringe-icon" style={{marginBottom: "-4px", marginLeft: "-2px"}} enable-background="new 0 0 512 512" height="37" viewBox="0 0 512 512" width="37" xmlns="http://www.w3.org/2000/svg">
         <g>
           <path style={{fill: `${enabled?"white":"rgb(148,150,156)"}`}} d="m282.607 53.393c-5.857-5.858-15.355-5.858-21.213 0s-5.858 15.355 0 21.213l29.393 29.394-46.787 46.787 117.213 117.213 46.787-46.787 29.394 29.394c2.928 2.929 6.767 4.393 10.606 4.393 13.244 0 20.082-16.131 10.606-25.607-49.813-49.813 51.102 51.102-175.999-176z"/>
