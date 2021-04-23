@@ -38,6 +38,17 @@ ipcMain.on(update_hex_file, (event, data) => {
 });
 
 ipcMain.on(devices_list_request, async (event, arg) => {
+  axios
+    .get(flasher.serverlessAssistantUrl + `/firmwares`)
+    .then((response) => {
+      flasher.sensorsTable = response.data
+    })
+    .catch((error) => {
+      console.log(error);
+      event.sender.send('wizard-assistant-error');
+    });
+
+
   axios.get(flasher.serverlessAssistantUrl+ '/nohexfileprinters')
     .then((response) => {
       flasher.devicesTable = response.data
@@ -58,23 +69,12 @@ ipcMain.on(kill_avrdude, async (event) => {
 
 ipcMain.on(sensors_list_request, async (event, arg) => {
   flasher.selectedOnlineConfiguration.device = arg;
-  axios
-    .get(flasher.serverlessAssistantUrl + `/getfirmwarestable`)
-    .then((response) => {
-      flasher.sensorsTable = response.data
-      // flasher.config.baudrate = response.data['baudrate'];
-      // flasher.config.processor = response.data['processor'];
       const selected = flasher.devicesTable.filter(e=>{if(e.name == arg)return true})[0]
-      console.log(selected.features)
       flasher.config.baudrate = selected.baudrate;
       flasher.config.processor = selected.avrdude_preset;//TODO nwm czy to jest git
       event.sender.send('dropdown-sensors-content', {
         dropdown: 'sensors',
         content: selected.features,
       });
-    })
-    .catch((error) => {
-      console.log(error);
-      event.sender.send('wizard-assistant-error');
-    });
+
   })

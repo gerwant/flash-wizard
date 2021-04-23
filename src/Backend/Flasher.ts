@@ -209,7 +209,7 @@ ipcMain.on(download_hex, (event, filename) => {
     flasher.config.filepath = path.join(hex_path, 'firmware.hex');
 
     let link = `http://gmz.webd.pro/firmwares/no_hex_file/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}/${filename}`;
-    axios.get( "https://ld3lyqt5jj.execute-api.eu-central-1.amazonaws.com" + `/getfile/${filename}`)
+    axios.get( "https://ld3lyqt5jj.execute-api.eu-central-1.amazonaws.com" + `/file/${filename}`)
     .then((response) => {
       console.log(response.data)
       link  = response.data.url
