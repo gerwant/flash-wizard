@@ -77,11 +77,17 @@ const FirmwareLanguageModal = ({onDone}: {onDone: () => void}) => {
           open={languageModalVisible}
           className='language-modal'
           style={{marginTop: "5%"}}
-          closeOnEscape= {false}
-          closeOnDimmerClick= {false}
       >
-      <Modal.Header style={{border: "none"}} className='noselect modal-header'>{strings["Choose the firmware language"]}</Modal.Header>
-        <Segment className="noselect" style={{width: "400px"}}>
+      <Icon
+        inverted
+        size="big"
+        name="close"
+        className="close-modal pointer"
+        style={{color: "white"}}
+        onClick={()=>setModalVisibility(false)}
+      />
+      <Modal.Header style={{border: "none"}} className='modal-header'>{strings["Choose the firmware language"]}</Modal.Header>
+        <Segment style={{width: "400px"}}>
         <List horizontal className="flag-list">
             {flag_item('united-kingdom', 'en', isAvailable('en'))}
             {flag_item('poland', 'pl', isAvailable('pl'))}

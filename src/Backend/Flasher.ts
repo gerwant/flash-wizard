@@ -69,12 +69,12 @@ class Flasher {
 
         // Avrdude executable and config path selector
         if (isDev) {
-            this.avrdude_path = path.join(__dirname, '../../bin/') + this.avrdude_exec;
-            this.avrdude_config_path = path.join(__dirname, '../../bin/') + 'avrdude.conf';
+            this.avrdude_path = path.normalize(path.join(__dirname, '..', '..', 'bin', this.avrdude_exec));
+            this.avrdude_config_path = path.normalize(path.join(__dirname, '..', '..', 'bin', 'avrdude.conf'));
         } else {
-            this.avrdude_path = path.join(process.resourcesPath, 'bin/') + this.avrdude_exec;
+            this.avrdude_path = path.normalize(path.join(process.resourcesPath, 'bin', this.avrdude_exec));
             this.avrdude_config_path =
-              path.join(process.resourcesPath, 'bin/') + 'avrdude.conf'; //process.resourcesPath
+              path.normalize(path.join(process.resourcesPath, 'bin', 'avrdude.conf')); //process.resourcesPath
         }
     }
 
@@ -98,13 +98,13 @@ class Flasher {
       const dudepreset = this.config.processor//chyba tak to powinno wyglądać lol
       const avrdude_args = [
         '-v',
-        '-C' + this.avrdude_config_path,
+        '-C' + '"' + this.avrdude_config_path + '"',
         '-p' + this.config.processor,
         `-c${dudepreset}`,
         '-P' + this.config.port,
         '-b' + this.config.baudrate,
         '-D',
-        '-Uflash:w:' + this.config.filepath + ':i', //'-Uflash:r:flash.bin:r',
+        '-Uflash:w:' + '"' + this.config.filepath + '"' + ':i', //'-Uflash:r:flash.bin:r',
       ];
 
       console.log(`Used avrdude preset: ${dudepreset}`);
@@ -113,7 +113,9 @@ class Flasher {
 
       let child = null;
       if (process.platform === 'win32') {
-        child = spawn('cmd.exe', ['/c', this.avrdude_path].concat(avrdude_args));
+        console.log("Triggering avrdude: ", this.avrdude_path);
+        //this.avrdude_config_path = '"'+this.avrdude_config_path+'"';
+        child = spawn('cmd.exe', [ "/s", '/c', '"', '"'+this.avrdude_path+'"'].concat(avrdude_args).concat('"'), {shell: true, windowsVerbatimArguments: true});
       } else {
         child = spawn(this.avrdude_path, avrdude_args);
       }
