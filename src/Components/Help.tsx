@@ -18,7 +18,7 @@ const Help = () => {
 
   const updateFaq = (event, data) => {
     let content = data.filter(e => {return e.code == language})
-    if(!content[0]) content = data.filter(e => {return e.code == 'engit'})
+    if(!content[0]) content = data.filter(e => {return e.code == 'en'})
     setFaq(content[0].faq);
     setFaqUpdate(true);
   }
@@ -61,7 +61,11 @@ const Help = () => {
 
     electron.ipcRenderer.on(faq_content, (ev, data) => {
       if (mounted) {
-      updateFaq(ev, data);
+        const faqlist = data;
+        if (faqlist.length==0){
+          return;
+        }
+        updateFaq(ev, faqlist);
       }
     })
 

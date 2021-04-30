@@ -12,6 +12,6 @@ const titlebar = new Titlebar({
   backgroundColor: Color.fromHex('#272A31'),
 });
 titlebar.setHorizontalAlignment('left');
-titlebar.updateTitle(`Flash Wizard ${version}`);
+titlebar.updateTitle(`Flash Wizard ${version} ${process.env.NODE_ENV=='development' ? 'DEVELOPMENT' : ''}`);
 
 render(<App />, document.getElementById('root'));

@@ -1,13 +1,13 @@
 {
   "name": "flash-wizard",
   "productName": "Flash Wizard",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Flash .hex file to your 3D printer!",
   "main": "./main.prod.js",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://github.com/electron-react-boilerplate"
+    "name": "Garage Makezone",
+    "email": "garage.make.zone@gmail.com",
+    "url": "https://garage-makezone.eu"
   },
   "scripts": {
     "electron-rebuild": "node -r ../.erb/scripts/BabelRegister.js ../.erb/scripts/ElectronRebuild.js",

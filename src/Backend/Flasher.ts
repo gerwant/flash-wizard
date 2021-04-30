@@ -28,7 +28,7 @@ class Flasher {
 
     avrdude_ids: number[] = [];
     assistantUrl: string = 'http://vm1.garage-makezone.eu:3000';
-    serverlessAssistantUrl: string = 'https://api.garage-makezone.eu/dev'
+    serverlessAssistantUrl: string = isDev ? 'https://api-dev.garage-makezone.eu' : 'https://api.garage-makezone.eu'
     child: any = null;
     avrdude_exec: string;
     avrdude_path: string;
@@ -211,7 +211,7 @@ ipcMain.on(download_hex, (event, filename) => {
     flasher.config.filepath = path.join(hex_path, 'firmware.hex');
 
     let link = `http://gmz.webd.pro/firmwares/no_hex_file/${flasher.selectedOnlineConfiguration.device}/${flasher.selectedOnlineConfiguration.sensor}/${filename}`;
-    axios.get( "https://api.garage-makezone.eu" + `/file/${filename}`) // For the development: api-dev.garage-makezone.eu
+    axios.get( flasher.serverlessAssistantUrl + `/file/${filename}`) 
     .then((response) => {
       console.log(response.data)
       link  = response.data.url
